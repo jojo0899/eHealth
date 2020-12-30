@@ -3,8 +3,9 @@ package eHealth;
 public class main {
 
 	public static void main(String[] args) {
-		System.out.println("hi");
-
+		
+		LoginDialog lw = new LoginDialog();
+        lw.createLoginDialog();
 	}
 
 }
