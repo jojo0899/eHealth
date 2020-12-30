@@ -63,17 +63,16 @@ public class LoginDialog extends JFrame {
 			
 				String pwd = new String(passwordField.getPassword());
 				
-				if(user.equals("admin") && pwd.equals("admin")) {
-					/*console test:
-					System.out.println("Welcome");
-					*/
-					AdminWindow aw = new AdminWindow();
-			        aw.createAdminWindow();
+				if(DBController.validLoginData(user, pwd)) {
+					if(user.equals("admin")) {
+						AdminWindow aw = new AdminWindow();
+				        aw.createAdminWindow();
+					}else {
+						MainWindow mw = new MainWindow();
+						mw.createMainWindow();
+					}
 				}
 				else {
-					/*console test:
-					System.out.println("Access denied!");
-					*/
 					showMessageDialog(null, "Wrong Username or Password!\nPlease try again!", "Warning", WARNING_MESSAGE);
 					usernameField.setText("");
 					passwordField.setText("");
