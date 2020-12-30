@@ -14,6 +14,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JFormattedTextField;
 
 public class RegisterWindow extends JFrame {
 
@@ -27,11 +29,14 @@ public class RegisterWindow extends JFrame {
 	private JTextField dateofbirth;
 	private JTextField healthinfo;
 	private JTextField insurancename;
+	private JTextField newUsernameField;
+	private JPasswordField newPasswordField;
+	private JPasswordField RepeatPasswordField;
 
 	
 	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 450);
+		setBounds(100, 100, 450, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -147,7 +152,7 @@ public class RegisterWindow extends JFrame {
 		
 		JButton ConfirmBtn = new JButton("Confirm and Register");
 		ConfirmBtn.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		ConfirmBtn.setBounds(263, 365, 167, 29);
+		ConfirmBtn.setBounds(263, 467, 167, 29);
 		contentPane.add(ConfirmBtn);
 		
 		JButton btnNewButton = new JButton("Cancel");
@@ -157,8 +162,36 @@ public class RegisterWindow extends JFrame {
 				//rw.dispose();
 			}
 		});
-		btnNewButton.setBounds(134, 365, 117, 29);
+		btnNewButton.setBounds(129, 467, 117, 29);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblUsername = new JLabel("username:");
+		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblUsername.setBounds(27, 359, 124, 16);
+		contentPane.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("password:");
+		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblPassword.setBounds(27, 387, 124, 16);
+		contentPane.add(lblPassword);
+		
+		JLabel lblRepeatPassword = new JLabel("repeat password:");
+		lblRepeatPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblRepeatPassword.setBounds(27, 415, 124, 16);
+		contentPane.add(lblRepeatPassword);
+		
+		newUsernameField = new JTextField();
+		newUsernameField.setColumns(10);
+		newUsernameField.setBounds(187, 355, 243, 26);
+		contentPane.add(newUsernameField);
+		
+		newPasswordField = new JPasswordField();
+		newPasswordField.setBounds(187, 383, 243, 26);
+		contentPane.add(newPasswordField);
+		
+		RepeatPasswordField = new JPasswordField();
+		RepeatPasswordField.setBounds(187, 411, 243, 26);
+		contentPane.add(RepeatPasswordField);
 	}
 	
 	public void createRegisterWindow() {
