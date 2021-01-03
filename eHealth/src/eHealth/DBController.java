@@ -20,42 +20,58 @@ public class DBController {
         Connection conn =  connectToDB();
         try {
             Statement st = conn.createStatement();
-            st.execute("CREATE TABLE user( " +
-                    "username	varchar(20) PRIMARY KEY, " +
-                    "user_password	varchar(30), " +
-                    "fname			varchar(15), " +
-                    "lname			varchar(15), " +
-                    "address			varchar(35), " +
-                    "date_of_birth	date, " +
-                    "health_info		varchar(25), " +
-                    "insurance_type	varchar(8));"
-            );
+            st.execute(
+            		"Create TABLE User_v2("+
+            			    "username    	varchar(15) PRIMARY KEY," +
+            			    "password    	varchar(20)," +
+            			    "firstName   	varchar(15)," +
+            			    "lastname    	varchar(15)," +
+            			    "dateOfBirth 	DATE," +
+            			    "healthInfo  	varchar(30)," +
+            			    "insuranceName   varchar(30)," +
+            			    "insuranceType   varchar(8)," +
+            			    "street          varchar(20)," +
+            			    "streetNo        int," +
+            			    "zipCode         varchar(10)," +
+            			    "city            varchar(20));"
+            		);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
     
-    public static Boolean insertUserIntoDB(String username,
-            String user_password,
-            String fname,
-            String lname,
-            String address,
-            String date_of_birth,
-            String health_info,
-            String insurance_type)
+    public static Boolean insertUserIntoDB(
+    		String username,
+            String password,
+            String firstName,
+            String lastName,
+            String date_of_birth, 
+            String healthInfo,
+            String insuranceName,
+            String insuranceType,
+            String street,
+            int streetNo,
+            String zipCode,
+            String city)
 	{
 		Connection conn =  connectToDB();
 		try {
 		Statement st = conn.createStatement();
-		st.execute("INSERT INTO user VALUES ('"+ username + "','"
-		                            + user_password + "','"
-		                            +fname + "','"
-		                            +lname + "','"
-		                            +address + "','"
-		                            +date_of_birth+"','"
-		                            +health_info + "','"
-		                            +insurance_type + "')");
+		
+		st.execute("INSERT INTO USER_V2 VALUES('" + username + "','"
+													+ password + "','"
+													+ firstName + "','"
+													+ lastName + "','"
+													+ date_of_birth + "','"
+													+ healthInfo + "','"
+													+ insuranceName + "','"
+													+ insuranceType + "','"
+													+ street + "',"
+													+ streetNo + ",'"
+													+ zipCode + "','"
+													+ city + "');");
+		
 		return true;
 		} catch (SQLException e) {
 		e.printStackTrace();
@@ -63,11 +79,12 @@ public class DBController {
 		}
 	}
     
+    
     public static void displayListOfAllDBEntries(){
         Connection conn =  connectToDB();
         try {
             Statement st = conn.createStatement();
-            ResultSet results = st.executeQuery("SELECT * FROM user");
+            ResultSet results = st.executeQuery("SELECT * FROM USER_V2");
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
                 for(int i=1;i<=8;i++){  // for all columns in user

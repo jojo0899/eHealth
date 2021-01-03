@@ -1,5 +1,8 @@
 package eHealth;
 
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -16,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterWindow extends JFrame {
 
@@ -29,8 +34,8 @@ public class RegisterWindow extends JFrame {
 	private JTextField dateofbirth;
 	private JTextField healthinfo;
 	private JTextField insurancename;
-	private JTextField newUsernameField;
-	private JPasswordField newPasswordField;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
 	private JPasswordField RepeatPasswordField;
 
 	
@@ -142,28 +147,66 @@ public class RegisterWindow extends JFrame {
 		insurancename.setBounds(187, 327, 243, 26);
 		contentPane.add(insurancename);
 		
-		JRadioButton publicbtn = new JRadioButton("public");
-		publicbtn.setBounds(187, 300, 95, 23);
-		contentPane.add(publicbtn);
+		JRadioButton publicButton = new JRadioButton("public");
+		publicButton.setBounds(187, 300, 95, 23);
+		contentPane.add(publicButton);
 		
-		JRadioButton privatebtn = new JRadioButton("private");
-		privatebtn.setBounds(294, 300, 95, 23);
-		contentPane.add(privatebtn);
+		JRadioButton privateButton = new JRadioButton("private");
+		privateButton.setBounds(294, 300, 95, 23);
+		contentPane.add(privateButton);
 		
+		// Add exception Handling for falsely formatted inputs
+		// Add pw check
 		JButton ConfirmBtn = new JButton("Confirm and Register");
+		ConfirmBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                char[] password = passwordField.getPassword();
+                String firstName = firstname.getText();
+                String lastName = lastname.getText();
+                String dateOfBirth = dateofbirth.getText();
+                String healthInformation = healthinfo.getText();
+                String insuranceName = insurancename.getText();
+                String insuranceType;
+                if(publicButton.isSelected()) {
+                	insuranceType = "public";
+                }else if(privateButton.isSelected()){
+                	insuranceType = "private";
+                }else {
+                	insuranceType = "";
+                	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
+                }
+                String addressStreet = street.getText();
+                String addressStreetNo = number.getText();
+                int adressStreetNoAsInt = 0;
+                adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
+                String adressZipCode = zipcode.getText();
+                String addressCity = city.getText();
+                
+                if(DBController.insertUserIntoDB(username, "123", firstName, lastName, dateOfBirth,
+                									healthInformation, insuranceName, insuranceType, addressStreet,
+                									adressStreetNoAsInt, adressZipCode, addressCity)) 
+                {
+                	showMessageDialog(null,"Registration finished\nYou can login now");
+                }else {
+                	showMessageDialog(null,"Registration failed, try again");
+                }
+			}
+		});
 		ConfirmBtn.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		ConfirmBtn.setBounds(263, 467, 167, 29);
 		contentPane.add(ConfirmBtn);
 		
-		JButton btnNewButton = new JButton("Cancel");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//rw.dispose();
+			//	rw.dispose();
+				
 			}
 		});
-		btnNewButton.setBounds(129, 467, 117, 29);
-		contentPane.add(btnNewButton);
+		cancelButton.setBounds(129, 467, 117, 29);
+		contentPane.add(cancelButton);
 		
 		JLabel lblUsername = new JLabel("username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -180,14 +223,14 @@ public class RegisterWindow extends JFrame {
 		lblRepeatPassword.setBounds(27, 415, 124, 16);
 		contentPane.add(lblRepeatPassword);
 		
-		newUsernameField = new JTextField();
-		newUsernameField.setColumns(10);
-		newUsernameField.setBounds(187, 355, 243, 26);
-		contentPane.add(newUsernameField);
+		usernameField = new JTextField();
+		usernameField.setColumns(10);
+		usernameField.setBounds(187, 355, 243, 26);
+		contentPane.add(usernameField);
 		
-		newPasswordField = new JPasswordField();
-		newPasswordField.setBounds(187, 383, 243, 26);
-		contentPane.add(newPasswordField);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(187, 383, 243, 26);
+		contentPane.add(passwordField);
 		
 		RepeatPasswordField = new JPasswordField();
 		RepeatPasswordField.setBounds(187, 411, 243, 26);
