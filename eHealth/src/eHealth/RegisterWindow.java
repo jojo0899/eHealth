@@ -41,7 +41,7 @@ public class RegisterWindow extends JFrame {
 	
 	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 550);
+		setBounds(100, 100, 560, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,9 +82,9 @@ public class RegisterWindow extends JFrame {
 		lblCity.setBounds(27, 219, 95, 16);
 		contentPane.add(lblCity);
 		
-		JLabel lblDateOfBirth = new JLabel("Date of Birth:");
+		JLabel lblDateOfBirth = new JLabel("Date of Birth(YYYY-MM-DD):");
 		lblDateOfBirth.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblDateOfBirth.setBounds(27, 247, 102, 16);
+		lblDateOfBirth.setBounds(27, 248, 207, 16);
 		contentPane.add(lblDateOfBirth);
 		
 		JLabel lblHealthInformation = new JLabel("Health information:");
@@ -103,56 +103,56 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(lblInsuranceName);
 		
 		firstname = new JTextField();
-		firstname.setBounds(187, 75, 243, 26);
+		firstname.setBounds(244, 76, 300, 26);
 		contentPane.add(firstname);
 		firstname.setColumns(10);
 		
 		lastname = new JTextField();
 		lastname.setColumns(10);
-		lastname.setBounds(187, 103, 243, 26);
+		lastname.setBounds(244, 104, 300, 26);
 		contentPane.add(lastname);
 		
 		street = new JTextField();
 		street.setColumns(10);
-		street.setBounds(187, 131, 243, 26);
+		street.setBounds(244, 132, 300, 26);
 		contentPane.add(street);
 		
 		number = new JTextField();
 		number.setColumns(10);
-		number.setBounds(187, 159, 243, 26);
+		number.setBounds(244, 160, 300, 26);
 		contentPane.add(number);
 		
 		zipcode = new JTextField();
 		zipcode.setColumns(10);
-		zipcode.setBounds(187, 187, 243, 26);
+		zipcode.setBounds(244, 188, 300, 26);
 		contentPane.add(zipcode);
 		
 		city = new JTextField();
 		city.setColumns(10);
-		city.setBounds(187, 215, 243, 26);
+		city.setBounds(244, 216, 300, 26);
 		contentPane.add(city);
 		
 		dateofbirth = new JTextField();
 		dateofbirth.setColumns(10);
-		dateofbirth.setBounds(187, 243, 243, 26);
+		dateofbirth.setBounds(244, 245, 300, 26);
 		contentPane.add(dateofbirth);
 		
 		healthinfo = new JTextField();
 		healthinfo.setColumns(10);
-		healthinfo.setBounds(187, 271, 243, 26);
+		healthinfo.setBounds(244, 272, 300, 26);
 		contentPane.add(healthinfo);
 		
 		insurancename = new JTextField();
 		insurancename.setColumns(10);
-		insurancename.setBounds(187, 327, 243, 26);
+		insurancename.setBounds(244, 328, 300, 26);
 		contentPane.add(insurancename);
 		
 		JRadioButton publicButton = new JRadioButton("public");
-		publicButton.setBounds(187, 300, 95, 23);
+		publicButton.setBounds(263, 302, 95, 23);
 		contentPane.add(publicButton);
 		
 		JRadioButton privateButton = new JRadioButton("private");
-		privateButton.setBounds(294, 300, 95, 23);
+		privateButton.setBounds(367, 302, 95, 23);
 		contentPane.add(privateButton);
 		
 		// Add exception Handling for falsely formatted inputs
@@ -225,15 +225,15 @@ public class RegisterWindow extends JFrame {
 		
 		usernameField = new JTextField();
 		usernameField.setColumns(10);
-		usernameField.setBounds(187, 355, 243, 26);
+		usernameField.setBounds(244, 356, 300, 26);
 		contentPane.add(usernameField);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(187, 383, 243, 26);
+		passwordField.setBounds(244, 384, 300, 26);
 		contentPane.add(passwordField);
 		
 		RepeatPasswordField = new JPasswordField();
-		RepeatPasswordField.setBounds(187, 411, 243, 26);
+		RepeatPasswordField.setBounds(244, 412, 300, 26);
 		contentPane.add(RepeatPasswordField);
 	}
 	
