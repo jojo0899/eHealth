@@ -41,7 +41,7 @@ public class RegisterWindow extends JFrame {
 
 	
 	public RegisterWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -173,6 +173,7 @@ public class RegisterWindow extends JFrame {
                 String healthInformation = healthinfo.getText();
                 String insuranceName = insurancename.getText();
                 String insuranceType;
+                
                 if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
