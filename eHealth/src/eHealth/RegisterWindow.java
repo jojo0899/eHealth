@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -155,6 +156,10 @@ public class RegisterWindow extends JFrame {
 		privateButton.setBounds(367, 302, 95, 23);
 		contentPane.add(privateButton);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(privateButton);
+		group.add(publicButton);
+		
 		// Add exception Handling for falsely formatted inputs
 		// Add pw check
 		JButton ConfirmBtn = new JButton("Confirm and Register");
@@ -205,13 +210,8 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(ConfirmBtn);
 		
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			//	rw.dispose();
-				
-			}
-		});
+		cancelButton.addActionListener(e -> this.dispose());
+		
 		cancelButton.setBounds(129, 467, 117, 29);
 		contentPane.add(cancelButton);
 		
