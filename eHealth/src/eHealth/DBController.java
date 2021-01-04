@@ -38,8 +38,8 @@ public class DBController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+    
     
     public static Boolean insertUserIntoDB(
     		String username,
@@ -104,7 +104,7 @@ public class DBController {
         Connection conn = connectToDB();
         try{
             Statement st = conn.createStatement();
-            ResultSet result =  st.executeQuery("SELECT username,user_password FROM USER WHERE username ='" + username + "' AND user_password ='" + password + "'");
+            ResultSet result =  st.executeQuery("SELECT username,password FROM USER_V2 WHERE username ='" + username + "' AND password ='" + password + "'");
             return result.next();
         } catch (SQLException e) {
             e.printStackTrace();

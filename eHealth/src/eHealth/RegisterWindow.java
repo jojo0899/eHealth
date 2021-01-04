@@ -199,6 +199,7 @@ public class RegisterWindow extends JFrame {
                 }
 			}
 		});
+		
 		ConfirmBtn.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		ConfirmBtn.setBounds(263, 467, 167, 29);
 		contentPane.add(ConfirmBtn);
