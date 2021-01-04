@@ -179,7 +179,13 @@ public class RegisterWindow extends JFrame {
                 String addressStreet = street.getText();
                 String addressStreetNo = number.getText();
                 int adressStreetNoAsInt = 0;
-                adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
+                try {
+                	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
+                }catch(NumberFormatException exc) {
+                	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
+                }
+   
+                
                 String adressZipCode = zipcode.getText();
                 String addressCity = city.getText();
                 
