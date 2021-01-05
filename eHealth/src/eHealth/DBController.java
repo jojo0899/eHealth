@@ -9,7 +9,7 @@ public class DBController {
         Connection conn = null;
         try {
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:~/eda","test", "test");
+            conn = DriverManager.getConnection("jdbc:h2:~/eda;create=true","test", "test");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
