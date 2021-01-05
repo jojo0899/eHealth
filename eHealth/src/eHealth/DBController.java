@@ -23,7 +23,7 @@ public class DBController {
             st.execute(
             		"Create TABLE User_v2("+
             			    "username    	varchar(15) PRIMARY KEY," +
-            			    "password    	varchar(20)," +
+            			    "password    	char(128)," +
             			    "firstName   	varchar(15)," +
             			    "lastname    	varchar(15)," +
             			    "dateOfBirth 	DATE," +
@@ -74,7 +74,7 @@ public class DBController {
 		
 		return true;
 		} catch (SQLException e) {
-		//e.printStackTrace();
+		e.printStackTrace();
 		return false;
 		}
 	}

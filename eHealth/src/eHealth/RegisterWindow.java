@@ -18,6 +18,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
@@ -37,7 +40,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField insurancename;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
-	private JPasswordField RepeatPasswordField;
+	private JPasswordField repeatPasswordField;
 
 	
 	public RegisterWindow() {
@@ -167,6 +170,17 @@ public class RegisterWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 char[] password = passwordField.getPassword();
+                char[] repeatedPassword = repeatPasswordField.getPassword();
+                if(!Arrays.equals(password, repeatedPassword)) {
+                	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                String encryptedPassword = "";
+                try {
+					encryptedPassword = Password.createhash(password, username);
+				} catch (UnsupportedEncodingException e1) {
+					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
+				}
                 String firstName = firstname.getText();
                 String lastName = lastname.getText();
                 String dateOfBirth = dateofbirth.getText();
@@ -181,6 +195,7 @@ public class RegisterWindow extends JFrame {
                 }else {
                 	insuranceType = "";
                 	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
+                	return;
                 }
                 String addressStreet = street.getText();
                 String addressStreetNo = number.getText();
@@ -195,7 +210,7 @@ public class RegisterWindow extends JFrame {
                 String adressZipCode = zipcode.getText();
                 String addressCity = city.getText();
                 
-                if(DBController.insertUserIntoDB(username, "123", firstName, lastName, dateOfBirth,
+                if(DBController.insertUserIntoDB(username, encryptedPassword, firstName, lastName, dateOfBirth,
                 									healthInformation, insuranceName, insuranceType, addressStreet,
                 									adressStreetNoAsInt, adressZipCode, addressCity)) 
                 {
@@ -240,9 +255,9 @@ public class RegisterWindow extends JFrame {
 		passwordField.setBounds(244, 384, 300, 26);
 		contentPane.add(passwordField);
 		
-		RepeatPasswordField = new JPasswordField();
-		RepeatPasswordField.setBounds(244, 412, 300, 26);
-		contentPane.add(RepeatPasswordField);
+		repeatPasswordField = new JPasswordField();
+		repeatPasswordField.setBounds(244, 412, 300, 26);
+		contentPane.add(repeatPasswordField);
 	}
 	
 	public void createRegisterWindow() {

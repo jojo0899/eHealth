@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.UnsupportedEncodingException;
+
 import static javax.swing.JOptionPane.*;
 
 public class LoginDialog extends JFrame {
@@ -61,9 +63,15 @@ public class LoginDialog extends JFrame {
 				String user;
 				user = usernameField.getText();
 			
-				String pwd = new String(passwordField.getPassword());
+				char[] password = passwordField.getPassword();
+                String encryptedPassword = "";
+                try {
+					encryptedPassword = Password.createhash(password, user);
+				} catch (UnsupportedEncodingException e1) {
+					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
+				}
 				
-				if(DBController.validLoginData(user, pwd)) {
+				if(DBController.validLoginData(user, encryptedPassword)) {
 					if(user.equals("admin")) {
 						AdminWindow aw = new AdminWindow();
 				        aw.createAdminWindow();

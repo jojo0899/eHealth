@@ -12,16 +12,16 @@ import java.security.spec.InvalidKeySpecException;
 
 
 
-public class password {
+public class Password {
 	
 	//method to create a hashed password
-	public static String createhash(String password, String salt)throws UnsupportedEncodingException {
+	public static String createhash(char[] password, String salt)throws UnsupportedEncodingException {
 		
 	    int iterations = 10000;
 	    
-	    //länge
+	    //lï¿½nge
 	    int keyLength = 512;
-	    char[] passwordChars = password.toCharArray();
+	    char[] passwordChars = password;
 	    byte[] saltBytes = salt.getBytes();
 	
 	    byte[] hashedBytes = hashPassword(passwordChars, saltBytes, iterations, keyLength);
@@ -56,9 +56,6 @@ public class password {
 	
 	
 	
-
-	
-	
 	public static byte[] hashPassword( final char[] password, final byte[] salt, final int iterations, final int keyLength ) {
 	
 	    try {
@@ -71,6 +68,7 @@ public class password {
 	        throw new RuntimeException( e );
 	    }
 	}
+	
 }
 
 	
