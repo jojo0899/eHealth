@@ -71,6 +71,20 @@ public class AdminWindow extends JFrame {
 		});
 		deleteUserButton.setBounds(10, 224, 169, 23);
 		contentPane.add(deleteUserButton);
+		
+		JButton refreshButton = new JButton("Refresh\r\n");
+		refreshButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DBController.resultSetToTableModel(table);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		refreshButton.setBounds(10, 279, 169, 23);
+		contentPane.add(refreshButton);
 	}
 
 	public void createAdminWindow() {

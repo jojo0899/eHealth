@@ -47,7 +47,7 @@ public class DeleteUserWindow extends JFrame {
 				String userToDelete = userToDeleteTextField.getText();
 				try {
 					DBController.deleteUserFromDB(userToDelete);
-					String message = "User " + userToDelete + "succesfullyu deleted";
+					String message = "User " + userToDelete + " succesfullyu deleted";
 					showMessageDialog(null, message, "Message",WARNING_MESSAGE);
 				} catch (SQLException e1) {
 					showMessageDialog(null, "User not Found", "Warning", WARNING_MESSAGE);
