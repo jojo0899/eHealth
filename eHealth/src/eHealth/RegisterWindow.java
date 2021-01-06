@@ -173,6 +173,8 @@ public class RegisterWindow extends JFrame {
                 char[] repeatedPassword = repeatPasswordField.getPassword();
                 if(!Arrays.equals(password, repeatedPassword)) {
                 	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
+                	passwordField.setText("");
+                	repeatPasswordField.setText("");
                 	return;
                 }
                 String encryptedPassword = "";
@@ -214,6 +216,7 @@ public class RegisterWindow extends JFrame {
                 									healthInformation, insuranceName, insuranceType, addressStreet,
                 									adressStreetNoAsInt, adressZipCode, addressCity)) 
                 {
+                	dispose();
                 	showMessageDialog(null,"Registration finished\nYou can login now");
                 }else {
                 	showMessageDialog(null,"Registration failed, try again");
