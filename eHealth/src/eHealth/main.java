@@ -6,7 +6,7 @@ public class main {
 		
 		
 		// AKTUELLE TABELLEN LÖSCHEN UND EINMAL AUSFUEHREN DAMIT DIE NEUE TABELLE ERSTELLT WIRD
-		DBController.createUserDBTable();
+		//DBController.createUserDBTable();
 		
 		DBController.displayListOfAllDBEntries();
 		

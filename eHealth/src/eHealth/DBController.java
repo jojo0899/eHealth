@@ -1,6 +1,10 @@
 package eHealth;
 
 import java.sql.*;
+import java.util.Vector;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class DBController {
 
@@ -87,7 +91,7 @@ public class DBController {
             ResultSet results = st.executeQuery("SELECT * FROM USER_V2");
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
-                for(int i=1;i<=8;i++){  // for all columns in user
+                for(int i=1;i<=12;i++){  // for all columns in user
                     String data = results.getString(i);
                     System.out.print(data + " | ");
                 }
@@ -122,5 +126,30 @@ public class DBController {
         }
     }
     
+    
+    public static void resultSetToTableModel(JTable table) throws SQLException{
+    	Connection conn = connectToDB();
+    	Statement st = conn.createStatement();
+    	ResultSet rs =  st.executeQuery("SELECT * FROM USER_V2");
+        DefaultTableModel tableModel = new DefaultTableModel();
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
+            tableModel.addColumn(metaData.getColumnLabel(columnIndex));
+        }
+
+        Object[] row = new Object[columnCount];
+
+        while (rs.next()){
+            for (int i = 0; i < columnCount; i++){
+                row[i] = rs.getObject(i+1);
+            }
+            tableModel.addRow(row);
+        }
+
+        table.setModel(tableModel);
+    }
+
     
 }
