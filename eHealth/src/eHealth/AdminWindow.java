@@ -57,6 +57,20 @@ public class AdminWindow extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JButton editUserButton = new JButton("Edit a User\r\n");
+		editUserButton.setBounds(6, 159, 173, 23);
+		contentPane.add(editUserButton);
+		
+		JButton deleteUserButton = new JButton("Delete a User");
+		deleteUserButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeleteUserWindow  duw = new DeleteUserWindow();
+				duw.createDeleteUserWindow();
+			}
+		});
+		deleteUserButton.setBounds(10, 224, 169, 23);
+		contentPane.add(deleteUserButton);
 	}
 
 	public void createAdminWindow() {

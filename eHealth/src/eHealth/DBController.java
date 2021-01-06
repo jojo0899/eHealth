@@ -116,14 +116,10 @@ public class DBController {
         }
     }
     
-    public static void deleteUserFromDB(String username){
+    public static void deleteUserFromDB(String username) throws SQLException{
         Connection conn = connectToDB();
-        try{
-            Statement st = conn.createStatement();
-            st.execute("DELETE FROM user WHERE username='"+username+"'");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement st = conn.createStatement();
+        st.execute("DELETE FROM USER_V2 WHERE username='"+username+"'");
     }
     
     
