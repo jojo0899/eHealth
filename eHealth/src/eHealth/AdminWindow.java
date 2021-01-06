@@ -59,6 +59,12 @@ public class AdminWindow extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton editUserButton = new JButton("Edit a User\r\n");
+		editUserButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditUserWindow edtu = new EditUserWindow();
+				edtu.createEditUserWindow();
+			}
+		});
 		editUserButton.setBounds(6, 159, 173, 23);
 		contentPane.add(editUserButton);
 		

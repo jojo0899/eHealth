@@ -123,6 +123,71 @@ public class DBController {
     }
     
     
+    public static String getColomnFromDB(String column, String username) {
+    	Connection conn = connectToDB();
+    	try{
+    		String query  = "SELECT " + column +" FROM USER_V2 WHERE username ='" + username + "'";
+            Statement st = conn.createStatement();
+            ResultSet result =  st.executeQuery(query);
+            result.next();
+            return result.getString(column);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    
+    public static Boolean updateUserInDB(
+    		String username,
+            /*String password,*/
+            String firstName,
+            String lastName,
+            String date_of_birth, 
+            String healthInfo,
+            String insuranceName,
+            String insuranceType,
+            String street,
+            int streetNo,
+            String zipCode,
+            String city)
+	{
+		Connection conn =  connectToDB();
+		try {
+		Statement st = conn.createStatement();
+		
+		st.execute("UPDATE USER_V2 SET " + "username = '" + username + "'," +
+				/*"password = '"+ password + "'," +*/
+				"firstname = '"+ firstName + "'," +
+				"lastname = '"+ lastName + "'," +
+				"dateofbirth = '"+ date_of_birth + "'," +
+				"healthinfo = '"+ healthInfo + "'," +
+				"insurancename = '"	+ insuranceName + "'," +
+				"insurancetype = '"	+ insuranceType + "'," +
+				"street = '"+ street + "'," +
+				"streetno = "	+ streetNo + "," +
+				"zipcode = '"+ zipCode + "'," +
+				"city = '"+ city 
+				+ "' WHERE username = '" + username + "';");
+		
+		return true;
+		} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+		}
+	}
+    
+    public static Boolean checkIfUsernameExistsInDB(String username) {
+        Connection conn = connectToDB();
+        try{
+            Statement st = conn.createStatement();
+            ResultSet result =  st.executeQuery("SELECT username FROM USER_V2 WHERE username ='" + username + "'");
+            return result.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public static void resultSetToTableModel(JTable table) throws SQLException{
     	Connection conn = connectToDB();
     	Statement st = conn.createStatement();
