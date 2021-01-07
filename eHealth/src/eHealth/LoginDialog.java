@@ -76,6 +76,7 @@ public class LoginDialog extends JFrame {
 						AdminWindow aw = new AdminWindow();
 				        aw.createAdminWindow();
 					}else {
+						dispose();
 						MainWindow mw = new MainWindow();
 						mw.createMainWindow();
 					}
