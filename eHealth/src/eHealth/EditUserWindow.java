@@ -170,6 +170,7 @@ public class EditUserWindow extends JFrame {
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setBounds(47, 637, 117, 29);
 		contentPane.add(cancelButton);
+		cancelButton.addActionListener(e -> this.dispose());
 		
 		JLabel lblUsername = new JLabel("username:");
 		lblUsername.setFont(new Font("Dialog", Font.PLAIN, 15));
