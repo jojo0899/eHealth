@@ -83,16 +83,14 @@ public class AdminWindow extends JFrame {
 				String userToDelete = userSelectionTextField.getText();
 				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this User?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
-					try {
-						DBController.deleteUserFromDB(userToDelete);
-						String message = "User " + userToDelete + " succesfully deleted";
-						showMessageDialog(null, message, "Message",WARNING_MESSAGE);
-						userSelectionTextField.setText("");
-					} catch (SQLException e1) {
-						showMessageDialog(null, "User not Found", "Warning", WARNING_MESSAGE);
-					}
-					//DeleteUserWindow  duw = new DeleteUserWindow();
-					//duw.createDeleteUserWindow();
+						if(DBController.checkIfUsernameExistsInDB(userToDelete)) {
+							DBController.deleteUserFromDB(userToDelete);
+							String message = "User " + userToDelete + " succesfully deleted";
+							showMessageDialog(null, message, "Message",WARNING_MESSAGE);
+							userSelectionTextField.setText("");
+						}else {
+							showMessageDialog(null, "User not found", "Message",WARNING_MESSAGE);
+						}
 				}
 				else return;
 			}
