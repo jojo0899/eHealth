@@ -70,7 +70,7 @@ public class AdminWindow extends JFrame {
 		editUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditUserWindow edtu = new EditUserWindow();
-				edtu.createEditUserWindow();
+				edtu.createEditUserWindow(userSelectionTextField.getText());
 			}
 		});
 		editUserButton.setBounds(749, 501, 173, 23);

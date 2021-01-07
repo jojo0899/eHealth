@@ -241,11 +241,12 @@ public class EditUserWindow extends JFrame {
 	}
 	
 	
-	public void createEditUserWindow() {
+	public void createEditUserWindow(String usernameInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					EditUserWindow euw = new EditUserWindow();
+					euw.userNameField.setText(usernameInput);
 					euw.setVisible(true);
 					euw.setResizable(false);
 				} catch (Exception e) {
