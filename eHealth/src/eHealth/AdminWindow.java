@@ -90,6 +90,7 @@ public class AdminWindow extends JFrame {
 							userSelectionTextField.setText("");
 						}else {
 							showMessageDialog(null, "User not found", "Message",WARNING_MESSAGE);
+							userSelectionTextField.setText("");
 						}
 				}
 				else return;
