@@ -74,8 +74,15 @@ public class AdminWindow extends JFrame {
 		JButton editUserButton = new JButton("Edit this User\r\n");
 		editUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditUserWindow edtu = new EditUserWindow();
-				edtu.createEditUserWindow(userSelectionTextField.getText());
+				if(userTable.checkIfUsernameExistsInDB(userSelectionTextField.getText())) {
+					EditUserWindow edtu = new EditUserWindow();
+					edtu.createEditUserWindow(userSelectionTextField.getText());
+				}
+				else {
+					showMessageDialog(null, "User not found", "Message",WARNING_MESSAGE);
+					userSelectionTextField.setText("");
+				}
+				
 			}
 		});
 		editUserButton.setBounds(749, 501, 173, 23);
@@ -86,19 +93,21 @@ public class AdminWindow extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String userToDelete = userSelectionTextField.getText();
-				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this User?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
-				if (confirm == 0) {
-						if(userTable.checkIfUsernameExistsInDB(userToDelete)) {
+				
+				if(userTable.checkIfUsernameExistsInDB(userToDelete)) {
+					int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this User?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+					if (confirm == 0) {
 							userTable.deleteUserFromDB(userToDelete);
 							String message = "User " + userToDelete + " succesfully deleted";
 							showMessageDialog(null, message, "Message",WARNING_MESSAGE);
 							userSelectionTextField.setText("");
-						}else {
-							showMessageDialog(null, "User not found", "Message",WARNING_MESSAGE);
-							userSelectionTextField.setText("");
-						}
+					}
+					else return;
 				}
-				else return;
+				else {
+					showMessageDialog(null, "User not found", "Message",WARNING_MESSAGE);
+					userSelectionTextField.setText("");
+				}
 			}
 		});
 		deleteButton.setBounds(925, 501, 169, 23);

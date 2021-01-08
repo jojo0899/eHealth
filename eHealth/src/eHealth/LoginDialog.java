@@ -61,6 +61,11 @@ public class LoginDialog extends JFrame {
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loginMethod();
+			}
+		});
 		passwordField.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		passwordField.setBounds(194, 148, 175, 26);
 		contentPane.add(passwordField);
@@ -69,33 +74,7 @@ public class LoginDialog extends JFrame {
 		loginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String user;
-				user = usernameField.getText();
-			
-				char[] password = passwordField.getPassword();
-                String encryptedPassword = "";
-                try {
-					encryptedPassword = Password.createhash(password, user);
-				} catch (UnsupportedEncodingException e1) {
-					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
-				}
-				
-				if(userTable.validLoginData(user, encryptedPassword)) {
-					if(user.equals("admin")) {
-						AdminWindow aw = new AdminWindow();
-				        aw.createAdminWindow();
-					}else {
-						dispose();
-						MainWindow mw = new MainWindow();
-						mw.createMainWindow();
-					}
-				}
-				else {
-					showMessageDialog(null, "Wrong Username or Password!\nPlease try again!", "Warning", WARNING_MESSAGE);
-					usernameField.setText("");
-					passwordField.setText("");
-					
-				}
+				loginMethod();
 			}
 		});
 		loginButton.setBounds(377, 149, 117, 29);
@@ -116,6 +95,37 @@ public class LoginDialog extends JFrame {
 		CreateAccButton.setBounds(194, 186, 175, 29);
 		contentPane.add(CreateAccButton);
 	}
+	
+	public void loginMethod() {
+		String user;
+		user = usernameField.getText();
+	
+		char[] password = passwordField.getPassword();
+	    String encryptedPassword = "";
+	    try {
+			encryptedPassword = Password.createhash(password, user);
+		} catch (UnsupportedEncodingException e1) {
+			showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
+		}
+		
+		if(userTable.validLoginData(user, encryptedPassword)) {
+			if(user.equals("admin")) {
+				AdminWindow aw = new AdminWindow();
+		        aw.createAdminWindow();
+			}else {
+				dispose();
+				MainWindow mw = new MainWindow();
+				mw.createMainWindow();
+			}
+		}
+		else {
+			showMessageDialog(null, "Wrong Username or Password!\nPlease try again!", "Warning", WARNING_MESSAGE);
+			usernameField.setText("");
+			passwordField.setText("");
+			
+		}
+	}
+
 	
 	public void createLoginDialog() {
 		EventQueue.invokeLater(new Runnable() {
