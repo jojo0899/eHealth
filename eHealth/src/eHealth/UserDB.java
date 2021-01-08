@@ -100,20 +100,6 @@ public class UserDB extends DBController {
         
     }
     
-    public String getColomnFromDB(String column, String username) {
-    	Connection conn = connectToDB();
-    	try{
-    		String query  = "SELECT " + column +" FROM USER_V2 WHERE username ='" + username + "'";
-            Statement st = conn.createStatement();
-            ResultSet result =  st.executeQuery(query);
-            result.next();
-            return result.getString(column);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-    
     public Boolean updateUserInDB(
     		String username,
             /*String password,*/

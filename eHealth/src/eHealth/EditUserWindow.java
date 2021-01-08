@@ -207,18 +207,18 @@ public class EditUserWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String usernameInput = userNameField.getText();
 				if(userTable.checkIfUsernameExistsInDB(usernameInput)) {
-					userNameField.setText(userTable.getColomnFromDB("USERNAME", usernameInput));
-					firstNameField.setText(userTable.getColomnFromDB("FIRSTNAME", usernameInput));
-					LastNameField.setText(userTable.getColomnFromDB("LASTNAME", usernameInput));
-					streetField.setText(userTable.getColomnFromDB("STREET", usernameInput));
-					streetNumberField.setText(userTable.getColomnFromDB("STREETNO", usernameInput));
-					zipCodeField.setText(userTable.getColomnFromDB("ZIPCODE", usernameInput));
-					cityField.setText(userTable.getColomnFromDB("CITY", usernameInput));
-					dateOfBirthField.setText(userTable.getColomnFromDB("DATEOFBIRTH", usernameInput));
-					healthInfoField.setText(userTable.getColomnFromDB("HEALTHINFO", usernameInput));
-					insuranceNameField.setText(userTable.getColomnFromDB("INSURANCENAME", usernameInput));
+					userNameField.setText(userTable.getColomnFromDB("USERNAME", usernameInput, "USER_V2"));
+					firstNameField.setText(userTable.getColomnFromDB("FIRSTNAME", usernameInput, "USER_V2"));
+					LastNameField.setText(userTable.getColomnFromDB("LASTNAME", usernameInput, "USER_V2"));
+					streetField.setText(userTable.getColomnFromDB("STREET", usernameInput, "USER_V2"));
+					streetNumberField.setText(userTable.getColomnFromDB("STREETNO", usernameInput, "USER_V2"));
+					zipCodeField.setText(userTable.getColomnFromDB("ZIPCODE", usernameInput, "USER_V2"));
+					cityField.setText(userTable.getColomnFromDB("CITY", usernameInput, "USER_V2"));
+					dateOfBirthField.setText(userTable.getColomnFromDB("DATEOFBIRTH", usernameInput, "USER_V2"));
+					healthInfoField.setText(userTable.getColomnFromDB("HEALTHINFO", usernameInput, "USER_V2"));
+					insuranceNameField.setText(userTable.getColomnFromDB("INSURANCENAME", usernameInput, "USER_V2"));
 					
-					if(userTable.getColomnFromDB("INSURANCETYPE", usernameInput).equals("public")) {
+					if(userTable.getColomnFromDB("INSURANCETYPE", usernameInput, "USER_V2").equals("public")) {
 						publicButton.setSelected(true);
 					}else {
 						privateButton.setSelected(true);
