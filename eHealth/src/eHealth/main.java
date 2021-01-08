@@ -4,11 +4,11 @@ public class main {
 
 	public static void main(String[] args) {
 		
+		UserDB userTable = new UserDB();
 		
 		// AKTUELLE TABELLEN LÖSCHEN UND EINMAL AUSFUEHREN DAMIT DIE NEUE TABELLE ERSTELLT WIRD
-		//DBController.createUserDBTable();
+		userTable.createUserDBTable();
 		
-		UserDB userTable = new UserDB();
 		userTable.displayListOfAllDBEntries();
 		
 		

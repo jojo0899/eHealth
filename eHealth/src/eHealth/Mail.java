@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
 
-public class mail {
+public class Mail {
 
 		public static void sendtext(String mailreceiver, String mailsubject, String mailmessage) {
 			final String username = "healthtesting01@gmail.com";

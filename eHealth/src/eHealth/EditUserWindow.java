@@ -33,6 +33,7 @@ public class EditUserWindow extends JFrame {
 	private JTextField streetField;
 	
 	private UserDB userTable = new UserDB();
+	private JTextField emailField;
 
 
 	public EditUserWindow() {
@@ -51,12 +52,12 @@ public class EditUserWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Firstname:");
 		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblNewLabel.setBounds(27, 244, 95, 16);
+		lblNewLabel.setBounds(27, 197, 95, 16);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLastname = new JLabel("Lastname:");
 		lblLastname.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblLastname.setBounds(27, 271, 95, 16);
+		lblLastname.setBounds(27, 224, 95, 16);
 		contentPane.add(lblLastname);
 		
 		JLabel lblStreet = new JLabel("Street:");
@@ -106,12 +107,12 @@ public class EditUserWindow extends JFrame {
 		
 		firstNameField = new JTextField();
 		firstNameField.setColumns(10);
-		firstNameField.setBounds(244, 241, 300, 26);
+		firstNameField.setBounds(244, 194, 300, 26);
 		contentPane.add(firstNameField);
 		
 		LastNameField = new JTextField();
 		LastNameField.setColumns(10);
-		LastNameField.setBounds(244, 268, 300, 26);
+		LastNameField.setBounds(244, 224, 300, 26);
 		contentPane.add(LastNameField);
 		
 		streetNumberField = new JTextField();
@@ -155,7 +156,7 @@ public class EditUserWindow extends JFrame {
                 	insuranceType = "private";
                 }
                 // cant change username & password yet
-				if(userTable.updateUserInDB(userNameField.getText(),  firstNameField.getText(), LastNameField.getText(), 
+				if(userTable.updateUserInDB(userNameField.getText(),  firstNameField.getText(), emailField.getText(), LastNameField.getText(), 
 						dateOfBirthField.getText(), healthInfoField.getText(), insuranceNameField.getText(), 
 						insuranceType,streetField.getText(),  streetNo,zipCodeField.getText(), cityField.getText())) 
 				{
@@ -207,18 +208,19 @@ public class EditUserWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String usernameInput = userNameField.getText();
 				if(userTable.checkIfUsernameExistsInDB(usernameInput)) {
-					userNameField.setText(userTable.getColomnFromDB("USERNAME", usernameInput, "USER_V2"));
-					firstNameField.setText(userTable.getColomnFromDB("FIRSTNAME", usernameInput, "USER_V2"));
-					LastNameField.setText(userTable.getColomnFromDB("LASTNAME", usernameInput, "USER_V2"));
-					streetField.setText(userTable.getColomnFromDB("STREET", usernameInput, "USER_V2"));
-					streetNumberField.setText(userTable.getColomnFromDB("STREETNO", usernameInput, "USER_V2"));
-					zipCodeField.setText(userTable.getColomnFromDB("ZIPCODE", usernameInput, "USER_V2"));
-					cityField.setText(userTable.getColomnFromDB("CITY", usernameInput, "USER_V2"));
-					dateOfBirthField.setText(userTable.getColomnFromDB("DATEOFBIRTH", usernameInput, "USER_V2"));
-					healthInfoField.setText(userTable.getColomnFromDB("HEALTHINFO", usernameInput, "USER_V2"));
-					insuranceNameField.setText(userTable.getColomnFromDB("INSURANCENAME", usernameInput, "USER_V2"));
+					userNameField.setText(userTable.getStringColomnFromDB("USERNAME", usernameInput, "USER"));
+					emailField.setText(userTable.getStringColomnFromDB("EMAIL", usernameInput, "USER"));
+					firstNameField.setText(userTable.getStringColomnFromDB("FIRSTNAME", usernameInput, "USER"));
+					LastNameField.setText(userTable.getStringColomnFromDB("LASTNAME", usernameInput, "USER"));
+					streetField.setText(userTable.getStringColomnFromDB("STREET", usernameInput, "USER"));
+					streetNumberField.setText(userTable.getStringColomnFromDB("STREETNO", usernameInput, "USER"));
+					zipCodeField.setText(userTable.getStringColomnFromDB("ZIPCODE", usernameInput, "USER"));
+					cityField.setText(userTable.getStringColomnFromDB("CITY", usernameInput, "USER"));
+					dateOfBirthField.setText(userTable.getStringColomnFromDB("DATEOFBIRTH", usernameInput, "USER"));
+					healthInfoField.setText(userTable.getStringColomnFromDB("HEALTHINFO", usernameInput, "USER"));
+					insuranceNameField.setText(userTable.getStringColomnFromDB("INSURANCENAME", usernameInput, "USER"));
 					
-					if(userTable.getColomnFromDB("INSURANCETYPE", usernameInput, "USER_V2").equals("public")) {
+					if(userTable.getStringColomnFromDB("INSURANCETYPE", usernameInput, "USER").equals("public")) {
 						publicButton.setSelected(true);
 					}else {
 						privateButton.setSelected(true);
@@ -240,6 +242,15 @@ public class EditUserWindow extends JFrame {
 		JButton doneButton = new JButton("Done\r\n");
 		doneButton.setBounds(437, 636, 109, 27);
 		contentPane.add(doneButton);
+		
+		JLabel lblNewLabel_3 = new JLabel("Email:");
+		lblNewLabel_3.setBounds(35, 278, 46, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		emailField = new JTextField();
+		emailField.setBounds(244, 275, 300, 20);
+		contentPane.add(emailField);
+		emailField.setColumns(10);
 		doneButton.addActionListener(e -> this.dispose());
 	}
 	

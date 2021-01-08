@@ -23,9 +23,14 @@ public class MainWindow extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField;
 	private JTextField textField_2;
+	
+	private User userUsed;
 
 	
-	public MainWindow() {
+	public MainWindow(String username) {
+		
+		userUsed = new User(username);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 450);
 		contentPane = new JPanel();
@@ -65,6 +70,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(lblNewLabel_1_1_2);
 		
 		JComboBox comboBox = new JComboBox();
+		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"no reminder", "1 week before", "3 days before", "1 hour before", "10 minutes before"}));
 		comboBox.setBounds(105, 275, 205, 34);
 		contentPane.add(comboBox);
@@ -79,11 +85,12 @@ public class MainWindow extends JFrame {
 		lblWelcome.setBounds(6, 34, 123, 34);
 		contentPane.add(lblWelcome);
 		
-		JLabel lblLoggedInUser = new JLabel("<<name>>");
-		lblLoggedInUser.setForeground(Color.RED);
-		lblLoggedInUser.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblLoggedInUser.setBounds(128, 34, 182, 34);
-		contentPane.add(lblLoggedInUser);
+		JLabel loggedInUser = new JLabel();
+		loggedInUser.setText(userUsed.getUsername());
+		loggedInUser.setForeground(Color.RED);
+		loggedInUser.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		loggedInUser.setBounds(128, 34, 182, 34);
+		contentPane.add(loggedInUser);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(6, 126, 304, 38);
@@ -112,13 +119,14 @@ public class MainWindow extends JFrame {
 		textField_2.setColumns(10);
 		textField_2.setBounds(80, 244, 225, 26);
 		contentPane.add(textField_2);
+		
 	}
 	
-	public void createMainWindow() {
+	public static void createMainWindow(String usernameInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow mw = new MainWindow();
+					MainWindow mw = new MainWindow(usernameInput);
 					mw.setVisible(true);
 					mw.setResizable(false);
 				} catch (Exception e) {

@@ -16,9 +16,10 @@ public class UserDB extends DBController {
         try {
             Statement st = conn.createStatement();
             st.execute(
-            		"Create TABLE User_v2("+
+            		"Create TABLE USER("+
             			    "username    	varchar(15) PRIMARY KEY," +
             			    "password    	char(128)," +
+            			    "email	    	varchar(30)," +
             			    "firstName   	varchar(15)," +
             			    "lastname    	varchar(15)," +
             			    "dateOfBirth 	DATE," +
@@ -38,6 +39,7 @@ public class UserDB extends DBController {
     public Boolean insertUserIntoDB(
     		String username,
             String password,
+            String email,
             String firstName,
             String lastName,
             String date_of_birth, 
@@ -53,8 +55,9 @@ public class UserDB extends DBController {
 		try {
 		Statement st = conn.createStatement();
 		
-		st.execute("INSERT INTO USER_V2 VALUES('" + username + "','"
+		st.execute("INSERT INTO USER VALUES('" + username + "','"
 													+ password + "','"
+													+ email + "','"
 													+ firstName + "','"
 													+ lastName + "','"
 													+ date_of_birth + "','"
@@ -79,7 +82,7 @@ public class UserDB extends DBController {
         Connection conn = connectToDB();
         try{
             Statement st = conn.createStatement();
-            ResultSet result =  st.executeQuery("SELECT username,password FROM USER_V2 WHERE username ='" + username + "' AND password ='" + password + "'");
+            ResultSet result =  st.executeQuery("SELECT username,password FROM USER WHERE username ='" + username + "' AND password ='" + password + "'");
             return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,7 +95,7 @@ public class UserDB extends DBController {
         Statement st;
 		try {
 			st = conn.createStatement();
-			st.execute("DELETE FROM USER_V2 WHERE username='"+username+"'");
+			st.execute("DELETE FROM USER WHERE username='"+username+"'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,6 +106,7 @@ public class UserDB extends DBController {
     public Boolean updateUserInDB(
     		String username,
             /*String password,*/
+    		String email,
             String firstName,
             String lastName,
             String date_of_birth, 
@@ -118,8 +122,9 @@ public class UserDB extends DBController {
 		try {
 		Statement st = conn.createStatement();
 		
-		st.execute("UPDATE USER_V2 SET " + "username = '" + username + "'," +
+		st.execute("UPDATE USER SET " + "username = '" + username + "'," +
 				/*"password = '"+ password + "'," +*/
+				"email = '"+ email + "'," +
 				"firstname = '"+ firstName + "'," +
 				"lastname = '"+ lastName + "'," +
 				"dateofbirth = '"+ date_of_birth + "'," +
@@ -143,7 +148,7 @@ public class UserDB extends DBController {
         Connection conn = connectToDB();
         try{
             Statement st = conn.createStatement();
-            ResultSet result =  st.executeQuery("SELECT username FROM USER_V2 WHERE username ='" + username + "'");
+            ResultSet result =  st.executeQuery("SELECT username FROM USER WHERE username ='" + username + "'");
             return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,7 +160,7 @@ public class UserDB extends DBController {
     public void resultSetToTableModel(JTable table) throws SQLException{
     	Connection conn = connectToDB();
     	Statement st = conn.createStatement();
-    	ResultSet rs =  st.executeQuery("SELECT * FROM USER_V2");
+    	ResultSet rs =  st.executeQuery("SELECT * FROM USER");
         DefaultTableModel tableModel = new DefaultTableModel();
         ResultSetMetaData metaData = rs.getMetaData();
         int columnCount = metaData.getColumnCount();
@@ -181,7 +186,7 @@ public class UserDB extends DBController {
         Connection conn =  connectToDB();
         try {
             Statement st = conn.createStatement();
-            ResultSet results = st.executeQuery("SELECT * FROM USER_V2");
+            ResultSet results = st.executeQuery("SELECT * FROM USER");
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
                 for(int i=1;i<=12;i++){  // for all columns in user
@@ -199,4 +204,5 @@ public class UserDB extends DBController {
 	}
 
 
+    
 }

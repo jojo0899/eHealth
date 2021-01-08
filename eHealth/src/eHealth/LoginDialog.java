@@ -27,6 +27,7 @@ public class LoginDialog extends JFrame {
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	
+	
 	private UserDB userTable = new UserDB();
 
 	
@@ -75,6 +76,8 @@ public class LoginDialog extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loginMethod();
+				
+				//Mail.sendtext("@gmail.com", "ehealth project test", "test1");
 			}
 		});
 		loginButton.setBounds(377, 149, 117, 29);
@@ -114,8 +117,7 @@ public class LoginDialog extends JFrame {
 		        aw.createAdminWindow();
 			}else {
 				dispose();
-				MainWindow mw = new MainWindow();
-				mw.createMainWindow();
+				MainWindow.createMainWindow(user);
 			}
 		}
 		else {
