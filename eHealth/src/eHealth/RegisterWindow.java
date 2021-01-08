@@ -41,6 +41,8 @@ public class RegisterWindow extends JFrame {
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JPasswordField repeatPasswordField;
+	
+	private UserDB userTable = new UserDB();
 
 	
 	public RegisterWindow() {
@@ -212,7 +214,7 @@ public class RegisterWindow extends JFrame {
                 String adressZipCode = zipcode.getText();
                 String addressCity = city.getText();
                 
-                if(DBController.insertUserIntoDB(username, encryptedPassword, firstName, lastName, dateOfBirth,
+                if(userTable.insertUserIntoDB(username, encryptedPassword, firstName, lastName, dateOfBirth,
                 									healthInformation, insuranceName, insuranceType, addressStreet,
                 									adressStreetNoAsInt, adressZipCode, addressCity)) 
                 {

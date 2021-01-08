@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import org.h2.engine.User;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,6 +32,8 @@ public class AdminWindow extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField userSelectionTextField;
+	
+	private UserDB userTable = new UserDB();
 
 	
 	public AdminWindow() {
@@ -49,7 +54,7 @@ public class AdminWindow extends JFrame {
 		viewUsersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					DBController.resultSetToTableModel(table);
+					userTable.resultSetToTableModel(table);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -83,8 +88,8 @@ public class AdminWindow extends JFrame {
 				String userToDelete = userSelectionTextField.getText();
 				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this User?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
-						if(DBController.checkIfUsernameExistsInDB(userToDelete)) {
-							DBController.deleteUserFromDB(userToDelete);
+						if(userTable.checkIfUsernameExistsInDB(userToDelete)) {
+							userTable.deleteUserFromDB(userToDelete);
 							String message = "User " + userToDelete + " succesfully deleted";
 							showMessageDialog(null, message, "Message",WARNING_MESSAGE);
 							userSelectionTextField.setText("");
@@ -103,7 +108,7 @@ public class AdminWindow extends JFrame {
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					DBController.resultSetToTableModel(table);
+					userTable.resultSetToTableModel(table);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

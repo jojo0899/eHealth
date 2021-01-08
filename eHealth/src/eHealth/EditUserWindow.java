@@ -31,6 +31,8 @@ public class EditUserWindow extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField insuranceNameField;
 	private JTextField streetField;
+	
+	private UserDB userTable = new UserDB();
 
 
 	public EditUserWindow() {
@@ -153,7 +155,7 @@ public class EditUserWindow extends JFrame {
                 	insuranceType = "private";
                 }
                 // cant change username & password yet
-				if(DBController.updateUserInDB(userNameField.getText(),  firstNameField.getText(), LastNameField.getText(), 
+				if(userTable.updateUserInDB(userNameField.getText(),  firstNameField.getText(), LastNameField.getText(), 
 						dateOfBirthField.getText(), healthInfoField.getText(), insuranceNameField.getText(), 
 						insuranceType,streetField.getText(),  streetNo,zipCodeField.getText(), cityField.getText())) 
 				{
@@ -204,19 +206,19 @@ public class EditUserWindow extends JFrame {
 		selectUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usernameInput = userNameField.getText();
-				if(DBController.checkIfUsernameExistsInDB(usernameInput)) {
-					userNameField.setText(DBController.getColomnFromDB("USERNAME", usernameInput));
-					firstNameField.setText(DBController.getColomnFromDB("FIRSTNAME", usernameInput));
-					LastNameField.setText(DBController.getColomnFromDB("LASTNAME", usernameInput));
-					streetField.setText(DBController.getColomnFromDB("STREET", usernameInput));
-					streetNumberField.setText(DBController.getColomnFromDB("STREETNO", usernameInput));
-					zipCodeField.setText(DBController.getColomnFromDB("ZIPCODE", usernameInput));
-					cityField.setText(DBController.getColomnFromDB("CITY", usernameInput));
-					dateOfBirthField.setText(DBController.getColomnFromDB("DATEOFBIRTH", usernameInput));
-					healthInfoField.setText(DBController.getColomnFromDB("HEALTHINFO", usernameInput));
-					insuranceNameField.setText(DBController.getColomnFromDB("INSURANCENAME", usernameInput));
+				if(userTable.checkIfUsernameExistsInDB(usernameInput)) {
+					userNameField.setText(userTable.getColomnFromDB("USERNAME", usernameInput));
+					firstNameField.setText(userTable.getColomnFromDB("FIRSTNAME", usernameInput));
+					LastNameField.setText(userTable.getColomnFromDB("LASTNAME", usernameInput));
+					streetField.setText(userTable.getColomnFromDB("STREET", usernameInput));
+					streetNumberField.setText(userTable.getColomnFromDB("STREETNO", usernameInput));
+					zipCodeField.setText(userTable.getColomnFromDB("ZIPCODE", usernameInput));
+					cityField.setText(userTable.getColomnFromDB("CITY", usernameInput));
+					dateOfBirthField.setText(userTable.getColomnFromDB("DATEOFBIRTH", usernameInput));
+					healthInfoField.setText(userTable.getColomnFromDB("HEALTHINFO", usernameInput));
+					insuranceNameField.setText(userTable.getColomnFromDB("INSURANCENAME", usernameInput));
 					
-					if(DBController.getColomnFromDB("INSURANCETYPE", usernameInput).equals("public")) {
+					if(userTable.getColomnFromDB("INSURANCETYPE", usernameInput).equals("public")) {
 						publicButton.setSelected(true);
 					}else {
 						privateButton.setSelected(true);

@@ -26,6 +26,8 @@ public class LoginDialog extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	
+	private UserDB userTable = new UserDB();
 
 	
 	public LoginDialog() {
@@ -78,7 +80,7 @@ public class LoginDialog extends JFrame {
 					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
 				}
 				
-				if(DBController.validLoginData(user, encryptedPassword)) {
+				if(userTable.validLoginData(user, encryptedPassword)) {
 					if(user.equals("admin")) {
 						AdminWindow aw = new AdminWindow();
 				        aw.createAdminWindow();
