@@ -7,10 +7,9 @@ public class main {
 		UserDB userTable = new UserDB();
 		
 		// AKTUELLE TABELLEN LÖSCHEN UND EINMAL AUSFUEHREN DAMIT DIE NEUE TABELLE ERSTELLT WIRD
-		userTable.createUserDBTable();
+		//userTable.createUserDBTable();
 		
-		userTable.displayListOfAllDBEntries();
-		
+		userTable.displayListOfAllDBEntries();	
 		
 		LoginDialog lw = new LoginDialog();
         lw.createLoginDialog();

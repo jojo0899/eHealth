@@ -189,7 +189,7 @@ public class UserDB extends DBController {
             ResultSet results = st.executeQuery("SELECT * FROM USER");
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
-                for(int i=1;i<=12;i++){  // for all columns in user
+                for(int i=1;i<=13;i++){  // for all columns in user
                     String data = results.getString(i);
                     System.out.print(data + " | ");
                 }

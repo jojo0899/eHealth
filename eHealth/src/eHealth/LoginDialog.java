@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 import static javax.swing.JOptionPane.*;
 import java.awt.Color;
@@ -64,7 +65,7 @@ public class LoginDialog extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loginMethod();
+				login();
 			}
 		});
 		passwordField.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -75,7 +76,7 @@ public class LoginDialog extends JFrame {
 		loginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				loginMethod();
+				login();
 				
 				//Mail.sendtext("@gmail.com", "ehealth project test", "test1");
 			}
@@ -99,7 +100,7 @@ public class LoginDialog extends JFrame {
 		contentPane.add(CreateAccButton);
 	}
 	
-	public void loginMethod() {
+	private void login() {
 		String user;
 		user = usernameField.getText();
 	
@@ -112,13 +113,7 @@ public class LoginDialog extends JFrame {
 		}
 		
 		if(userTable.validLoginData(user, encryptedPassword)) {
-			if(user.equals("admin")) {
-				AdminWindow aw = new AdminWindow();
-		        aw.createAdminWindow();
-			}else {
-				dispose();
-				MainWindow.createMainWindow(user);
-			}
+			AuthenticationWindow.createAuthenticationWindow(user);
 		}
 		else {
 			showMessageDialog(null, "Wrong Username or Password!\nPlease try again!", "Warning", WARNING_MESSAGE);
@@ -127,6 +122,9 @@ public class LoginDialog extends JFrame {
 			
 		}
 	}
+	
+	
+
 
 	
 	public void createLoginDialog() {
