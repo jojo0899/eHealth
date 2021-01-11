@@ -156,7 +156,7 @@ public class EditUserWindow extends JFrame {
                 	insuranceType = "private";
                 }
                 // cant change username & password yet
-				if(userTable.updateUserInDB(userNameField.getText(),  firstNameField.getText(), emailField.getText(), LastNameField.getText(), 
+				if(userTable.updateUserInDB(userNameField.getText(), emailField.getText() , firstNameField.getText(), LastNameField.getText(), 
 						dateOfBirthField.getText(), healthInfoField.getText(), insuranceNameField.getText(), 
 						insuranceType,streetField.getText(),  streetNo,zipCodeField.getText(), cityField.getText())) 
 				{

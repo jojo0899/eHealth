@@ -85,10 +85,6 @@ public class AuthenticationWindow extends JFrame {
 
 	}
 
-	public void authentication() {
-
-	}
-
 	public static String getRandom6DigitNumberString() {
 		Random rnd = new Random();
 		int number = rnd.nextInt(999999);
