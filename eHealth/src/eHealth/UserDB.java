@@ -29,7 +29,8 @@ public class UserDB extends DBController {
             			    "street          varchar(20)," +
             			    "streetNo        int," +
             			    "zipCode         varchar(10)," +
-            			    "city            varchar(20));"
+            			    "latitude        Decimal(8,6)," +
+            			    "longitude       Decimal(9,6));"
             		);
         } catch (SQLException e) {
             e.printStackTrace();
