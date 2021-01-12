@@ -29,6 +29,7 @@ public class UserDB extends DBController {
             			    "street          varchar(20)," +
             			    "streetNo        int," +
             			    "zipCode         varchar(10)," +
+            			    "city	         varchar(20)," +
             			    "latitude        Decimal(8,6)," +
             			    "longitude       Decimal(9,6));"
             		);
@@ -190,7 +191,7 @@ public class UserDB extends DBController {
             ResultSet results = st.executeQuery("SELECT * FROM USER");
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
-                for(int i=1;i<=13;i++){  // for all columns in user
+                for(int i=1;i<=15;i++){  // for all columns in user
                     String data = results.getString(i);
                     System.out.print(data + " | ");
                 }
