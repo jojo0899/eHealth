@@ -16,6 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class AuthenticationWindow extends JFrame {
 
@@ -30,29 +37,24 @@ public class AuthenticationWindow extends JFrame {
 
 		userUsed = new User(username);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 127, 80));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Enter 6-digit number:");
-		lblNewLabel.setBounds(27, 162, 109, 14);
-		contentPane.add(lblNewLabel);
-
-		JTextPane txtpnYouAreUsing = new JTextPane();
-		txtpnYouAreUsing.setText(
-				"You are using 2-Factor-Authentication. Click the button below to receive an email with the 6-digit authentication number.");
-		txtpnYouAreUsing.setBounds(27, 11, 376, 68);
-		contentPane.add(txtpnYouAreUsing);
+		lblNewLabel.setBounds(156, 168, 138, 14);
 
 		authenticationNumberInputField = new JTextField();
-		authenticationNumberInputField.setBounds(156, 159, 221, 20);
-		contentPane.add(authenticationNumberInputField);
+		authenticationNumberInputField.setHorizontalAlignment(SwingConstants.CENTER);
+		authenticationNumberInputField.setBounds(114, 194, 221, 26);
+		authenticationNumberInputField.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		authenticationNumberInputField.setColumns(10);
 
 		JButton sendButton = new JButton("Send");
+		sendButton.setBounds(156, 115, 138, 23);
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				authenticationNumber = getRandom6DigitNumberString();
@@ -61,10 +63,9 @@ public class AuthenticationWindow extends JFrame {
 				Mail.sendtext(userUsed.getEmail(), "ehealth login with 2FA", mailText);
 			}
 		});
-		sendButton.setBounds(153, 89, 89, 23);
-		contentPane.add(sendButton);
 
 		JButton confirmButton = new JButton("Confirm");
+		confirmButton.setBounds(131, 231, 187, 23);
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (authenticationNumberInputField.getText().equals(authenticationNumber)) {
@@ -80,7 +81,30 @@ public class AuthenticationWindow extends JFrame {
 				}
 			}
 		});
-		confirmButton.setBounds(202, 206, 89, 23);
+		
+		JLabel lblNewLabel_1 = new JLabel("You are using 2-Factor-Authentication.");
+		lblNewLabel_1.setBounds(47, 16, 356, 31);
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.BOLD, 17));
+		
+		JLabel lblNewLabel_2 = new JLabel("Click the button below to receive an email");
+		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(71, 59, 308, 16);
+		
+		JLabel lblNewLabel_3 = new JLabel(" with the 6-digit authentication number.");
+		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_3.setBounds(79, 80, 292, 23);
+		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(UIManager.getColor("Button.darkShadow"));
+		separator.setBounds(0, 144, 455, 12);
+		contentPane.setLayout(null);
+		contentPane.add(lblNewLabel_1);
+		contentPane.add(lblNewLabel_2);
+		contentPane.add(lblNewLabel_3);
+		contentPane.add(sendButton);
+		contentPane.add(separator);
+		contentPane.add(lblNewLabel);
+		contentPane.add(authenticationNumberInputField);
 		contentPane.add(confirmButton);
 
 	}
@@ -98,6 +122,7 @@ public class AuthenticationWindow extends JFrame {
 				try {
 					AuthenticationWindow frame = new AuthenticationWindow(user);
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
