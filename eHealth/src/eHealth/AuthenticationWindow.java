@@ -56,6 +56,7 @@ public class AuthenticationWindow extends JFrame {
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				authenticationNumber = getRandom6DigitNumberString();
+				System.out.println(authenticationNumber);
 				String mailText = "This is your 6-digit Authentication number: " + authenticationNumber
 						+ "\nUse it to login into eHealth now!";
 				Mail.sendtext(userUsed.getEmail(), "ehealth login with 2FA", mailText);
