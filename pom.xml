@@ -33,6 +33,32 @@
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.6.2</version>
 		</dependency>
+		 <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+			<dependency>
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			    <version>1.2.17</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.squareup.okhttp3</groupId>
+			  <artifactId>mockwebserver</artifactId>
+			  <version>4.9.0</version>
+			</dependency>
+			<dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.14.0</version>
+		  </dependency>
+		  <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.14.0</version>
+		  </dependency>
   
   </dependencies>
 </project>

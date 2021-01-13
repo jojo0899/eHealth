@@ -1,13 +1,19 @@
 package eHealth;
 
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.Map;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
 
 public class UserDB extends DBController {
 	
@@ -19,18 +25,19 @@ public class UserDB extends DBController {
             		"Create TABLE USER("+
             			    "username    	varchar(15) PRIMARY KEY," +
             			    "password    	char(128)," +
-            			    "email	    	varchar(30)," +
-            			    "firstName   	varchar(15)," +
-            			    "lastname    	varchar(15)," +
+            			    "email	    	varchar(50)," +
+            			    "firstName   	varchar(25)," +
+            			    "lastname    	varchar(25)," +
             			    "dateOfBirth 	DATE," +
             			    "healthInfo  	varchar(30)," +
             			    "insuranceName   varchar(30)," +
             			    "insuranceType   varchar(8)," +
-            			    "street          varchar(20)," +
+            			    "street          varchar(60)," +
             			    "streetNo        int," +
             			    "zipCode         varchar(10)," +
-            			    "latitude        Decimal(8,6)," +
-            			    "longitude       Decimal(9,6));"
+            			    "City        	 varchar(40)," +
+            			    "latitude        Decimal(80,70)," +
+            			    "longitude       Decimal(80,70));"
             		);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +59,19 @@ public class UserDB extends DBController {
             String zipCode,
             String city)
 	{
+    	
+    	String address;
+    	address = city+ " " + street+ " " + streetNo;
+    	Map<String, Double> coords;
+    	coords = OpenStreetMapUtils.getInstance().getCoordinates(address);
+    	BigDecimal lat = new BigDecimal(coords.get("lat"));
+    	BigDecimal lon = new BigDecimal(coords.get("lon"));
+        
+        
+    	
+    	
+    	
+    	
 		Connection conn =  connectToDB();
 		try {
 		Statement st = conn.createStatement();
@@ -65,10 +85,12 @@ public class UserDB extends DBController {
 													+ healthInfo + "','"
 													+ insuranceName + "','"
 													+ insuranceType + "','"
-													+ street + "',"
-													+ streetNo + ",'"
+													+ street + "','"
+													+ streetNo + "','"
 													+ zipCode + "','"
-													+ city + "');");
+													+ city + "','"
+													+ lat + "','"
+													+ lon + "');");
 		
 		return true;
 		} catch (SQLException e) {
