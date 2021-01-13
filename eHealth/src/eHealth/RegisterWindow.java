@@ -290,6 +290,7 @@ public class RegisterWindow extends JFrame {
                 	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
                 }catch(NumberFormatException exc) {
                 	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
+                	return;
                 }
    
                 
@@ -300,6 +301,7 @@ public class RegisterWindow extends JFrame {
 					encryptedPassword = Password.createhash(password, username);
 				} catch (UnsupportedEncodingException e1) {
 					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
+					return;
 				}
               
                 //insert data into database
