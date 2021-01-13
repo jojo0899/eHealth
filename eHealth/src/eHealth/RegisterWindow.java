@@ -173,29 +173,23 @@ public class RegisterWindow extends JFrame {
 		JButton ConfirmBtn = new JButton("Confirm and Register");
 		ConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Read out text fields
+                String firstName = firstname.getText();
+                String lastName = lastname.getText();
+                String emailAddress = email.getText();
+                String addressStreet = street.getText();
+                String addressStreetNo = number.getText();
+                String adressZipCode = zipcode.getText();
+                String addressCity = city.getText();
+                String dateOfBirth = dateofbirth.getText();
+                String healthInformation = healthinfo.getText();
+                String insuranceType;
+                String insuranceName = insurancename.getText();
                 String username = usernameField.getText();
                 char[] password = passwordField.getPassword();
                 char[] repeatedPassword = repeatPasswordField.getPassword();
-                if(!Arrays.equals(password, repeatedPassword)) {
-                	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
-                	passwordField.setText("");
-                	repeatPasswordField.setText("");
-                	return;
-                }
-                String encryptedPassword = "";
-                try {
-					encryptedPassword = Password.createhash(password, username);
-				} catch (UnsupportedEncodingException e1) {
-					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
-				}
-                String firstName = firstname.getText();
-                String lastName = lastname.getText();
-                String dateOfBirth = dateofbirth.getText();
-                String healthInformation = healthinfo.getText();
-                String insuranceName = insurancename.getText();
-                String insuranceType;
-                String emailAddress = email.getText();
                 
+                // insuranceType selection
                 if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
@@ -205,8 +199,8 @@ public class RegisterWindow extends JFrame {
                 	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
-                String addressStreet = street.getText();
-                String addressStreetNo = number.getText();
+                
+                //street number validation
                 int adressStreetNoAsInt = 0;
                 try {
                 	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
@@ -214,10 +208,23 @@ public class RegisterWindow extends JFrame {
                 	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
                 }
    
+                //password check
+                if(!Arrays.equals(password, repeatedPassword)) {
+                	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
+                	passwordField.setText("");
+                	repeatPasswordField.setText("");
+                	return;
+                }
                 
-                String adressZipCode = zipcode.getText();
-                String addressCity = city.getText();
-                
+                //password encryption
+                String encryptedPassword = "";
+                try {
+					encryptedPassword = Password.createhash(password, username);
+				} catch (UnsupportedEncodingException e1) {
+					showMessageDialog(null, "Password Error", "Warning", WARNING_MESSAGE);
+				}
+              
+                //insert data into database
                 if(userTable.insertUserIntoDB(username, encryptedPassword, emailAddress, firstName, lastName, dateOfBirth,
                 									healthInformation, insuranceName, insuranceType, addressStreet,
                 									adressStreetNoAsInt, adressZipCode, addressCity)) 
