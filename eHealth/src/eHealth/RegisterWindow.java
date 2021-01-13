@@ -3,7 +3,7 @@ package eHealth;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,13 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
@@ -25,6 +22,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.awt.color.*;
+import javax.swing.border.LineBorder;
 
 public class RegisterWindow extends JFrame {
 
@@ -173,7 +173,7 @@ public class RegisterWindow extends JFrame {
 		JButton ConfirmBtn = new JButton("Confirm and Register");
 		ConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Read out text fields
+				//Read in text fields
                 String firstName = firstname.getText();
                 String lastName = lastname.getText();
                 String emailAddress = email.getText();
@@ -189,7 +189,50 @@ public class RegisterWindow extends JFrame {
                 char[] password = passwordField.getPassword();
                 char[] repeatedPassword = repeatPasswordField.getPassword();
                 
-                // insuranceType selection
+                if (firstName.equals("")) {
+                	firstname.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a firstname!", "Warning", WARNING_MESSAGE);                	
+                	return;
+                }
+                else {
+                	firstname.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                if (lastName.equals("")) {
+                	lastname.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a lastname!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                else {
+                	lastname.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                if (emailAddress.equals("")) {
+                	email.setBorder(new LineBorder(Color.RED, 1));
+					showMessageDialog(null,"Please enter a valid email address!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	email.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                
+                // add address validation here
+                
+                
+                if (dateOfBirth.equals("")) {
+                	dateofbirth.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid date of birth!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	dateofbirth.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                if (healthInformation.equals("")) {
+                	healthinfo.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	healthinfo.setBorder(new LineBorder(Color.GREEN, 1));
+                }
                 if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
@@ -198,6 +241,47 @@ public class RegisterWindow extends JFrame {
                 	insuranceType = "";
                 	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
                 	return;
+                }
+                if (insuranceName.equals("")) {
+                	insurancename.setBorder(new LineBorder(Color.RED, 1));
+					showMessageDialog(null,"Please enter a insurance name!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	insurancename.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                if (username.equals("")) {
+                	usernameField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a username!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                else if (userTable.checkIfUsernameExistsInDB(username)) {
+                	usernameField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"This username is not available!\nPlease choose another username!", "Warning", WARNING_MESSAGE);
+                	return;
+                }    
+                else {
+                	usernameField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                
+                String pwd = new String(password);
+                if (pwd.equals("")) {
+                	passwordField.setBorder(new LineBorder(Color.RED, 1));
+                	repeatPasswordField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null, "Please enter a password!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                else if(!Arrays.equals(password, repeatedPassword)) {
+                	passwordField.setBorder(new LineBorder(Color.RED, 1));
+                	repeatPasswordField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
+                	passwordField.setText("");
+                	repeatPasswordField.setText("");
+                	return;
+                }
+                else {
+                	passwordField.setBorder(new LineBorder(Color.GREEN, 1));
+                	repeatPasswordField.setBorder(new LineBorder(Color.GREEN, 1));
                 }
                 
                 //street number validation
@@ -208,13 +292,7 @@ public class RegisterWindow extends JFrame {
                 	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
                 }
    
-                //password check
-                if(!Arrays.equals(password, repeatedPassword)) {
-                	showMessageDialog(null, "Passwords do no match", "Warning", WARNING_MESSAGE);
-                	passwordField.setText("");
-                	repeatPasswordField.setText("");
-                	return;
-                }
+                
                 
                 //password encryption
                 String encryptedPassword = "";
