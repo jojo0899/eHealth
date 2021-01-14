@@ -13,10 +13,14 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Map;
 
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
@@ -189,23 +193,24 @@ public class RegisterWindow extends JFrame {
                 char[] password = passwordField.getPassword();
                 char[] repeatedPassword = repeatPasswordField.getPassword();
                 
-                if (firstName.equals("")) {
+                if (firstName.equals("") | firstName.length() > 25) {
                 	firstname.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a firstname!", "Warning", WARNING_MESSAGE);                	
+                	showMessageDialog(null,"Please enter a valid firstname!", "Warning", WARNING_MESSAGE);                	
                 	return;
                 }
                 else {
                 	firstname.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if (lastName.equals("")) {
+                if (lastName.equals("") | lastName.length() > 25 ) {
                 	lastname.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a lastname!", "Warning", WARNING_MESSAGE);
+                	showMessageDialog(null,"Please enter a valid lastname!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
                 else {
                 	lastname.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if (emailAddress.equals("")) {
+                                               
+                if (emailAddress.equals("") | isValidEmailAddress(emailAddress) == false | emailAddress.length() > 50) {
                 	email.setBorder(new LineBorder(Color.RED, 1));
 					showMessageDialog(null,"Please enter a valid email address!", "Warning", WARNING_MESSAGE);
 		        	return;
@@ -214,9 +219,47 @@ public class RegisterWindow extends JFrame {
                 	email.setBorder(new LineBorder(Color.GREEN, 1));
                 }
                 
-                // add address validation here
-                
-                
+                // address validation not completely working yet
+            	if(addressStreet.equals("") | addressStreetNo.equals("") | addressCity.equals("") | addressStreet.length() > 60 | addressCity.length() > 40) {
+                	street.setBorder(new LineBorder(Color.RED, 1));
+                	number.setBorder(new LineBorder(Color.RED, 1));
+                	city.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+            	else {
+            		String address;
+                	address = addressCity+ " " + addressStreet+ " " + addressStreetNo;
+                	Map<String, Double> coords;
+                	coords = OpenStreetMapUtils.getInstance().getCoordinates(address);
+                	BigDecimal lat = new BigDecimal(coords.get("lat"));
+                	BigDecimal lon = new BigDecimal(coords.get("lon"));
+                	
+                	if(lat != null & lon != null) {
+                    	street.setBorder(new LineBorder(Color.GREEN, 1));
+                    	number.setBorder(new LineBorder(Color.GREEN, 1));
+                    	city.setBorder(new LineBorder(Color.GREEN, 1));
+                    }
+                    
+                    else if(coords == null) {
+                    	street.setBorder(new LineBorder(Color.RED, 1));
+                    	number.setBorder(new LineBorder(Color.RED, 1));
+                    	city.setBorder(new LineBorder(Color.RED, 1));
+                    	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
+                    	return;
+                    }
+            	}
+            	
+            	//street number validation
+                int adressStreetNoAsInt = 0;
+                try {
+                	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
+                }catch(NumberFormatException exc) {
+                	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+   
+                                           
                 if (dateOfBirth.equals("")) {
                 	dateofbirth.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter a valid date of birth!", "Warning", WARNING_MESSAGE);
@@ -225,7 +268,7 @@ public class RegisterWindow extends JFrame {
                 else {
                 	dateofbirth.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if (healthInformation.equals("")) {
+                if (healthInformation.equals("") | healthInformation.length() > 30) {
                 	healthinfo.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
 		        	return;
@@ -242,17 +285,17 @@ public class RegisterWindow extends JFrame {
                 	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
-                if (insuranceName.equals("")) {
+                if (insuranceName.equals("") | insuranceName.length() > 30) {
                 	insurancename.setBorder(new LineBorder(Color.RED, 1));
-					showMessageDialog(null,"Please enter a insurance name!", "Warning", WARNING_MESSAGE);
+					showMessageDialog(null,"Please enter a valid insurance name!", "Warning", WARNING_MESSAGE);
 		        	return;
 				}
                 else {
                 	insurancename.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if (username.equals("")) {
+                if (username.equals("") | username.length() > 15) {
                 	usernameField.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a username!", "Warning", WARNING_MESSAGE);
+                	showMessageDialog(null,"Please enter a username!\nMust be smaller or equal 15 characters!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
                 else if (userTable.checkIfUsernameExistsInDB(username)) {
@@ -284,17 +327,7 @@ public class RegisterWindow extends JFrame {
                 	repeatPasswordField.setBorder(new LineBorder(Color.GREEN, 1));
                 }
                 
-                //street number validation
-                int adressStreetNoAsInt = 0;
-                try {
-                	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
-                }catch(NumberFormatException exc) {
-                	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
-                	return;
-                }
-   
-                
-                
+                                
                 //password encryption
                 String encryptedPassword = "";
                 try {
@@ -365,6 +398,19 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(email);
 		email.setColumns(10);
 	}
+	
+	public static boolean isValidEmailAddress(String email) {
+		boolean result = true;
+   	   	try {
+   	   		InternetAddress emailAddr = new InternetAddress(email);
+   	   		emailAddr.validate();
+   	   	} 	catch (AddressException ex) {
+   	   		result = false;
+   	   	}
+   	   	return result;
+	}
+	// https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
+	
 	
 	public void createRegisterWindow() {
 		EventQueue.invokeLater(new Runnable() {
