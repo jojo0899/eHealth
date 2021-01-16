@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -30,6 +32,7 @@ public class LoginDialog extends JFrame {
 	
 	
 	private UserDB userTable = new UserDB();
+	private DoctorDB docTables = new DoctorDB();
 
 	
 	public LoginDialog() {
@@ -98,6 +101,23 @@ public class LoginDialog extends JFrame {
 		});
 		CreateAccButton.setBounds(194, 186, 175, 29);
 		contentPane.add(CreateAccButton);
+		
+		JButton btnNewButton = new JButton("@");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String createDBInfoText = "If you are using the Application for the first time click YES (the Database will then be created).\nAs a next step you have to create a admin account.";
+				int confirm = JOptionPane.showConfirmDialog(null, createDBInfoText, "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (confirm == 0) {
+					userTable.createUserDBTable();
+					docTables.createPopulatedDoctorDB();
+				}else {
+					return;
+				}
+				
+			}
+		});
+		btnNewButton.setBounds(10, 11, 43, 23);
+		contentPane.add(btnNewButton);
 	}
 	
 	private void login() {
