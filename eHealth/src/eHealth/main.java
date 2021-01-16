@@ -9,9 +9,6 @@ public class main {
 		UserDB userTable = new UserDB();
 		DoctorDB docTable = new DoctorDB();
 		
-		// change main to only create tables if they do not exist yet
-		
-		// AKTUELLE TABELLEN LÖSCHEN UND EINMAL AUSFUEHREN DAMIT DIE NEUE TABELLE ERSTELLT WIRD
 		userTable.createUserDBTable();
 
 		docTable.createDoctorDBTable("dentist");
@@ -26,11 +23,12 @@ public class main {
 		docTable.insertIntoDoctorDBTable("familydoc", "karl", "jarvis", "Auf dem Niederberg 43, 61118 Bad Vilbel");
 		docTable.insertIntoDoctorDBTable("familydoc", "boris", "schmeichel", "Auf dem Niederberg 1A, 61118 Bad Vilbel");
 		docTable.insertIntoDoctorDBTable("familydoc", "schaad", "martin", "Auf dem Niederberg 19, 61118 Bad Vilbel");
+		*/
 		
 		userTable.displayListOfAllDBEntries();	
 	
 		docTable.displayListOfAllDBEntries("dentist");
-		docTable.displayListOfAllDBEntries("familydoc"); */
+		docTable.displayListOfAllDBEntries("familydoc"); 
 		
 		
 		LoginDialog lw = new LoginDialog();

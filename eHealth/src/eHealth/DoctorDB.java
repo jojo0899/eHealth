@@ -36,7 +36,7 @@ public class DoctorDB extends DBController{
         try {
             Statement st = conn.createStatement();
             st.execute(
-            		"Create TABLE " + docType + "("+
+            		"Create TABLE IF NOT EXISTS " + docType + "("+
             			    "id    			 int AUTO_INCREMENT NOT NULL," +
             			    "firstname	     varchar(12)," +
             			    "lastname	     varchar(12)," +

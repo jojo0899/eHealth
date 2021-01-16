@@ -22,7 +22,7 @@ public class UserDB extends DBController {
         try {
             Statement st = conn.createStatement();
             st.execute(
-            		"Create TABLE USER("+
+            		"Create TABLE IF NOT EXISTS USER("+
             			    "username    	varchar(15) PRIMARY KEY," +
             			    "password    	char(128)," +
             			    "email	    	varchar(50)," +
