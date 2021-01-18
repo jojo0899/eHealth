@@ -54,7 +54,7 @@ public class AdminWindow extends JFrame {
 		viewUsersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					userTable.resultSetToTableModel(table);
+					userTable.resultSetToTableModel(table, "user", "");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -117,7 +117,7 @@ public class AdminWindow extends JFrame {
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					userTable.resultSetToTableModel(table);
+					userTable.resultSetToTableModel(table, "user", "");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

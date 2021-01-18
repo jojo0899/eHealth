@@ -54,6 +54,31 @@ abstract class DBController {
         }
     }
     
+    
+    public void resultSetToTableModel(JTable table, String tableName, String whereCondition) throws SQLException{
+    	Connection conn = connectToDB();
+    	Statement st = conn.createStatement();
+    	ResultSet rs =  st.executeQuery("SELECT * FROM " + tableName + " " + whereCondition);
+        DefaultTableModel tableModel = new DefaultTableModel();
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
+            tableModel.addColumn(metaData.getColumnLabel(columnIndex));
+        }
+
+        Object[] row = new Object[columnCount];
+
+        while (rs.next()){
+            for (int i = 0; i < columnCount; i++){
+                row[i] = rs.getObject(i+1);
+            }
+            tableModel.addRow(row);
+        }
+
+        table.setModel(tableModel);
+    }
+    
     protected abstract void displayListOfAllDBEntries(String tableName);
 
     

@@ -180,30 +180,6 @@ public class UserDB extends DBController {
         }
     }
     
-    
-    public void resultSetToTableModel(JTable table) throws SQLException{
-    	Connection conn = connectToDB();
-    	Statement st = conn.createStatement();
-    	ResultSet rs =  st.executeQuery("SELECT * FROM USER");
-        DefaultTableModel tableModel = new DefaultTableModel();
-        ResultSetMetaData metaData = rs.getMetaData();
-        int columnCount = metaData.getColumnCount();
-
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
-            tableModel.addColumn(metaData.getColumnLabel(columnIndex));
-        }
-
-        Object[] row = new Object[columnCount];
-
-        while (rs.next()){
-            for (int i = 0; i < columnCount; i++){
-                row[i] = rs.getObject(i+1);
-            }
-            tableModel.addRow(row);
-        }
-
-        table.setModel(tableModel);
-    }
 
 	@Override
 	public void displayListOfAllDBEntries(String tableName) {
