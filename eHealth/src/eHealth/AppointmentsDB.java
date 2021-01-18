@@ -1,10 +1,8 @@
 package eHealth;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 
 public class AppointmentsDB extends DBController{
 
@@ -14,14 +12,13 @@ public class AppointmentsDB extends DBController{
             Statement st = conn.createStatement();
             st.execute(
             		"Create TABLE IF NOT EXISTS Appointments ("+
-            				"id    			 int AUTO_INCREMENT NOT NULL," +
             			    "username	     varchar(15)," +
             			    "docfirstname	 varchar(30)," +
             			    "doclastname	 varchar(30)," +
             			    "docaddress   	 varchar(200)," +
             			    "AppointmentDate DATE," +
-            			    "AppointmentTime TIME," + //transform or better use DATETIME?
-            			    "PRIMARY KEY(id));"
+            			    "AppointmentTime TIME," + 
+            			    "PRIMARY KEY(username, docfirstname, doclastname, docaddress, AppointmentDate, AppointmentTime));"
             		);
         } catch (SQLException e) {
             e.printStackTrace();

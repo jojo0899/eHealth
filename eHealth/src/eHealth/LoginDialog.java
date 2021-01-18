@@ -33,6 +33,7 @@ public class LoginDialog extends JFrame {
 	
 	private UserDB userTable = new UserDB();
 	private DoctorDB docTables = new DoctorDB();
+	private AppointmentsDB appTable = new AppointmentsDB();
 
 	
 	public LoginDialog() {
@@ -110,6 +111,7 @@ public class LoginDialog extends JFrame {
 				if (confirm == 0) {
 					userTable.createUserDBTable();
 					docTables.createPopulatedDoctorDB();
+					appTable.createAppointmentsDBTable();
 				}else {
 					return;
 				}
