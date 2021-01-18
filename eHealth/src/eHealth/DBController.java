@@ -54,7 +54,7 @@ abstract class DBController {
         }
     }
     
-    protected abstract void displayListOfAllDBEntries();
+    protected abstract void displayListOfAllDBEntries(String tableName);
 
     
 

@@ -206,11 +206,11 @@ public class UserDB extends DBController {
     }
 
 	@Override
-	public void displayListOfAllDBEntries() {
+	public void displayListOfAllDBEntries(String tableName) {
         Connection conn =  connectToDB();
         try {
             Statement st = conn.createStatement();
-            ResultSet results = st.executeQuery("SELECT * FROM USER");
+            ResultSet results = st.executeQuery("SELECT * FROM " + tableName);
             while (results.next()) {
                 System.out.print(results.getRow()+" : ");
                 for(int i=1;i<=15;i++){  // for all columns in user

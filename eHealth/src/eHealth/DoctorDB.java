@@ -9,27 +9,6 @@ import java.util.Map;
 
 public class DoctorDB extends DBController{
 
-
-	public void displayListOfAllDBEntries(String tableName) {
-        Connection conn =  connectToDB();
-        try {
-            Statement st = conn.createStatement();
-            ResultSet results = st.executeQuery("SELECT * FROM " + tableName);
-            while (results.next()) {
-                System.out.print(results.getRow()+" : ");
-                for(int i=1;i<=6;i++){  // for all columns in user
-                    String data = results.getString(i);
-                    System.out.print(data + " | ");
-                }
-                System.out.println("\n");
-
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-	}
 	
     public void createDoctorDBTable(String docType){
         Connection conn =  connectToDB();
@@ -101,8 +80,25 @@ public class DoctorDB extends DBController{
     }
 
 	@Override
-	protected void displayListOfAllDBEntries() {
-		// TODO Auto-generated method stub
+	protected void displayListOfAllDBEntries(String tableName) {
+        Connection conn =  connectToDB();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet results = st.executeQuery("SELECT * FROM " + tableName);
+            while (results.next()) {
+                System.out.print(results.getRow()+" : ");
+                for(int i=1;i<=6;i++){  // for all columns in user
+                    String data = results.getString(i);
+                    System.out.print(data + " | ");
+                }
+                System.out.println("\n");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
 		
 	}
 
