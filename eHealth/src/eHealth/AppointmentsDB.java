@@ -20,7 +20,7 @@ public class AppointmentsDB extends DBController{
             			    "doclastname	 varchar(30)," +
             			    "docaddress   	 varchar(200)," +
             			    "AppointmentDate DATE," +
-            			    "AppointmentTime int," + //transform
+            			    "AppointmentTime TIME," + //transform or better use DATETIME?
             			    "PRIMARY KEY(id));"
             		);
         } catch (SQLException e) {
@@ -28,7 +28,7 @@ public class AppointmentsDB extends DBController{
         }
     }
 	
-    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, int AppointmentTime) {
+    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime) {
     	Connection conn =  connectToDB();
 		try {
 		Statement st = conn.createStatement();

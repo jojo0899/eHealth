@@ -173,7 +173,6 @@ public class RegisterWindow extends JFrame {
 		group.add(publicButton);
 		
 		// Add exception Handling for falsely formatted inputs
-		// Add pw check
 		JButton ConfirmBtn = new JButton("Confirm and Register");
 		ConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
