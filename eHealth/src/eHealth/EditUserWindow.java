@@ -4,11 +4,13 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -16,7 +18,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import javax.swing.border.LineBorder;
 
 public class EditUserWindow extends JFrame {
 	private JPanel contentPane;
@@ -27,7 +33,6 @@ public class EditUserWindow extends JFrame {
 	private JTextField zipCodeField;
 	private JTextField cityField;
 	private JTextField dateOfBirthField;
-	private JTextField healthInfoField;
 	private JPasswordField passwordField;
 	private JTextField insuranceNameField;
 	private JTextField streetField;
@@ -39,7 +44,7 @@ public class EditUserWindow extends JFrame {
 	public EditUserWindow() {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 622, 715);
+		setBounds(100, 100, 570, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,95 +57,91 @@ public class EditUserWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Firstname:");
 		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblNewLabel.setBounds(27, 197, 95, 16);
+		lblNewLabel.setBounds(27, 178, 95, 16);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLastname = new JLabel("Lastname:");
 		lblLastname.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblLastname.setBounds(27, 224, 95, 16);
+		lblLastname.setBounds(27, 206, 95, 16);
 		contentPane.add(lblLastname);
 		
 		JLabel lblStreet = new JLabel("Street:");
 		lblStreet.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblStreet.setBounds(27, 314, 95, 16);
+		lblStreet.setBounds(27, 260, 95, 16);
 		contentPane.add(lblStreet);
 		
 		JLabel lblNumber = new JLabel("Number:");
 		lblNumber.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblNumber.setBounds(27, 354, 95, 16);
+		lblNumber.setBounds(27, 288, 95, 16);
 		contentPane.add(lblNumber);
 		
 		JLabel lblZipcode = new JLabel("Zip-Code:");
 		lblZipcode.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblZipcode.setBounds(27, 408, 95, 16);
+		lblZipcode.setBounds(27, 316, 95, 16);
 		contentPane.add(lblZipcode);
 		
 		JLabel lblCity = new JLabel("City:");
 		lblCity.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblCity.setBounds(27, 435, 95, 16);
+		lblCity.setBounds(27, 344, 95, 16);
 		contentPane.add(lblCity);
 		
 		JLabel lblDateOfBirth = new JLabel("Date of Birth(YYYY-MM-DD):");
 		lblDateOfBirth.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblDateOfBirth.setBounds(27, 462, 207, 16);
+		lblDateOfBirth.setBounds(27, 372, 218, 16);
 		contentPane.add(lblDateOfBirth);
-		
-		JLabel lblHealthInformation = new JLabel("Health information:");
-		lblHealthInformation.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblHealthInformation.setBounds(27, 489, 140, 16);
-		contentPane.add(lblHealthInformation);
 		
 		JLabel lblInsurenceType = new JLabel("Insurence type:");
 		lblInsurenceType.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblInsurenceType.setBounds(27, 381, 124, 16);
+		lblInsurenceType.setBounds(27, 400, 124, 16);
 		contentPane.add(lblInsurenceType);
 		
 		JLabel lblInsuranceName = new JLabel("Insurance name:");
 		lblInsuranceName.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblInsuranceName.setBounds(27, 516, 124, 16);
+		lblInsuranceName.setBounds(27, 428, 124, 16);
 		contentPane.add(lblInsuranceName);
 		
 		userNameField = new JTextField();
+		userNameField.setEnabled(false);
 		userNameField.setColumns(10);
-		userNameField.setBounds(220, 102, 300, 26);
+		userNameField.setBounds(230, 68, 300, 26);
 		contentPane.add(userNameField);
 		
 		firstNameField = new JTextField();
 		firstNameField.setColumns(10);
-		firstNameField.setBounds(244, 194, 300, 26);
+		firstNameField.setBounds(244, 174, 300, 26);
 		contentPane.add(firstNameField);
 		
 		LastNameField = new JTextField();
 		LastNameField.setColumns(10);
-		LastNameField.setBounds(244, 224, 300, 26);
+		LastNameField.setBounds(244, 202, 300, 26);
 		contentPane.add(LastNameField);
 		
 		streetNumberField = new JTextField();
 		streetNumberField.setColumns(10);
-		streetNumberField.setBounds(244, 344, 300, 26);
+		streetNumberField.setBounds(244, 284, 300, 26);
 		contentPane.add(streetNumberField);
 		
 		zipCodeField = new JTextField();
 		zipCodeField.setColumns(10);
-		zipCodeField.setBounds(244, 398, 300, 26);
+		zipCodeField.setBounds(244, 312, 300, 26);
 		contentPane.add(zipCodeField);
 		
 		cityField = new JTextField();
 		cityField.setColumns(10);
-		cityField.setBounds(244, 425, 300, 26);
+		cityField.setBounds(244, 340, 300, 26);
 		contentPane.add(cityField);
 		
 		dateOfBirthField = new JTextField();
 		dateOfBirthField.setColumns(10);
-		dateOfBirthField.setBounds(244, 459, 300, 26);
+		dateOfBirthField.setBounds(244, 368, 300, 26);
 		contentPane.add(dateOfBirthField);
 		
 		JRadioButton publicButton = new JRadioButton("public");
-		publicButton.setBounds(259, 374, 95, 23);
+		publicButton.setBounds(244, 393, 95, 23);
 		contentPane.add(publicButton);
 		
 		JRadioButton privateButton = new JRadioButton("private");
-		privateButton.setBounds(368, 374, 95, 23);
+		privateButton.setBounds(353, 393, 95, 23);
 		contentPane.add(privateButton);
 		
 		JButton confirmButton = new JButton("Confirm ");
@@ -156,8 +157,98 @@ public class EditUserWindow extends JFrame {
                 	insuranceType = "private";
                 }
                 // cant change username & password yet
-				if(userTable.updateUserInDB(userNameField.getText(), emailField.getText() , firstNameField.getText(), LastNameField.getText(), 
-						dateOfBirthField.getText(), healthInfoField.getText(), insuranceNameField.getText(), 
+                if (firstNameField.getText().equals("") | firstNameField.getText().length() > 25) {
+                	firstNameField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid firstname!", "Warning", WARNING_MESSAGE);                	
+                	return;
+                }
+                else {
+                	firstNameField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                if (LastNameField.getText().equals("") | LastNameField.getText().length() > 25 ) {
+                	LastNameField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid lastname!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                else {
+                	LastNameField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                                               
+                if (emailField.getText().equals("") /*| isValidEmailAddress(emailAddress) == false */| emailField.getText().length() > 50) {
+                	emailField.setBorder(new LineBorder(Color.RED, 1));
+					showMessageDialog(null,"Please enter a valid email address!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	emailField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+                
+                // address validation not completely working yet
+            	if(streetField.getText().equals("") | streetNumberField.getText().equals("") | cityField.getText().equals("") | streetField.getText().length() > 60 | cityField.getText().length() > 40) {
+                	streetField.setBorder(new LineBorder(Color.RED, 1));
+                	streetNumberField.setBorder(new LineBorder(Color.RED, 1));
+                	cityField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+            	else {
+            		String address;
+                	address = cityField.getText()+ " " + streetField.getText()+ " " + streetNumberField.getText();
+                	Map<String, Double> coords;
+                	coords = OpenStreetMapUtils.getInstance().getCoordinates(address);
+                	BigDecimal lat = new BigDecimal(coords.get("lat"));
+                	BigDecimal lon = new BigDecimal(coords.get("lon"));
+                	
+                	if(lat != null & lon != null) {
+                    	streetField.setBorder(new LineBorder(Color.GREEN, 1));
+                    	streetNumberField.setBorder(new LineBorder(Color.GREEN, 1));
+                    	cityField.setBorder(new LineBorder(Color.GREEN, 1));
+                    }
+                    
+                    else if(coords == null) {
+                    	streetField.setBorder(new LineBorder(Color.RED, 1));
+                    	streetNumberField.setBorder(new LineBorder(Color.RED, 1));
+                    	cityField.setBorder(new LineBorder(Color.RED, 1));
+                    	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
+                    	return;
+                    }
+            	}
+            	
+          
+                              
+                if (dateOfBirthField.getText().equals("")) {
+                	dateOfBirthField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid date of birth!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	dateOfBirthField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+          /*      if (healthInformation.equals("") | healthInformation.length() > 30) {
+                	healthinfo.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	healthinfo.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+          */    if(publicButton.isSelected()) {
+                	insuranceType = "public";
+                }else if(privateButton.isSelected()){
+                	insuranceType = "private";
+                }else {
+                	insuranceType = "";
+                	showMessageDialog(null, "Insurance Type must be selected!", "Warning", WARNING_MESSAGE);
+                	return;
+                }
+                if (insuranceNameField.getText().equals("") | insuranceNameField.getText().length() > 30) {
+                	insuranceNameField.setBorder(new LineBorder(Color.RED, 1));
+					showMessageDialog(null,"Please enter a valid insurance name!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                
+                if(userTable.updateUserInDB(userNameField.getText(), emailField.getText() , firstNameField.getText(), LastNameField.getText(), 
+						dateOfBirthField.getText(), null, insuranceNameField.getText(), 
 						insuranceType,streetField.getText(),  streetNo,zipCodeField.getText(), cityField.getText())) 
 				{
 					showMessageDialog(null, "User succsessfully updated", "Info", WARNING_MESSAGE);
@@ -167,43 +258,34 @@ public class EditUserWindow extends JFrame {
 			}
 		});
 		confirmButton.setFont(new Font("Dialog", Font.PLAIN, 13));
-		confirmButton.setBounds(209, 636, 167, 29);
+		confirmButton.setBounds(209, 513, 167, 29);
 		contentPane.add(confirmButton);
 		
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setBounds(47, 637, 117, 29);
+		cancelButton.setBounds(27, 513, 135, 29);
 		contentPane.add(cancelButton);
 		cancelButton.addActionListener(e -> this.dispose());
 		
 		JLabel lblUsername = new JLabel("username:");
 		lblUsername.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblUsername.setBounds(27, 105, 124, 16);
+		lblUsername.setBounds(27, 72, 124, 16);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("password:");
 		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblPassword.setBounds(27, 543, 124, 16);
+		lblPassword.setBounds(27, 456, 124, 16);
 		contentPane.add(lblPassword);
 		
-		healthInfoField = new JTextField();
-		healthInfoField.setColumns(10);
-		healthInfoField.setBounds(244, 486, 300, 26);
-		contentPane.add(healthInfoField);
-		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(244, 543, 300, 26);
+		passwordField.setBounds(244, 452, 300, 26);
 		contentPane.add(passwordField);
 		
-		JLabel lblNewLabel_2 = new JLabel("Select the User Account to edit");
-		lblNewLabel_2.setBounds(27, 70, 326, 14);
-		contentPane.add(lblNewLabel_2);
-		
 		insuranceNameField = new JTextField();
-		insuranceNameField.setBounds(244, 516, 300, 20);
+		insuranceNameField.setBounds(244, 427, 300, 20);
 		contentPane.add(insuranceNameField);
 		insuranceNameField.setColumns(10);
 		
-		JButton selectUserButton = new JButton("Select User\r\n");
+		JButton selectUserButton = new JButton("Edit this User\r\n");
 		selectUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usernameInput = userNameField.getText();
@@ -217,7 +299,7 @@ public class EditUserWindow extends JFrame {
 					zipCodeField.setText(userTable.getStringColomnFromDB("ZIPCODE", usernameInput, "USER"));
 					cityField.setText(userTable.getStringColomnFromDB("CITY", usernameInput, "USER"));
 					dateOfBirthField.setText(userTable.getStringColomnFromDB("DATEOFBIRTH", usernameInput, "USER"));
-					healthInfoField.setText(userTable.getStringColomnFromDB("HEALTHINFO", usernameInput, "USER"));
+					//healthInfoField.setText(userTable.getStringColomnFromDB("HEALTHINFO", usernameInput, "USER"));
 					insuranceNameField.setText(userTable.getStringColomnFromDB("INSURANCENAME", usernameInput, "USER"));
 					
 					if(userTable.getStringColomnFromDB("INSURANCETYPE", usernameInput, "USER").equals("public")) {
@@ -231,26 +313,31 @@ public class EditUserWindow extends JFrame {
 
 			}
 		});
-		selectUserButton.setBounds(324, 139, 89, 23);
+		selectUserButton.setBounds(269, 106, 209, 23);
 		contentPane.add(selectUserButton);
 		
 		streetField = new JTextField();
-		streetField.setBounds(244, 314, 300, 20);
+		streetField.setBounds(244, 259, 300, 20);
 		contentPane.add(streetField);
 		streetField.setColumns(10);
 		
 		JButton doneButton = new JButton("Done\r\n");
-		doneButton.setBounds(437, 636, 109, 27);
+		doneButton.setBounds(409, 512, 135, 27);
 		contentPane.add(doneButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("Email:");
-		lblNewLabel_3.setBounds(35, 278, 46, 14);
+		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_3.setBounds(27, 234, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		emailField = new JTextField();
-		emailField.setBounds(244, 275, 300, 20);
+		emailField.setBounds(244, 232, 300, 20);
 		contentPane.add(emailField);
 		emailField.setColumns(10);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 150, 570, 12);
+		contentPane.add(separator);
 		doneButton.addActionListener(e -> this.dispose());
 	}
 	
@@ -269,5 +356,4 @@ public class EditUserWindow extends JFrame {
 			}
 		});
 	}
-
 }

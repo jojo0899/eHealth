@@ -40,7 +40,6 @@ public class RegisterWindow extends JFrame {
 	private JTextField zipcode;
 	private JTextField city;
 	private JTextField dateofbirth;
-	private JTextField healthinfo;
 	private JTextField insurancename;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
@@ -98,11 +97,6 @@ public class RegisterWindow extends JFrame {
 		lblDateOfBirth.setBounds(27, 276, 219, 16);
 		contentPane.add(lblDateOfBirth);
 		
-		JLabel lblHealthInformation = new JLabel("Health information:");
-		lblHealthInformation.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblHealthInformation.setBounds(27, 304, 140, 16);
-		contentPane.add(lblHealthInformation);
-		
 		JLabel lblInsurenceType = new JLabel("Insurence type:");
 		lblInsurenceType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblInsurenceType.setBounds(27, 332, 124, 16);
@@ -148,11 +142,6 @@ public class RegisterWindow extends JFrame {
 		dateofbirth.setBounds(244, 272, 300, 26);
 		contentPane.add(dateofbirth);
 		
-		healthinfo = new JTextField();
-		healthinfo.setColumns(10);
-		healthinfo.setBounds(244, 300, 300, 26);
-		contentPane.add(healthinfo);
-		
 		insurancename = new JTextField();
 		insurancename.setColumns(10);
 		insurancename.setBounds(244, 356, 300, 26);
@@ -185,7 +174,7 @@ public class RegisterWindow extends JFrame {
                 String adressZipCode = zipcode.getText();
                 String addressCity = city.getText();
                 String dateOfBirth = dateofbirth.getText();
-                String healthInformation = healthinfo.getText();
+                String healthInformation = null;
                 String insuranceType;
                 String insuranceName = insurancename.getText();
                 String username = usernameField.getText();
@@ -267,7 +256,7 @@ public class RegisterWindow extends JFrame {
                 else {
                 	dateofbirth.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if (healthInformation.equals("") | healthInformation.length() > 30) {
+          /*      if (healthInformation.equals("") | healthInformation.length() > 30) {
                 	healthinfo.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
 		        	return;
@@ -275,7 +264,7 @@ public class RegisterWindow extends JFrame {
                 else {
                 	healthinfo.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-                if(publicButton.isSelected()) {
+          */    if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
                 	insuranceType = "private";
