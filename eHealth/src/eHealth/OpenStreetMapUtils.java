@@ -158,6 +158,18 @@ public class OpenStreetMapUtils {
       throw new RuntimeException(e);
     }
   }
+  
+ 
+  public static double distance(double lat1, double long1, double lat2, double long2) {
+		
+		double lat = (lat1+lat2)/ 2 * 0.01745;
+		double dx = 111.3* Math.cos(lat) * (long1-long2);
+		double dy = 111.3*(lat1-lat2);
+		double dist= Math.sqrt(dx*dx+dy*dy);		
+		return dist;
+	}
+  
+  
 }
 
 //https://medium.com/@muasir_33255/geo-data-leveraging-openstreetmap-11a5fe2cf9dc
