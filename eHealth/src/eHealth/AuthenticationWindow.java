@@ -48,6 +48,22 @@ public class AuthenticationWindow extends JFrame {
 		lblNewLabel.setBounds(156, 168, 138, 14);
 
 		authenticationNumberInputField = new JTextField();
+		authenticationNumberInputField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (authenticationNumberInputField.getText().equals(authenticationNumber)) {
+					if (username.equals("admin")) {
+						dispose();
+						AdminWindow aw = new AdminWindow();
+						aw.createAdminWindow();
+					} else {
+						dispose();
+						MainWindow.createMainWindow(username);
+					}
+				} else {
+					showMessageDialog(null, "Wrong Authentication code", "Warning", WARNING_MESSAGE);
+				}
+			}
+		});
 		authenticationNumberInputField.setHorizontalAlignment(SwingConstants.CENTER);
 		authenticationNumberInputField.setBounds(114, 194, 221, 26);
 		authenticationNumberInputField.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -71,6 +87,7 @@ public class AuthenticationWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (authenticationNumberInputField.getText().equals(authenticationNumber)) {
 					if (username.equals("admin")) {
+						dispose();
 						AdminWindow aw = new AdminWindow();
 						aw.createAdminWindow();
 					} else {

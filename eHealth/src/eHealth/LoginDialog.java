@@ -135,6 +135,7 @@ public class LoginDialog extends JFrame {
 		}
 		
 		if(userTable.validLoginData(user, encryptedPassword)) {
+			dispose();
 			AuthenticationWindow.createAuthenticationWindow(user);
 		}
 		else {

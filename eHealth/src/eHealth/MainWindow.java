@@ -1,5 +1,8 @@
 package eHealth;
 
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -7,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JSlider;
@@ -16,6 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
 
@@ -119,6 +126,36 @@ public class MainWindow extends JFrame {
 		textField_2.setColumns(10);
 		textField_2.setBounds(80, 244, 225, 26);
 		contentPane.add(textField_2);
+		
+		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				if (confirm == 0) {
+					dispose();
+					LoginDialog lw = new LoginDialog();
+			        lw.createLoginDialog();
+				}
+				else return;
+			}
+		});
+		logoutBtn.setBounds(516, 387, 117, 29);
+		contentPane.add(logoutBtn);
+		
+		JButton quitBtn = new JButton("Quit");
+		quitBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				if (confirm == 0) {
+					System.exit(0);
+				}
+				else return;
+				
+				
+			}
+		});
+		quitBtn.setBounds(627, 387, 117, 29);
+		contentPane.add(quitBtn);
 		
 	}
 	
