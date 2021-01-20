@@ -75,9 +75,13 @@ public class AuthenticationWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				authenticationNumber = getRandom6DigitNumberString();
 				System.out.println(authenticationNumber);
-				String mailText = "This is your 6-digit Authentication number: " + authenticationNumber
-						+ "\nUse it to login into eHealth now!";
-				Mail.sendtext(userUsed.getEmail(), "ehealth login with 2FA", mailText);
+				String mailText = "Hello " + username + "\n\nA sign in attempt requires further verification because Two Factor Authentication is enabled for your account.\n\n"
+				+ "Verification code: " + authenticationNumber + 
+				"\n\nIf you did not attempt to sign in to your account, your password may be compromised. Contact our Support Team to create a new, strong password for your eHealth account."
+				+ "\nSimply contact us via: healthtesting01@gmail.com"
+				+ "\n\nThanks,\nThe eHealth Team";
+				String subject ="[eHealth] Two Factor Authentication";
+				Mail.sendtext(userUsed.getEmail(), subject, mailText);
 			}
 		});
 
