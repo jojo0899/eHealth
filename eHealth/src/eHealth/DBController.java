@@ -55,7 +55,7 @@ abstract class DBController {
     }
     
     
-    public void resultSetToTableModel(JTable table, String tableName, String whereCondition) throws SQLException{
+    protected void resultSetToTableModel(JTable table, String tableName, String whereCondition) throws SQLException{
     	Connection conn = connectToDB();
     	Statement st = conn.createStatement();
     	ResultSet rs =  st.executeQuery("SELECT * FROM " + tableName + " " + whereCondition);

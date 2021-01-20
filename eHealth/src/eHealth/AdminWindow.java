@@ -38,7 +38,7 @@ public class AdminWindow extends JFrame {
 	
 	public AdminWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 600);
+		setBounds(100, 100, 1333, 570);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +65,7 @@ public class AdminWindow extends JFrame {
 		contentPane.add(viewUsersButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(34, 60, 1015, 382);
+		scrollPane.setBounds(16, 60, 1291, 382);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -85,7 +85,7 @@ public class AdminWindow extends JFrame {
 				
 			}
 		});
-		editUserButton.setBounds(749, 501, 173, 23);
+		editUserButton.setBounds(954, 501, 173, 23);
 		contentPane.add(editUserButton);
 		
 		JButton deleteButton = new JButton("Delete this User");
@@ -110,7 +110,7 @@ public class AdminWindow extends JFrame {
 				}
 			}
 		});
-		deleteButton.setBounds(925, 501, 169, 23);
+		deleteButton.setBounds(1138, 501, 169, 23);
 		contentPane.add(deleteButton);
 		
 		JButton refreshButton = new JButton("Refresh\r\n");
@@ -129,17 +129,17 @@ public class AdminWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Please enter the username of the user you like to edit or delete:");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblNewLabel.setBounds(6, 489, 583, 42);
+		lblNewLabel.setBounds(262, 488, 451, 42);
 		contentPane.add(lblNewLabel);
 		
 		userSelectionTextField = new JTextField();
 		userSelectionTextField.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		userSelectionTextField.setBounds(516, 498, 221, 26);
+		userSelectionTextField.setBounds(723, 498, 221, 26);
 		contentPane.add(userSelectionTextField);
 		userSelectionTextField.setColumns(10);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 477, 1100, 12);
+		separator.setBounds(0, 477, 1307, 12);
 		contentPane.add(separator);
 		
 		JButton btnNewButton = new JButton("Leave Admin View");
@@ -156,7 +156,7 @@ public class AdminWindow extends JFrame {
 		});
 		btnNewButton.setForeground(new Color(255, 0, 0));
 		btnNewButton.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		btnNewButton.setBounds(942, 6, 152, 29);
+		btnNewButton.setBounds(1155, 6, 152, 29);
 		contentPane.add(btnNewButton);
 	}
 

@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 
 import java.awt.color.*;
 import javax.swing.border.LineBorder;
+import javax.swing.JSeparator;
 
 public class RegisterWindow extends JFrame {
 
@@ -51,7 +52,7 @@ public class RegisterWindow extends JFrame {
 	
 	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 575, 575);
+		setBounds(100, 100, 575, 610);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -100,12 +101,12 @@ public class RegisterWindow extends JFrame {
 		
 		JLabel lblInsurenceType = new JLabel("Insurence type:");
 		lblInsurenceType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblInsurenceType.setBounds(27, 332, 124, 16);
+		lblInsurenceType.setBounds(27, 314, 124, 16);
 		contentPane.add(lblInsurenceType);
 		
 		JLabel lblInsuranceName = new JLabel("Insurance name:");
 		lblInsuranceName.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblInsuranceName.setBounds(27, 360, 124, 16);
+		lblInsuranceName.setBounds(27, 348, 124, 16);
 		contentPane.add(lblInsuranceName);
 		
 		firstname = new JTextField();
@@ -120,42 +121,42 @@ public class RegisterWindow extends JFrame {
 		
 		street = new JTextField();
 		street.setColumns(10);
-		street.setBounds(244, 160, 300, 26);
+		street.setBounds(244, 161, 300, 26);
 		contentPane.add(street);
 		
 		number = new JTextField();
 		number.setColumns(10);
-		number.setBounds(244, 188, 300, 26);
+		number.setBounds(244, 189, 300, 26);
 		contentPane.add(number);
 		
 		zipcode = new JTextField();
 		zipcode.setColumns(10);
-		zipcode.setBounds(244, 216, 300, 26);
+		zipcode.setBounds(244, 217, 300, 26);
 		contentPane.add(zipcode);
 		
 		city = new JTextField();
 		city.setColumns(10);
-		city.setBounds(244, 244, 300, 26);
+		city.setBounds(244, 245, 300, 26);
 		contentPane.add(city);
 		
 		dateofbirth = new JTextField();
 		dateofbirth.setColumns(10);
-		dateofbirth.setBounds(244, 272, 300, 26);
+		dateofbirth.setBounds(244, 273, 300, 26);
 		contentPane.add(dateofbirth);
 		
 		insurancename = new JTextField();
 		insurancename.setColumns(10);
-		insurancename.setBounds(244, 356, 300, 26);
+		insurancename.setBounds(244, 345, 300, 26);
 		contentPane.add(insurancename);
 		
 		JRadioButton publicButton = new JRadioButton("public");
 		publicButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		publicButton.setBounds(244, 328, 95, 23);
+		publicButton.setBounds(244, 311, 95, 23);
 		contentPane.add(publicButton);
 		
 		JRadioButton privateButton = new JRadioButton("private");
 		privateButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		privateButton.setBounds(335, 328, 95, 23);
+		privateButton.setBounds(351, 311, 95, 23);
 		contentPane.add(privateButton);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -339,41 +340,41 @@ public class RegisterWindow extends JFrame {
 		});
 		
 		ConfirmBtn.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		ConfirmBtn.setBounds(261, 490, 167, 29);
+		ConfirmBtn.setBounds(263, 530, 167, 29);
 		contentPane.add(ConfirmBtn);
 		
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(e -> this.dispose());
 		
-		cancelButton.setBounds(127, 491, 117, 29);
+		cancelButton.setBounds(125, 531, 117, 29);
 		contentPane.add(cancelButton);
 		
 		JLabel lblUsername = new JLabel("username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblUsername.setBounds(27, 388, 124, 16);
+		lblUsername.setBounds(27, 410, 124, 16);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("password:");
 		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblPassword.setBounds(27, 416, 124, 16);
+		lblPassword.setBounds(27, 437, 124, 16);
 		contentPane.add(lblPassword);
 		
 		JLabel lblRepeatPassword = new JLabel("repeat password:");
 		lblRepeatPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblRepeatPassword.setBounds(27, 444, 124, 16);
+		lblRepeatPassword.setBounds(27, 464, 124, 16);
 		contentPane.add(lblRepeatPassword);
 		
 		usernameField = new JTextField();
 		usernameField.setColumns(10);
-		usernameField.setBounds(244, 384, 300, 26);
+		usernameField.setBounds(244, 407, 300, 26);
 		contentPane.add(usernameField);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(244, 412, 300, 26);
+		passwordField.setBounds(244, 434, 300, 26);
 		contentPane.add(passwordField);
 		
 		repeatPasswordField = new JPasswordField();
-		repeatPasswordField.setBounds(244, 440, 300, 26);
+		repeatPasswordField.setBounds(244, 461, 300, 26);
 		contentPane.add(repeatPasswordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("Email:");
@@ -382,9 +383,13 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		email = new JTextField();
-		email.setBounds(244, 134, 300, 20);
+		email.setBounds(244, 133, 300, 26);
 		contentPane.add(email);
 		email.setColumns(10);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(27, 387, 517, 2);
+		contentPane.add(separator);
 	}
 	
 	public static boolean isValidEmailAddress(String email) {
