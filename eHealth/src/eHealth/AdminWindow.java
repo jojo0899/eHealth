@@ -37,7 +37,7 @@ public class AdminWindow extends JFrame {
 
 	
 	public AdminWindow() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -141,6 +141,23 @@ public class AdminWindow extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 477, 1100, 12);
 		contentPane.add(separator);
+		
+		JButton btnNewButton = new JButton("Leave Admin View");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave Admin view?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				if (confirm == 0) {
+					dispose();
+					LoginDialog lw = new LoginDialog();
+			        lw.createLoginDialog();
+				}
+				else return;
+			}
+		});
+		btnNewButton.setForeground(new Color(255, 0, 0));
+		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		btnNewButton.setBounds(942, 6, 152, 29);
+		contentPane.add(btnNewButton);
 	}
 
 	public void createAdminWindow() {

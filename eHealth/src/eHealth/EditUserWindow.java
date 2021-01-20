@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
@@ -144,6 +145,10 @@ public class EditUserWindow extends JFrame {
 		privateButton.setBounds(353, 393, 95, 23);
 		contentPane.add(privateButton);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(privateButton);
+		group.add(publicButton);
+		
 		JButton confirmButton = new JButton("Confirm ");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -246,6 +251,9 @@ public class EditUserWindow extends JFrame {
 					showMessageDialog(null,"Please enter a valid insurance name!", "Warning", WARNING_MESSAGE);
 		        	return;
 				}
+                else {
+                	insuranceNameField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
                 
                 if(userTable.updateUserInDB(userNameField.getText(), emailField.getText() , firstNameField.getText(), LastNameField.getText(), 
 						dateOfBirthField.getText(), null, insuranceNameField.getText(), 
