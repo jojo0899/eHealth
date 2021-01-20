@@ -24,6 +24,8 @@ import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class EditUserWindow extends JFrame {
 	private JPanel contentPane;
@@ -34,7 +36,6 @@ public class EditUserWindow extends JFrame {
 	private JTextField zipCodeField;
 	private JTextField cityField;
 	private JTextField dateOfBirthField;
-	private JPasswordField passwordField;
 	private JTextField insuranceNameField;
 	private JTextField streetField;
 	
@@ -45,8 +46,9 @@ public class EditUserWindow extends JFrame {
 	public EditUserWindow() {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 570, 600);
+		setBounds(100, 100, 570, 550);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -57,54 +59,57 @@ public class EditUserWindow extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("Firstname:");
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblNewLabel.setBounds(27, 178, 95, 16);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLastname = new JLabel("Lastname:");
-		lblLastname.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblLastname.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblLastname.setBounds(27, 206, 95, 16);
 		contentPane.add(lblLastname);
 		
 		JLabel lblStreet = new JLabel("Street:");
-		lblStreet.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblStreet.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblStreet.setBounds(27, 260, 95, 16);
 		contentPane.add(lblStreet);
 		
 		JLabel lblNumber = new JLabel("Number:");
-		lblNumber.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNumber.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblNumber.setBounds(27, 288, 95, 16);
 		contentPane.add(lblNumber);
 		
 		JLabel lblZipcode = new JLabel("Zip-Code:");
-		lblZipcode.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblZipcode.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblZipcode.setBounds(27, 316, 95, 16);
 		contentPane.add(lblZipcode);
 		
 		JLabel lblCity = new JLabel("City:");
-		lblCity.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblCity.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCity.setBounds(27, 344, 95, 16);
 		contentPane.add(lblCity);
 		
 		JLabel lblDateOfBirth = new JLabel("Date of Birth(YYYY-MM-DD):");
-		lblDateOfBirth.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblDateOfBirth.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblDateOfBirth.setBounds(27, 372, 218, 16);
 		contentPane.add(lblDateOfBirth);
 		
 		JLabel lblInsurenceType = new JLabel("Insurence type:");
-		lblInsurenceType.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblInsurenceType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblInsurenceType.setBounds(27, 400, 124, 16);
 		contentPane.add(lblInsurenceType);
 		
 		JLabel lblInsuranceName = new JLabel("Insurance name:");
-		lblInsuranceName.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblInsuranceName.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblInsuranceName.setBounds(27, 428, 124, 16);
 		contentPane.add(lblInsuranceName);
 		
 		userNameField = new JTextField();
+		userNameField.setBackground(Color.WHITE);
+		userNameField.setHorizontalAlignment(SwingConstants.CENTER);
+		userNameField.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		userNameField.setEnabled(false);
 		userNameField.setColumns(10);
-		userNameField.setBounds(230, 68, 300, 26);
+		userNameField.setBounds(244, 67, 300, 26);
 		contentPane.add(userNameField);
 		
 		firstNameField = new JTextField();
@@ -149,7 +154,7 @@ public class EditUserWindow extends JFrame {
 		group.add(privateButton);
 		group.add(publicButton);
 		
-		JButton confirmButton = new JButton("Confirm ");
+		JButton confirmButton = new JButton("Save Changes");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int streetNo = Integer.parseInt(streetNumberField.getText());
@@ -189,10 +194,13 @@ public class EditUserWindow extends JFrame {
                 }
                 
                 // address validation not completely working yet
-            	if(streetField.getText().equals("") | streetNumberField.getText().equals("") | cityField.getText().equals("") | streetField.getText().length() > 60 | cityField.getText().length() > 40) {
+            	if(streetField.getText().equals("") | streetNumberField.getText().equals("") | cityField.getText().equals("") | zipCodeField.getText().equals("") |
+            			streetField.getText().length() > 60 | cityField.getText().length() > 40 |  zipCodeField.getText().length() > 5 | 
+            			isInteger(zipCodeField.getText()) == false | isInteger(streetNumberField.getText()) == false) {
                 	streetField.setBorder(new LineBorder(Color.RED, 1));
                 	streetNumberField.setBorder(new LineBorder(Color.RED, 1));
                 	cityField.setBorder(new LineBorder(Color.RED, 1));
+                	zipCodeField.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
@@ -208,6 +216,7 @@ public class EditUserWindow extends JFrame {
                     	streetField.setBorder(new LineBorder(Color.GREEN, 1));
                     	streetNumberField.setBorder(new LineBorder(Color.GREEN, 1));
                     	cityField.setBorder(new LineBorder(Color.GREEN, 1));
+                    	zipCodeField.setBorder(new LineBorder(Color.GREEN, 1));
                     }
                     
                     else if(coords == null) {
@@ -265,28 +274,19 @@ public class EditUserWindow extends JFrame {
 				}
 			}
 		});
-		confirmButton.setFont(new Font("Dialog", Font.PLAIN, 13));
-		confirmButton.setBounds(209, 513, 167, 29);
+		confirmButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		confirmButton.setBounds(209, 472, 167, 29);
 		contentPane.add(confirmButton);
 		
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setBounds(27, 513, 135, 29);
+		cancelButton.setBounds(27, 472, 135, 29);
 		contentPane.add(cancelButton);
 		cancelButton.addActionListener(e -> this.dispose());
 		
 		JLabel lblUsername = new JLabel("username:");
-		lblUsername.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblUsername.setBounds(27, 72, 124, 16);
 		contentPane.add(lblUsername);
-		
-		JLabel lblPassword = new JLabel("password:");
-		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblPassword.setBounds(27, 456, 124, 16);
-		contentPane.add(lblPassword);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(244, 452, 300, 26);
-		contentPane.add(passwordField);
 		
 		insuranceNameField = new JTextField();
 		insuranceNameField.setBounds(244, 427, 300, 20);
@@ -321,7 +321,7 @@ public class EditUserWindow extends JFrame {
 
 			}
 		});
-		selectUserButton.setBounds(269, 106, 209, 23);
+		selectUserButton.setBounds(285, 105, 209, 23);
 		contentPane.add(selectUserButton);
 		
 		streetField = new JTextField();
@@ -330,7 +330,7 @@ public class EditUserWindow extends JFrame {
 		streetField.setColumns(10);
 		
 		JButton doneButton = new JButton("Done\r\n");
-		doneButton.setBounds(409, 512, 135, 27);
+		doneButton.setBounds(409, 471, 135, 27);
 		contentPane.add(doneButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("Email:");
@@ -347,6 +347,17 @@ public class EditUserWindow extends JFrame {
 		separator.setBounds(0, 150, 570, 12);
 		contentPane.add(separator);
 		doneButton.addActionListener(e -> this.dispose());
+	}
+	
+	
+	public boolean isInteger(String input) {
+	    try {
+	        Integer.parseInt(input);
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	    }
 	}
 	
 	

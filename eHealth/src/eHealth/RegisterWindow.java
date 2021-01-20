@@ -53,6 +53,7 @@ public class RegisterWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 575, 575);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -208,10 +209,13 @@ public class RegisterWindow extends JFrame {
                 }
                 
                 // address validation not completely working yet
-            	if(addressStreet.equals("") | addressStreetNo.equals("") | addressCity.equals("") | addressStreet.length() > 60 | addressCity.length() > 40) {
+            	if(addressStreet.equals("") | addressStreetNo.equals("") | addressCity.equals("") | adressZipCode.equals("") | 
+            			addressStreet.length() > 60 | addressCity.length() > 40 |  adressZipCode.length() > 5 | 
+            			isInteger(adressZipCode) == false | isInteger(addressStreetNo) == false) {
                 	street.setBorder(new LineBorder(Color.RED, 1));
                 	number.setBorder(new LineBorder(Color.RED, 1));
                 	city.setBorder(new LineBorder(Color.RED, 1));
+                	zipcode.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
                 	return;
                 }
@@ -227,25 +231,28 @@ public class RegisterWindow extends JFrame {
                     	street.setBorder(new LineBorder(Color.GREEN, 1));
                     	number.setBorder(new LineBorder(Color.GREEN, 1));
                     	city.setBorder(new LineBorder(Color.GREEN, 1));
+                    	zipcode.setBorder(new LineBorder(Color.GREEN, 1));
                     }
                     
                     else if(coords == null) {
                     	street.setBorder(new LineBorder(Color.RED, 1));
                     	number.setBorder(new LineBorder(Color.RED, 1));
                     	city.setBorder(new LineBorder(Color.RED, 1));
+                    	zipcode.setBorder(new LineBorder(Color.RED, 1));
                     	showMessageDialog(null,"Please enter valid address data!", "Warning", WARNING_MESSAGE);
                     	return;
                     }
             	}
             	
-            	//street number validation
+            	//street number validation 
+            	
                 int adressStreetNoAsInt = 0;
                 try {
                 	adressStreetNoAsInt = Integer.parseInt(addressStreetNo);
                 }catch(NumberFormatException exc) {
                 	showMessageDialog(null, "Enter a valid street no!", "Warning", WARNING_MESSAGE);
                 	return;
-                }
+                } 
    
                                            
                 if (dateOfBirth.equals("")) {
@@ -256,15 +263,8 @@ public class RegisterWindow extends JFrame {
                 else {
                 	dateofbirth.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-          /*      if (healthInformation.equals("") | healthInformation.length() > 30) {
-                	healthinfo.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
-		        	return;
-				}
-                else {
-                	healthinfo.setBorder(new LineBorder(Color.GREEN, 1));
-                }
-          */    if(publicButton.isSelected()) {
+            
+                if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
                 	insuranceType = "private";
@@ -398,6 +398,17 @@ public class RegisterWindow extends JFrame {
    	   	return result;
 	}
 	// https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
+	
+	
+	public boolean isInteger(String input) {
+	    try {
+	        Integer.parseInt(input);
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	    }
+	}
 	
 	
 	public void createRegisterWindow() {

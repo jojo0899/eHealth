@@ -41,6 +41,7 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 450);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -94,9 +95,9 @@ public class MainWindow extends JFrame {
 		
 		JLabel loggedInUser = new JLabel();
 		loggedInUser.setText(userUsed.getUsername());
-		loggedInUser.setForeground(Color.RED);
+		loggedInUser.setForeground(new Color(0, 0, 0));
 		loggedInUser.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		loggedInUser.setBounds(128, 34, 182, 34);
+		loggedInUser.setBounds(128, 34, 183, 34);
 		contentPane.add(loggedInUser);
 		
 		JComboBox comboBox_1 = new JComboBox();
@@ -128,6 +129,8 @@ public class MainWindow extends JFrame {
 		contentPane.add(textField_2);
 		
 		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.setForeground(Color.RED);
+		logoutBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -143,6 +146,8 @@ public class MainWindow extends JFrame {
 		contentPane.add(logoutBtn);
 		
 		JButton quitBtn = new JButton("Quit");
+		quitBtn.setForeground(Color.RED);
+		quitBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);

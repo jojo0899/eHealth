@@ -145,7 +145,7 @@ public class AdminWindow extends JFrame {
 		JButton btnNewButton = new JButton("Leave Admin View");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave Admin view?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave Admin view?\nAny unsaved Changes won't be saved!", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
 					dispose();
 					LoginDialog lw = new LoginDialog();
@@ -155,7 +155,7 @@ public class AdminWindow extends JFrame {
 			}
 		});
 		btnNewButton.setForeground(new Color(255, 0, 0));
-		btnNewButton.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		btnNewButton.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		btnNewButton.setBounds(942, 6, 152, 29);
 		contentPane.add(btnNewButton);
 	}
