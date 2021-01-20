@@ -1,5 +1,7 @@
 package eHealth;
 
+import java.math.BigDecimal;
+
 public class User {
 
 	private String username;
@@ -15,7 +17,9 @@ public class User {
 	private int streetNo;
 	private String zipCode;
 	private String city;
-	
+	private BigDecimal latitude;
+	private BigDecimal longitude;
+
 	private String dbTableName = "USER";
 	
 	private UserDB userFromDB = new UserDB();
@@ -34,6 +38,9 @@ public class User {
 		streetNo = userFromDB.getIntColomnFromDB("streetNo", usernameInput, dbTableName);
 		zipCode = userFromDB.getStringColomnFromDB("zipCode", usernameInput, dbTableName);
 		city = userFromDB.getStringColomnFromDB("city", usernameInput, dbTableName);
+		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", usernameInput, dbTableName);
+		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", usernameInput, dbTableName);
+		//System.out.println(latitude+" "+longitude);
 	}
 
 	public User(User user) {
@@ -50,6 +57,8 @@ public class User {
 		this.streetNo = user.streetNo;
 		this.zipCode = user.zipCode;
 		this.city = user.city;
+		this.latitude = user.latitude;
+		this.longitude = user.longitude;
 	}
 
 	// Getters & Setters
@@ -182,5 +191,21 @@ public class User {
 		this.email = email;
 	}
 	
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
+
 	
 }

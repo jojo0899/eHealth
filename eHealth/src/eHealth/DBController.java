@@ -1,5 +1,6 @@
 package eHealth;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Vector;
 
@@ -51,6 +52,20 @@ abstract class DBController {
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+    
+    protected BigDecimal getBigDecimalColomnFromDB(String column, String username, String Table) {
+    	Connection conn = connectToDB();
+    	try{
+    		String query  = "SELECT " + column +" FROM " + Table + " WHERE username ='" + username + "'";
+            Statement st = conn.createStatement();
+            ResultSet result =  st.executeQuery(query);
+            result.next();
+            return result.getBigDecimal(column);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
     
