@@ -9,6 +9,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -27,9 +28,9 @@ import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField radius;
+	private JTextField dateField;
+	private JTextField timeField;
 	
 	private User userUsed;
 
@@ -61,11 +62,11 @@ public class MainWindow extends JFrame {
 		lblNewLabel_1_1.setBounds(6, 176, 136, 22);
 		contentPane.add(lblNewLabel_1_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_1.setColumns(10);
-		textField_1.setBounds(195, 172, 62, 34);
-		contentPane.add(textField_1);
+		radius = new JTextField();
+		radius.setHorizontalAlignment(SwingConstants.RIGHT);
+		radius.setColumns(10);
+		radius.setBounds(195, 172, 62, 34);
+		contentPane.add(radius);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("km");
 		lblNewLabel_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
@@ -105,61 +106,99 @@ public class MainWindow extends JFrame {
 		comboBoxProblem.setBounds(6, 126, 304, 38);
 		contentPane.add(comboBoxProblem);
 		
-		JButton btnNewButton = new JButton("Search");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String doctorType;
+				String radiusString = radius.getText();
+				int radiusInt = 0;
+				String date = dateField.getText();
+				String time = timeField.getText();
+				
 				switch(comboBoxProblem.getSelectedIndex()) {
 				case 0:
 					//Warning
 					showMessageDialog(null,"Please select your health problem!", "Warning", WARNING_MESSAGE);
-					break;
+					return;
 				case 1,2,3:
 					//Augenarzt
-					
-					
+					doctorType = "ophthalmologist";
 					break;
 				case 4,5,6,7:
 					//Hausarzt
-					
-					
+					doctorType = "generaldoctor";
 					break;
 				case 8,9:
 					//Hautarzt
-					
-					
+					doctorType = "dermatologist";
 				case 10,11,12:
 					// Zahnarzt
-					
+					doctorType = "dentist";
 					
 				default:
 					showMessageDialog(null,"Something went wrong.\nPlease try again!", "Warning", WARNING_MESSAGE);
-					break;
+					return;
 				}
 				
+				if (radiusString.equals("") | isInteger(radiusString) == false) {
+					radius.setBorder(new LineBorder(Color.RED, 1));
+                	radius.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null, "Please enter an integer value!", "Warning", WARNING_MESSAGE);
+                	return;
+				}
+				else {
+					radius.setBorder(new LineBorder(Color.GREEN, 1));
+                	radius.setBorder(new LineBorder(Color.GREEN, 1));
+                	
+                    try {
+                    	radiusInt = Integer.parseInt(radiusString);
+                    }catch(NumberFormatException exc) {
+                    	showMessageDialog(null, "ERROR", "Warning", WARNING_MESSAGE);
+                    	return;
+                    } 
+				}
+				
+				if (date.equals("")) {
+                	dateField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid date!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	dateField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
+				
+				if (time.equals("")) {
+                	timeField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null,"Please enter a valid date!", "Warning", WARNING_MESSAGE);
+		        	return;
+				}
+                else {
+                	timeField.setBorder(new LineBorder(Color.GREEN, 1));
+                }
 			}
 		});
-		btnNewButton.setBounds(6, 358, 299, 29);
-		contentPane.add(btnNewButton);
+		searchButton.setBounds(6, 358, 299, 29);
+		contentPane.add(searchButton);
 		
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date:");
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date (YYYY-MM-DD):");
 		lblNewLabel_1_1_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2_1.setBounds(6, 210, 62, 22);
+		lblNewLabel_1_1_2_1.setBounds(6, 210, 193, 22);
 		contentPane.add(lblNewLabel_1_1_2_1);
 		
-		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Time:");
+		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Time (HH:MM):");
 		lblNewLabel_1_1_2_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2_1_1.setBounds(6, 244, 62, 22);
+		lblNewLabel_1_1_2_1_1.setBounds(6, 244, 187, 22);
 		contentPane.add(lblNewLabel_1_1_2_1_1);
 		
-		textField = new JTextField();
-		textField.setBounds(80, 210, 225, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		dateField = new JTextField();
+		dateField.setBounds(205, 210, 100, 26);
+		contentPane.add(dateField);
+		dateField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(80, 244, 225, 26);
-		contentPane.add(textField_2);
+		timeField = new JTextField();
+		timeField.setColumns(10);
+		timeField.setBounds(205, 244, 100, 26);
+		contentPane.add(timeField);
 		
 		JButton logoutBtn = new JButton("Logout");
 		logoutBtn.setForeground(Color.RED);
@@ -195,6 +234,16 @@ public class MainWindow extends JFrame {
 		quitBtn.setBounds(627, 387, 117, 29);
 		contentPane.add(quitBtn);
 		
+	}
+	
+	public boolean isInteger(String input) {
+	    try {
+	        Integer.parseInt(input);
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	    }
 	}
 	
 	public static void createMainWindow(String usernameInput) {
