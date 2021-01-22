@@ -100,11 +100,44 @@ public class MainWindow extends JFrame {
 		loggedInUser.setBounds(128, 34, 183, 34);
 		contentPane.add(loggedInUser);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(6, 126, 304, 38);
-		contentPane.add(comboBox_1);
+		JComboBox comboBoxProblem = new JComboBox();
+		comboBoxProblem.setModel(new DefaultComboBoxModel(new String[] {"---", "eye pain", "weak vision", "watery eyes", "cough", "sniff", "fever", "headache", "itchy skin", "acne", "tootache", "gingivitis", "jaw pain"}));
+		comboBoxProblem.setBounds(6, 126, 304, 38);
+		contentPane.add(comboBoxProblem);
 		
 		JButton btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switch(comboBoxProblem.getSelectedIndex()) {
+				case 0:
+					//Warning
+					showMessageDialog(null,"Please select your health problem!", "Warning", WARNING_MESSAGE);
+					break;
+				case 1,2,3:
+					//Augenarzt
+					
+					
+					break;
+				case 4,5,6,7:
+					//Hausarzt
+					
+					
+					break;
+				case 8,9:
+					//Hautarzt
+					
+					
+				case 10,11,12:
+					// Zahnarzt
+					
+					
+				default:
+					showMessageDialog(null,"Something went wrong.\nPlease try again!", "Warning", WARNING_MESSAGE);
+					break;
+				}
+				
+			}
+		});
 		btnNewButton.setBounds(6, 358, 299, 29);
 		contentPane.add(btnNewButton);
 		
