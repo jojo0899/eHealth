@@ -3,6 +3,7 @@ package eHealth;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -160,11 +161,15 @@ public class OpenStreetMapUtils {
   }
   
  
-  public static double distance(double lat1, double long1, double lat2, double long2) {
-		
-		double lat = (lat1+lat2)/ 2 * 0.01745;
-		double dx = 111.3* Math.cos(lat) * (long1-long2);
-		double dy = 111.3*(lat1-lat2);
+  public static double distance(BigDecimal lat1, BigDecimal long1, BigDecimal lat2, BigDecimal long2) {
+	  	double lat1AsDouble = lat1.doubleValue();
+	  	double lon1AsDouble = long1.doubleValue();
+	  	double lat2AsDouble = lat2.doubleValue();
+	  	double lon2AsDouble = long2.doubleValue();
+	  	
+		double lat = (lat1AsDouble+lat2AsDouble)/ 2 * 0.01745;
+		double dx = 111.3* Math.cos(lat) * (lon1AsDouble-lon2AsDouble);
+		double dy = 111.3*(lat1AsDouble-lat2AsDouble);
 		double dist= Math.sqrt(dx*dx+dy*dy);		
 		return dist;
 	}

@@ -55,10 +55,10 @@ abstract class DBController {
         }
     }
     
-    protected BigDecimal getBigDecimalColomnFromDB(String column, String username, String Table) {
+    protected BigDecimal getBigDecimalColomnFromDB(String column,String Table, String whereCondition) {
     	Connection conn = connectToDB();
     	try{
-    		String query  = "SELECT " + column +" FROM " + Table + " WHERE username ='" + username + "'";
+    		String query  = "SELECT " + column +" FROM " + Table + " WHERE "+whereCondition;
             Statement st = conn.createStatement();
             ResultSet result =  st.executeQuery(query);
             result.next();

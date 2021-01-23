@@ -39,8 +39,8 @@ public class User {
 		streetNo = userFromDB.getIntColomnFromDB("streetNo", usernameInput, dbTableName);
 		zipCode = userFromDB.getStringColomnFromDB("zipCode", dbTableName,queryWhere);
 		city = userFromDB.getStringColomnFromDB("city", dbTableName,queryWhere);
-		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", usernameInput, dbTableName);
-		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", usernameInput, dbTableName);
+		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", dbTableName, queryWhere);
+		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", dbTableName, queryWhere);
 		//System.out.println(latitude+" "+longitude);
 	}
 

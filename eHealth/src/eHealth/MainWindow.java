@@ -205,7 +205,7 @@ public class MainWindow extends JFrame {
 				// distance calc
 				String queryWhereCondition = "WHERE ";
 				try {
-					docDB.resultSetToTableModel(searchResultTable, doctorType, " ");
+					docDB.resultSetToTableModel(searchResultTable, doctorType, " ", userUsed, radiusInt);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
