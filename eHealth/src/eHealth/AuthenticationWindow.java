@@ -145,6 +145,7 @@ public class AuthenticationWindow extends JFrame {
 					AuthenticationWindow frame = new AuthenticationWindow(user);
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setAlwaysOnTop(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

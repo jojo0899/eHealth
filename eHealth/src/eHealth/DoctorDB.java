@@ -79,6 +79,7 @@ public class DoctorDB extends DBController{
     	insertIntoDoctorDBTable("Dermatologist", "Kerstin", "Dr. Friedrich", "Zentturmstraße 6, 64807 Dieburg");
     }
 
+    
 	@Override
 	protected void displayListOfAllDBEntries(String tableName) {
         Connection conn =  connectToDB();

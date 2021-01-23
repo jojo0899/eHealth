@@ -41,8 +41,7 @@ public class AppointmentsDB extends DBController{
 		e.printStackTrace();
 		}
     }
-	
-	
+
 	
 	@Override
 	protected void displayListOfAllDBEntries(String tableName) {

@@ -21,10 +21,10 @@ abstract class DBController {
         return conn;
     }
 
-    protected String getStringColomnFromDB(String column, String username, String Table) {
+    protected String getStringColomnFromDB(String column, String Table, String whereCondition) {
     	Connection conn = connectToDB();
     	try{
-    		String query  = "SELECT " + column +" FROM " + Table + " WHERE username ='" + username + "'";
+    		String query  = "SELECT " + column +" FROM " + Table + " WHERE " + whereCondition;
             Statement st = conn.createStatement();
             ResultSet result =  st.executeQuery(query);
             if(result.next()) {

@@ -23,7 +23,11 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class MainWindow extends JFrame {
 
@@ -31,8 +35,18 @@ public class MainWindow extends JFrame {
 	private JTextField radius;
 	private JTextField dateField;
 	private JTextField timeField;
+	private JTextField docIdField;
+	private JTable appointmentsTable;
+	private JTable searchResultTable;
+	
+	private String doctorType;
+	private String appointmentTime;
+	private String appointmentDate;
 	
 	private User userUsed;
+
+	private DoctorDB docDB = new DoctorDB();
+	private AppointmentsDB appDB = new AppointmentsDB();
 
 	
 	public MainWindow(String username) {
@@ -40,7 +54,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 450);
+		setBounds(100, 100, 1177, 463);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,15 +92,15 @@ public class MainWindow extends JFrame {
 		lblNewLabel_1_1_2.setBounds(6, 278, 136, 22);
 		contentPane.add(lblNewLabel_1_1_2);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"no reminder", "1 week before", "3 days before", "1 hour before", "10 minutes before"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"no reminder", "1 week before", "3 days before", "1 hour before", "10 minutes before"}));
 		comboBox.setBounds(105, 275, 205, 34);
 		contentPane.add(comboBox);
 		
 		JLabel lblUpcoming = new JLabel("Upcoming appointments:");
 		lblUpcoming.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblUpcoming.setBounds(390, 6, 354, 34);
+		lblUpcoming.setBounds(798, 1, 354, 34);
 		contentPane.add(lblUpcoming);
 		
 		JLabel lblWelcome = new JLabel("Welcome, ");
@@ -101,45 +115,58 @@ public class MainWindow extends JFrame {
 		loggedInUser.setBounds(128, 34, 183, 34);
 		contentPane.add(loggedInUser);
 		
-		JComboBox comboBoxProblem = new JComboBox();
-		comboBoxProblem.setModel(new DefaultComboBoxModel(new String[] {"---", "eye pain", "weak vision", "watery eyes", "cough", "sniff", "fever", "headache", "itchy skin", "acne", "tootache", "gingivitis", "jaw pain"}));
+		JComboBox<String> comboBoxProblem = new JComboBox<String>();
+		comboBoxProblem.setModel(new DefaultComboBoxModel<String>(new String[] {"---", "eye pain", "weak vision", "watery eyes", "cough", "sniff", "fever", "headache", "itchy skin", "acne", "tootache", "gingivitis", "jaw pain"}));
 		comboBoxProblem.setBounds(6, 126, 304, 38);
 		contentPane.add(comboBoxProblem);
 		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String doctorType;
 				String radiusString = radius.getText();
 				int radiusInt = 0;
-				String date = dateField.getText();
-				String time = timeField.getText();
+				appointmentDate = dateField.getText();
+				appointmentTime = timeField.getText();
 				
 				switch(comboBoxProblem.getSelectedIndex()) {
 				case 0:
 					//Warning
 					showMessageDialog(null,"Please select your health problem!", "Warning", WARNING_MESSAGE);
 					return;
-				case 1,2,3:
+				case 1:
+				case 2:
+				case 3:
 					//Augenarzt
-					doctorType = "ophthalmologist";
+					System.out.println("AU");
+					doctorType = "Oculist";
 					break;
-				case 4,5,6,7:
+				case 4:
+				case 5: 
+				case 6:
+				case 7:
 					//Hausarzt
-					doctorType = "generaldoctor";
+					System.out.println("HA");
+					doctorType = "FamilyDoctor";
 					break;
-				case 8,9:
+				case 8:
+				case 9:
 					//Hautarzt
-					doctorType = "dermatologist";
-				case 10,11,12:
+					System.out.println("HAT");
+					doctorType = "Dermatologist";
+					break;
+				case 10:
+				case 11:
+				case 12:
 					// Zahnarzt
-					doctorType = "dentist";
+					System.out.println("ZA");
+					doctorType = "Dentist";
+					break;
 					
 				default:
-					showMessageDialog(null,"Something went wrong.\nPlease try again!", "Warning", WARNING_MESSAGE);
+					showMessageDialog(null,"Please select a Health Problem!", "Warning", WARNING_MESSAGE);
 					return;
 				}
-				
+
 				if (radiusString.equals("") | isInteger(radiusString) == false) {
 					radius.setBorder(new LineBorder(Color.RED, 1));
                 	radius.setBorder(new LineBorder(Color.RED, 1));
@@ -158,7 +185,7 @@ public class MainWindow extends JFrame {
                     } 
 				}
 				
-				if (date.equals("")) {
+				if (appointmentDate.equals("")) {
                 	dateField.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter a valid date!", "Warning", WARNING_MESSAGE);
 		        	return;
@@ -167,7 +194,7 @@ public class MainWindow extends JFrame {
                 	dateField.setBorder(new LineBorder(Color.GREEN, 1));
                 }
 				
-				if (time.equals("")) {
+				if (appointmentTime.equals("")) {
                 	timeField.setBorder(new LineBorder(Color.RED, 1));
                 	showMessageDialog(null,"Please enter a valid date!", "Warning", WARNING_MESSAGE);
 		        	return;
@@ -175,9 +202,20 @@ public class MainWindow extends JFrame {
                 else {
                 	timeField.setBorder(new LineBorder(Color.GREEN, 1));
                 }
+				// distance calc
+				String queryWhereCondition = "WHERE ";
+				try {
+					docDB.resultSetToTableModel(searchResultTable, doctorType, " ");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
 			}
+			
 		});
-		searchButton.setBounds(6, 358, 299, 29);
+		searchButton.setBounds(11, 374, 299, 29);
 		contentPane.add(searchButton);
 		
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date (YYYY-MM-DD):");
@@ -214,7 +252,7 @@ public class MainWindow extends JFrame {
 				else return;
 			}
 		});
-		logoutBtn.setBounds(516, 387, 117, 29);
+		logoutBtn.setBounds(906, 387, 117, 29);
 		contentPane.add(logoutBtn);
 		
 		JButton quitBtn = new JButton("Quit");
@@ -231,8 +269,72 @@ public class MainWindow extends JFrame {
 				
 			}
 		});
-		quitBtn.setBounds(627, 387, 117, 29);
+		quitBtn.setBounds(1035, 387, 117, 29);
 		contentPane.add(quitBtn);
+		
+		JScrollPane scrollPaneSearchResult = new JScrollPane();
+		scrollPaneSearchResult.setBounds(431, 65, 330, 263);
+		contentPane.add(scrollPaneSearchResult);
+		
+		searchResultTable = new JTable();
+		scrollPaneSearchResult.setViewportView(searchResultTable);
+		
+		JLabel lblSearchResults = new JLabel("Search results");
+		lblSearchResults.setBounds(429, 0, 239, 30);
+		contentPane.add(lblSearchResults);
+		
+		JButton makeAppointmentBtn = new JButton("Make Appointment");
+		makeAppointmentBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String docIdString = docIdField.getText();
+				int docId = 0;
+                try {
+                	docId = Integer.parseInt(docIdString);
+                }catch(NumberFormatException exc) {
+                	showMessageDialog(null, "ERROR", "Warning", WARNING_MESSAGE);
+                	return;
+                } 
+				String queryWhere = " id = " + docId; 
+				String appointmentDocFirstName = docDB.getStringColomnFromDB("firstname", doctorType, queryWhere);
+				String appointmentDocLastName = docDB.getStringColomnFromDB("lastname", doctorType, queryWhere);
+				String appointmentDocAddress = docDB.getStringColomnFromDB("address", doctorType, queryWhere);
+				
+				appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
+			}
+		});
+		makeAppointmentBtn.setBounds(594, 376, 167, 25);
+		contentPane.add(makeAppointmentBtn);
+		
+		docIdField = new JTextField();
+		docIdField.setBounds(430, 379, 114, 19);
+		contentPane.add(docIdField);
+		docIdField.setColumns(10);
+		
+		JLabel lblEnterTheId = new JLabel("Enter the ID of the wanted Doctor");
+		lblEnterTheId.setBounds(441, 335, 299, 15);
+		contentPane.add(lblEnterTheId);
+		
+		JScrollPane scrollPanAppointments = new JScrollPane();
+		scrollPanAppointments.setBounds(843, 65, 287, 164);
+		contentPane.add(scrollPanAppointments);
+		
+		appointmentsTable = new JTable();
+		scrollPanAppointments.setViewportView(appointmentsTable);
+		
+		JButton refreshAppointmentTableBtn = new JButton("Refresh");
+		refreshAppointmentTableBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String queryWhere = "WHERE username = '" + username+"'";
+				try {
+					appDB.resultSetToTableModel(appointmentsTable, "Appointments", queryWhere);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		refreshAppointmentTableBtn.setBounds(1012, 244, 117, 25);
+		contentPane.add(refreshAppointmentTableBtn);
 		
 	}
 	

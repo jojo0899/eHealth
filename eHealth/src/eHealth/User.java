@@ -25,19 +25,20 @@ public class User {
 	private UserDB userFromDB = new UserDB();
 	
 	public User(String usernameInput) {
-		username = userFromDB.getStringColomnFromDB("username", usernameInput, dbTableName);
-		password = userFromDB.getStringColomnFromDB("password", usernameInput, dbTableName);
-		email = userFromDB.getStringColomnFromDB("email", usernameInput, dbTableName);
-		firstName = userFromDB.getStringColomnFromDB("firstName", usernameInput, dbTableName);
-		lastName = userFromDB.getStringColomnFromDB("lastName", usernameInput, dbTableName);
-		date_of_birth = userFromDB.getStringColomnFromDB("dateOfBirth", usernameInput, dbTableName);
-		healthInfo = userFromDB.getStringColomnFromDB("healthInfo", usernameInput, dbTableName);
-		insuranceName = userFromDB.getStringColomnFromDB("insuranceName", usernameInput, dbTableName);
-		insuranceType = userFromDB.getStringColomnFromDB("insuranceType", usernameInput, dbTableName);
-		street = userFromDB.getStringColomnFromDB("street", usernameInput, dbTableName);
+		String queryWhere = "username = '" +usernameInput+"' ";
+		username = userFromDB.getStringColomnFromDB("username", dbTableName,queryWhere);
+		password = userFromDB.getStringColomnFromDB("password", dbTableName,queryWhere);
+		email = userFromDB.getStringColomnFromDB("email", dbTableName,queryWhere);
+		firstName = userFromDB.getStringColomnFromDB("firstName", dbTableName,queryWhere);
+		lastName = userFromDB.getStringColomnFromDB("lastName", dbTableName,queryWhere);
+		date_of_birth = userFromDB.getStringColomnFromDB("dateOfBirth", dbTableName,queryWhere);
+		healthInfo = userFromDB.getStringColomnFromDB("healthInfo", dbTableName,queryWhere);
+		insuranceName = userFromDB.getStringColomnFromDB("insuranceName", dbTableName,queryWhere);
+		insuranceType = userFromDB.getStringColomnFromDB("insuranceType", dbTableName,queryWhere);
+		street = userFromDB.getStringColomnFromDB("street", dbTableName,queryWhere);
 		streetNo = userFromDB.getIntColomnFromDB("streetNo", usernameInput, dbTableName);
-		zipCode = userFromDB.getStringColomnFromDB("zipCode", usernameInput, dbTableName);
-		city = userFromDB.getStringColomnFromDB("city", usernameInput, dbTableName);
+		zipCode = userFromDB.getStringColomnFromDB("zipCode", dbTableName,queryWhere);
+		city = userFromDB.getStringColomnFromDB("city", dbTableName,queryWhere);
 		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", usernameInput, dbTableName);
 		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", usernameInput, dbTableName);
 		//System.out.println(latitude+" "+longitude);
