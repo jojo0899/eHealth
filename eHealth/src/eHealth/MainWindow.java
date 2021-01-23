@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JSeparator;
 
 public class MainWindow extends JFrame {
 
@@ -54,7 +55,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1177, 463);
+		setBounds(100, 100, 1083, 878);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -100,7 +101,7 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblUpcoming = new JLabel("Upcoming appointments:");
 		lblUpcoming.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblUpcoming.setBounds(798, 1, 354, 34);
+		lblUpcoming.setBounds(52, 506, 354, 34);
 		contentPane.add(lblUpcoming);
 		
 		JLabel lblWelcome = new JLabel("Welcome, ");
@@ -252,7 +253,7 @@ public class MainWindow extends JFrame {
 				else return;
 			}
 		});
-		logoutBtn.setBounds(906, 387, 117, 29);
+		logoutBtn.setBounds(954, 750, 117, 29);
 		contentPane.add(logoutBtn);
 		
 		JButton quitBtn = new JButton("Quit");
@@ -269,11 +270,11 @@ public class MainWindow extends JFrame {
 				
 			}
 		});
-		quitBtn.setBounds(1035, 387, 117, 29);
+		quitBtn.setBounds(954, 800, 117, 29);
 		contentPane.add(quitBtn);
 		
 		JScrollPane scrollPaneSearchResult = new JScrollPane();
-		scrollPaneSearchResult.setBounds(431, 65, 330, 263);
+		scrollPaneSearchResult.setBounds(431, 65, 639, 207);
 		contentPane.add(scrollPaneSearchResult);
 		
 		searchResultTable = new JTable();
@@ -302,20 +303,20 @@ public class MainWindow extends JFrame {
 				appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
 			}
 		});
-		makeAppointmentBtn.setBounds(594, 376, 167, 25);
+		makeAppointmentBtn.setBounds(838, 362, 167, 25);
 		contentPane.add(makeAppointmentBtn);
 		
 		docIdField = new JTextField();
-		docIdField.setBounds(430, 379, 114, 19);
+		docIdField.setBounds(688, 365, 114, 19);
 		contentPane.add(docIdField);
 		docIdField.setColumns(10);
 		
 		JLabel lblEnterTheId = new JLabel("Enter the ID of the wanted Doctor");
-		lblEnterTheId.setBounds(441, 335, 299, 15);
+		lblEnterTheId.setBounds(688, 311, 299, 15);
 		contentPane.add(lblEnterTheId);
 		
 		JScrollPane scrollPanAppointments = new JScrollPane();
-		scrollPanAppointments.setBounds(843, 65, 287, 164);
+		scrollPanAppointments.setBounds(52, 576, 732, 164);
 		contentPane.add(scrollPanAppointments);
 		
 		appointmentsTable = new JTable();
@@ -333,8 +334,12 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		refreshAppointmentTableBtn.setBounds(1012, 244, 117, 25);
+		refreshAppointmentTableBtn.setBounds(667, 752, 117, 25);
 		contentPane.add(refreshAppointmentTableBtn);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(12, 448, 1043, 2);
+		contentPane.add(separator_1);
 		
 	}
 	

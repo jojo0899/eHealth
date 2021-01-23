@@ -41,7 +41,7 @@ public class User {
 		city = userFromDB.getStringColomnFromDB("city", dbTableName,queryWhere);
 		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", dbTableName, queryWhere);
 		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", dbTableName, queryWhere);
-		//System.out.println(latitude+" "+longitude);
+		System.out.println(latitude+" "+longitude);
 	}
 
 	public User(User user) {

@@ -118,7 +118,7 @@ public class DoctorDB extends DBController{
  
         double userToDocDistance = 0.0;
         
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
+        for (int columnIndex = 1; columnIndex <= columnCount-2; columnIndex++){
 
             
                 tableModel.addColumn(metaData.getColumnLabel(columnIndex));
