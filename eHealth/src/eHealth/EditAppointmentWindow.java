@@ -9,6 +9,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -22,10 +23,14 @@ public class EditAppointmentWindow extends JFrame {
 	private JTextField dateField;
 	private JTextField timeField;
 	
+	private String user;
+	
 	private AppointmentsDB appDB = new AppointmentsDB();
+	private User userUsed;
 
-
-	public EditAppointmentWindow() {
+	public EditAppointmentWindow(String user) {
+		
+		userUsed = new User(user);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -82,6 +87,22 @@ public class EditAppointmentWindow extends JFrame {
 				if(appDB.updateAppointmentInDB(idField.getText(), dateField.getText(), timeField.getText())) 
 				{
 					showMessageDialog(null, "User succsessfully updated", "Info", WARNING_MESSAGE);
+					String queryWhere = " id = " + idField.getText(); 
+					String appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
+					String appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
+					String appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
+					String appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
+					String appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+					
+					String mailText = "Hello " + user + "\n\nYou just succsesfully modified a appointment.\n" +
+							"Here is the modified data of the appointment:\n\n" +
+							"Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName +
+							"\nAddress:\t" + appointmentDocAddress +
+							"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
+							"\n\nBest regards,\nYour eHealth Team";
+					String subject ="[eHealth] Appointment modified";
+					
+					Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				}else{
 					showMessageDialog(null, "Something went wrong", "Warning", WARNING_MESSAGE);
 				}
@@ -96,12 +117,13 @@ public class EditAppointmentWindow extends JFrame {
 		btnCancel.addActionListener(e -> this.dispose());
 	}
 	
-	public void createAppointmentWindow(String id) {
+	public void createEditAppointmentWindow(String id, String username) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditAppointmentWindow frame = new EditAppointmentWindow();
+					EditAppointmentWindow frame = new EditAppointmentWindow(username);
 					frame.idField.setText(id);
+					frame.user = username;
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 				} catch (Exception e) {

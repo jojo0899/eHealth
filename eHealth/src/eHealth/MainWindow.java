@@ -50,6 +50,10 @@ public class MainWindow extends JFrame {
 	private AppointmentsDB appDB = new AppointmentsDB();
 	private JTextField appointmentIdField;
 
+	private String appointmentDocFirstName; 
+	private String appointmentDocLastName;
+	private String appointmentDocAddress;
+	
 	
 	public MainWindow(String username) {
 		
@@ -297,9 +301,19 @@ public class MainWindow extends JFrame {
                 	return;
                 } 
 				String queryWhere = " id = " + docId; 
-				String appointmentDocFirstName = docDB.getStringColomnFromDB("firstname", doctorType, queryWhere);
-				String appointmentDocLastName = docDB.getStringColomnFromDB("lastname", doctorType, queryWhere);
-				String appointmentDocAddress = docDB.getStringColomnFromDB("address", doctorType, queryWhere);
+				appointmentDocFirstName = docDB.getStringColomnFromDB("firstname", doctorType, queryWhere);
+				appointmentDocLastName = docDB.getStringColomnFromDB("lastname", doctorType, queryWhere);
+				appointmentDocAddress = docDB.getStringColomnFromDB("address", doctorType, queryWhere);
+				
+				String mailText = "Hello " + username + "\n\nYou just succsesfully created a new appointment.\n" +
+									"In the following You can find the most important information regarding your appointment:\n\n" +
+									"Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName +
+									"\nAddress:\t" + appointmentDocAddress +
+									"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
+									"\n\nYou can still edit or cancel the appointment through the eHealth Application." +
+									"\n\nBest regards,\nYour eHealth Team";
+				String subject ="[eHealth] New Appointment Created";
+				Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				
 				appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
 			}
@@ -354,8 +368,8 @@ public class MainWindow extends JFrame {
 		JButton editAppointmentBtn = new JButton("Edit");
 		editAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditAppointmentWindow eaw = new EditAppointmentWindow();
-				eaw.createAppointmentWindow(appointmentIdField.getText());
+				EditAppointmentWindow eaw = new EditAppointmentWindow(username);
+				eaw.createEditAppointmentWindow(appointmentIdField.getText(), username);
 			}
 		});
 		editAppointmentBtn.setBounds(551, 765, 117, 25);
@@ -365,6 +379,24 @@ public class MainWindow extends JFrame {
 		deleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int appId = Integer.parseInt(appointmentIdField.getText());
+				
+				String queryWhere = " id = " + appId; 
+				appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
+				appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
+				appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
+				appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
+				appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+				
+				String mailText = "Hello " + username + "\n\nYou just succsesfully deleted a appointment.\n" +
+						"Here is the data of the deleted appointment:\n\n" +
+						"Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName +
+						"\nAddress:\t" + appointmentDocAddress +
+						"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
+						"\n\nYou can create a new appointment anytime using the eHealth Application." +
+						"\n\nBest regards,\nYour eHealth Team";
+				String subject ="[eHealth] Appointment deleted";
+				Mail.sendtext(userUsed.getEmail(), subject, mailText);
+				
 				appDB.deleteAppointmentFromDB(appId);
 			}
 		});
