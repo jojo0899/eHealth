@@ -315,7 +315,13 @@ public class MainWindow extends JFrame {
 				String subject ="[eHealth] New Appointment Created";
 				Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				
-				appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
+				try {
+					appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
+					showMessageDialog(null, "Appointment succesfully created");
+				} catch (SQLException e1) {
+					showMessageDialog(null,"Appointment could not be created\nPlease make sure you entered a valid id\nAlso note that you can not create dublicate Appointments","Warning",WARNING_MESSAGE);
+					e1.printStackTrace();
+				}
 			}
 		});
 		makeAppointmentBtn.setBounds(799, 362, 167, 25);
@@ -395,9 +401,14 @@ public class MainWindow extends JFrame {
 						"\n\nYou can create a new appointment anytime using the eHealth Application." +
 						"\n\nBest regards,\nYour eHealth Team";
 				String subject ="[eHealth] Appointment deleted";
-				Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				
-				appDB.deleteAppointmentFromDB(appId);
+				
+				if(appDB.deleteAppointmentFromDB(appId)) {
+					showMessageDialog(null, "Appointment succesfully deleted");
+					Mail.sendtext(userUsed.getEmail(), subject, mailText);
+				}else {
+					showMessageDialog(null, "Appointment could not be deleted");
+				}
 			}
 		});
 		deleteAppointmentBtn.setBounds(700, 765, 117, 25);

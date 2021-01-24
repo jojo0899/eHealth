@@ -26,9 +26,8 @@ public class AppointmentsDB extends DBController{
         }
     }
 	
-    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime) {
+    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime) throws SQLException {
     	Connection conn =  connectToDB();
-		try {
 		Statement st = conn.createStatement();
 		
 		st.execute("INSERT INTO Appointments(USERNAME,DOCFIRSTNAME, DOCLASTNAME, DOCADDRESS, AppointmentDate, AppointmentTime) VALUES('" 
@@ -38,9 +37,6 @@ public class AppointmentsDB extends DBController{
 													+ docaddress + "','"
 													+ AppointmentDate + "','"
 													+ AppointmentTime + "');");
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
     }
     
     public Boolean updateAppointmentInDB(String id, String date, String time) {
@@ -56,15 +52,17 @@ public class AppointmentsDB extends DBController{
 		}
     }
     
-    public void deleteAppointmentFromDB(int id) {
+    public Boolean deleteAppointmentFromDB(int id) {
     	Connection conn = connectToDB();
         Statement st;
         try {
 			st = conn.createStatement();
 			st.execute("DELETE FROM Appointments WHERE id= "+id);
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
     }
 
