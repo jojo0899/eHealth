@@ -60,7 +60,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1083, 878);
+		setBounds(100, 100, 1284, 904);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -212,6 +212,7 @@ public class MainWindow extends JFrame {
 				String queryWhereCondition = "WHERE ";
 				try {
 					docDB.resultSetToTableModel(searchResultTable, doctorType, " ", userUsed, radiusInt);
+					searchResultTable.getColumnModel().getColumn(3).setPreferredWidth(300);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -258,7 +259,7 @@ public class MainWindow extends JFrame {
 				else return;
 			}
 		});
-		logoutBtn.setBounds(954, 750, 117, 29);
+		logoutBtn.setBounds(1155, 763, 117, 29);
 		contentPane.add(logoutBtn);
 		
 		JButton quitBtn = new JButton("Quit");
@@ -275,11 +276,11 @@ public class MainWindow extends JFrame {
 				
 			}
 		});
-		quitBtn.setBounds(954, 800, 117, 29);
+		quitBtn.setBounds(1155, 826, 117, 29);
 		contentPane.add(quitBtn);
 		
 		JScrollPane scrollPaneSearchResult = new JScrollPane();
-		scrollPaneSearchResult.setBounds(431, 65, 639, 207);
+		scrollPaneSearchResult.setBounds(431, 65, 624, 207);
 		contentPane.add(scrollPaneSearchResult);
 		
 		searchResultTable = new JTable();
@@ -337,7 +338,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(lblEnterTheId);
 		
 		JScrollPane scrollPanAppointments = new JScrollPane();
-		scrollPanAppointments.setBounds(52, 576, 765, 164);
+		scrollPanAppointments.setBounds(52, 576, 1003, 164);
 		contentPane.add(scrollPanAppointments);
 		
 		appointmentsTable = new JTable();
@@ -349,13 +350,15 @@ public class MainWindow extends JFrame {
 				String queryWhere = "WHERE username = '" + username+"'";
 				try {
 					appDB.resultSetToTableModel(appointmentsTable, "Appointments", queryWhere);
+					appointmentsTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+					appointmentsTable.getColumnModel().getColumn(4).setPreferredWidth(280);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		refreshAppointmentTableBtn.setBounds(700, 539, 117, 25);
+		refreshAppointmentTableBtn.setBounds(938, 534, 117, 25);
 		contentPane.add(refreshAppointmentTableBtn);
 		
 		JSeparator separator_1 = new JSeparator();

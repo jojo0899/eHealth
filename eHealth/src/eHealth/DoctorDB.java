@@ -112,20 +112,16 @@ public class DoctorDB extends DBController{
 
         BigDecimal userLat = user.getLatitude();
         BigDecimal userLon = user.getLongitude();
-        
-//        BigDecimal docLat = null;
-//        BigDecimal docLon = null;
  
         double userToDocDistance = 0.0;
         
         for (int columnIndex = 1; columnIndex <= columnCount-2; columnIndex++){
 
-            
+            	
                 tableModel.addColumn(metaData.getColumnLabel(columnIndex));
-            
 
         }
-
+        
         Object[] row = new Object[columnCount];
 
 
