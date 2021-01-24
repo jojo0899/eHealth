@@ -297,8 +297,7 @@ public class MainWindow extends JFrame {
                 try {
                 	docId = Integer.parseInt(docIdString);
                 }catch(NumberFormatException exc) {
-                	showMessageDialog(null, "Please enter a valid id!", "Warning", WARNING_MESSAGE);
-                	docIdField.setBorder(new LineBorder(Color.RED, 1));
+                	showMessageDialog(null, "ERROR", "Warning", WARNING_MESSAGE);
                 	return;
                 } 
 				String queryWhere = " id = " + docId; 
@@ -318,10 +317,8 @@ public class MainWindow extends JFrame {
 				
 				try {
 					appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
-					docIdField.setBorder(new LineBorder(Color.GREEN, 1));
 					showMessageDialog(null, "Appointment succesfully created");
 				} catch (SQLException e1) {
-					docIdField.setBorder(new LineBorder(Color.RED, 1));
 					showMessageDialog(null,"Appointment could not be created\nPlease make sure you entered a valid id\nAlso note that you can not create dublicate Appointments","Warning",WARNING_MESSAGE);
 					e1.printStackTrace();
 				}
