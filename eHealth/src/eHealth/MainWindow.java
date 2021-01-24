@@ -48,6 +48,7 @@ public class MainWindow extends JFrame {
 
 	private DoctorDB docDB = new DoctorDB();
 	private AppointmentsDB appDB = new AppointmentsDB();
+	private JTextField appointmentIdField;
 
 	
 	public MainWindow(String username) {
@@ -303,11 +304,11 @@ public class MainWindow extends JFrame {
 				appDB.insertIntoAppointmentsDBTable(username, appointmentDocFirstName, appointmentDocLastName, appointmentDocAddress, appointmentDate, appointmentTime);
 			}
 		});
-		makeAppointmentBtn.setBounds(838, 362, 167, 25);
+		makeAppointmentBtn.setBounds(799, 362, 167, 25);
 		contentPane.add(makeAppointmentBtn);
 		
 		docIdField = new JTextField();
-		docIdField.setBounds(688, 365, 114, 19);
+		docIdField.setBounds(688, 365, 78, 19);
 		contentPane.add(docIdField);
 		docIdField.setColumns(10);
 		
@@ -316,7 +317,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(lblEnterTheId);
 		
 		JScrollPane scrollPanAppointments = new JScrollPane();
-		scrollPanAppointments.setBounds(52, 576, 732, 164);
+		scrollPanAppointments.setBounds(52, 576, 765, 164);
 		contentPane.add(scrollPanAppointments);
 		
 		appointmentsTable = new JTable();
@@ -334,12 +335,41 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		refreshAppointmentTableBtn.setBounds(667, 752, 117, 25);
+		refreshAppointmentTableBtn.setBounds(700, 539, 117, 25);
 		contentPane.add(refreshAppointmentTableBtn);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(12, 448, 1043, 2);
 		contentPane.add(separator_1);
+		
+		JLabel lblSelectTheAppointment = new JLabel("Select the Appointment Id you wish to cancel/change");
+		lblSelectTheAppointment.setBounds(52, 770, 393, 15);
+		contentPane.add(lblSelectTheAppointment);
+		
+		appointmentIdField = new JTextField();
+		appointmentIdField.setBounds(448, 768, 72, 19);
+		contentPane.add(appointmentIdField);
+		appointmentIdField.setColumns(10);
+		
+		JButton editAppointmentBtn = new JButton("Edit");
+		editAppointmentBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditAppointmentWindow eaw = new EditAppointmentWindow();
+				eaw.createAppointmentWindow(appointmentIdField.getText());
+			}
+		});
+		editAppointmentBtn.setBounds(551, 765, 117, 25);
+		contentPane.add(editAppointmentBtn);
+		
+		JButton deleteAppointmentBtn = new JButton("Delete");
+		deleteAppointmentBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int appId = Integer.parseInt(appointmentIdField.getText());
+				appDB.deleteAppointmentFromDB(appId);
+			}
+		});
+		deleteAppointmentBtn.setBounds(700, 765, 117, 25);
+		contentPane.add(deleteAppointmentBtn);
 		
 	}
 	

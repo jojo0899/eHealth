@@ -12,6 +12,7 @@ public class AppointmentsDB extends DBController{
             Statement st = conn.createStatement();
             st.execute(
             		"Create TABLE IF NOT EXISTS Appointments ("+
+            				"id    			 int AUTO_INCREMENT NOT NULL," +
             			    "username	     varchar(15)," +
             			    "docfirstname	 varchar(30)," +
             			    "doclastname	 varchar(30)," +
@@ -39,6 +40,31 @@ public class AppointmentsDB extends DBController{
 													+ AppointmentTime + "');");
 		} catch (SQLException e) {
 		e.printStackTrace();
+		}
+    }
+    
+    public Boolean updateAppointmentInDB(String id, String date, String time) {
+    	Connection conn =  connectToDB();
+		try {
+			Statement st = conn.createStatement();
+			String query = "UPDATE Appointments SET AppointmentDate = '" + date + "', AppointmentTime = '" + time +"' WHERE id = " + id;
+			st.execute(query);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+    }
+    
+    public void deleteAppointmentFromDB(int id) {
+    	Connection conn = connectToDB();
+        Statement st;
+        try {
+			st = conn.createStatement();
+			st.execute("DELETE FROM Appointments WHERE id= "+id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     }
 
