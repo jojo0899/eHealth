@@ -15,13 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class EditAppointmentWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField idField;
 	private JTextField dateField;
-	private JTextField timeField;
 	
 	private String user;
 	
@@ -32,8 +34,9 @@ public class EditAppointmentWindow extends JFrame {
 		
 		userUsed = new User(user);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 408, 380);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -64,10 +67,15 @@ public class EditAppointmentWindow extends JFrame {
 		contentPane.add(dateField);
 		dateField.setColumns(10);
 		
-		timeField = new JTextField();
-		timeField.setBounds(162, 164, 114, 19);
-		contentPane.add(timeField);
-		timeField.setColumns(10);
+		JComboBox comboBoxHour = new JComboBox();
+		comboBoxHour.setModel(new DefaultComboBoxModel(new String[] {"7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}));
+		comboBoxHour.setBounds(162, 160, 70, 27);
+		contentPane.add(comboBoxHour);
+		
+		JComboBox comboBoxMin = new JComboBox();
+		comboBoxMin.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
+		comboBoxMin.setBounds(247, 160, 70, 27);
+		contentPane.add(comboBoxMin);
 		
 		JButton btnEditThisAppointment = new JButton("Edit this Appointment");
 		btnEditThisAppointment.addActionListener(new ActionListener() {
@@ -75,7 +83,7 @@ public class EditAppointmentWindow extends JFrame {
 
 				String idInput = idField.getText();
 				dateField.setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
-				timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
+				//timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
 			}
 		});
 		btnEditThisAppointment.setBounds(159, 68, 211, 25);
@@ -84,7 +92,8 @@ public class EditAppointmentWindow extends JFrame {
 		JButton btnSaveChanges = new JButton("Save Changes");
 		btnSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(appDB.updateAppointmentInDB(idField.getText(), dateField.getText(), timeField.getText())) 
+				String timeInput = comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem();
+				if(appDB.updateAppointmentInDB(idField.getText(), dateField.getText(), timeInput)) 
 				{
 					showMessageDialog(null, "User succsessfully updated", "Info", WARNING_MESSAGE);
 					String queryWhere = " id = " + idField.getText(); 
@@ -108,11 +117,11 @@ public class EditAppointmentWindow extends JFrame {
 				}
 			}
 		});
-		btnSaveChanges.setBounds(61, 206, 141, 25);
+		btnSaveChanges.setBounds(68, 302, 141, 25);
 		contentPane.add(btnSaveChanges);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(248, 206, 117, 25);
+		btnCancel.setBounds(247, 302, 117, 25);
 		contentPane.add(btnCancel);
 		btnCancel.addActionListener(e -> this.dispose());
 	}
