@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class EditAppointmentWindow extends JFrame {
 
@@ -34,6 +37,7 @@ public class EditAppointmentWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -68,6 +72,16 @@ public class EditAppointmentWindow extends JFrame {
 		timeField.setBounds(162, 164, 114, 19);
 		contentPane.add(timeField);
 		timeField.setColumns(10);
+		
+		JComboBox comboBoxHour = new JComboBox();
+		comboBoxHour.setModel(new DefaultComboBoxModel(new String[] {"7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}));
+		comboBoxHour.setBounds(295, 161, 70, 27);
+		contentPane.add(comboBoxHour);
+		
+		JComboBox comboBoxMin = new JComboBox();
+		comboBoxMin.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
+		comboBoxMin.setBounds(359, 161, 70, 27);
+		contentPane.add(comboBoxMin);
 		
 		JButton btnEditThisAppointment = new JButton("Edit this Appointment");
 		btnEditThisAppointment.addActionListener(new ActionListener() {
