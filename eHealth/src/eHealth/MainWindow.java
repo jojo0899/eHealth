@@ -276,7 +276,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(quitBtn);
 		
 		JScrollPane scrollPaneSearchResult = new JScrollPane();
-		scrollPaneSearchResult.setBounds(405, 96, 663, 207);
+		scrollPaneSearchResult.setBounds(405, 92, 663, 211);
 		contentPane.add(scrollPaneSearchResult);
 		
 		searchResultTable = new JTable();
@@ -284,7 +284,7 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblSearchResults = new JLabel("Search results:");
 		lblSearchResults.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblSearchResults.setBounds(429, 54, 239, 30);
+		lblSearchResults.setBounds(405, 36, 263, 30);
 		contentPane.add(lblSearchResults);
 		
 		JButton makeAppointmentBtn = new JButton("Make Appointment");
@@ -325,7 +325,7 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		makeAppointmentBtn.setBounds(819, 332, 239, 25);
+		makeAppointmentBtn.setBounds(819, 332, 258, 25);
 		contentPane.add(makeAppointmentBtn);
 		
 		docIdField = new JTextField();
@@ -358,7 +358,7 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		refreshAppointmentTableBtn.setBounds(865, 421, 206, 25);
+		refreshAppointmentTableBtn.setBounds(819, 421, 258, 25);
 		contentPane.add(refreshAppointmentTableBtn);
 		
 		JSeparator separator_1 = new JSeparator();
