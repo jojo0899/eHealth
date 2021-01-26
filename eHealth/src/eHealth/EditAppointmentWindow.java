@@ -95,7 +95,7 @@ public class EditAppointmentWindow extends JFrame {
 				String timeInput = comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem();
 				if(appDB.updateAppointmentInDB(idField.getText(), dateField.getText(), timeInput)) 
 				{
-					showMessageDialog(null, "User succsessfully updated", "Info", WARNING_MESSAGE);
+					showMessageDialog(null, "Appointment succsessfully updated", "Info", WARNING_MESSAGE);
 					String queryWhere = " id = " + idField.getText(); 
 					String appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
 					String appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);

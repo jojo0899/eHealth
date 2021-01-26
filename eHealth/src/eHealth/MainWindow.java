@@ -248,7 +248,7 @@ public class MainWindow extends JFrame {
 		logoutBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from eHealth?\nUnsaved changes won't be saved!", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
 					dispose();
 					LoginDialog lw = new LoginDialog();
@@ -267,7 +267,7 @@ public class MainWindow extends JFrame {
 		quitBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit eHealth?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit eHealth?\nUnsaved changes won't be saved!", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
 					System.exit(0);
 				}
@@ -293,7 +293,7 @@ public class MainWindow extends JFrame {
 		lblSearchResults.setBounds(405, 36, 263, 30);
 		contentPane.add(lblSearchResults);
 		
-		JButton makeAppointmentBtn = new JButton("Make Appointment");
+		JButton makeAppointmentBtn = new JButton("Make appointment");
 		makeAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String docIdString = docIdField.getText();
@@ -326,7 +326,7 @@ public class MainWindow extends JFrame {
 					showMessageDialog(null, "Appointment succesfully created");
 				} catch (SQLException e1) {
 					docIdField.setBorder(new LineBorder(Color.RED, 1));
-					showMessageDialog(null,"Appointment could not be created\nPlease make sure you entered a valid id\nAlso note that you can not create dublicate Appointments","Warning",WARNING_MESSAGE);
+					showMessageDialog(null,"Appointment could not be created\nPlease make sure you entered a valid id\nAlso note that you can not create duplicate Appointments","Warning",WARNING_MESSAGE);
 					e1.printStackTrace();
 				}
 			}
@@ -401,31 +401,34 @@ public class MainWindow extends JFrame {
 		deleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int appId = Integer.parseInt(appointmentIdField.getText());
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this appointment?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+				if (confirm == 0) {
+					String queryWhere = " id = " + appId; 
+					appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
+					appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
+					appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
+					appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
+					appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+					
+					String mailText = "Hello " + username + "\n\nYou just succsesfully deleted a appointment.\n" +
+							"Here is the data of the deleted appointment:\n\n" +
+							"Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName +
+							"\nAddress:\t" + appointmentDocAddress +
+							"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
+							"\n\nYou can create a new appointment anytime using the eHealth Application." +
+							"\n\nBest regards,\nYour eHealth Team";
+					String subject ="[eHealth] Appointment deleted";
 				
-				String queryWhere = " id = " + appId; 
-				appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
-				appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
-				appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
-				appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
-				appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
 				
-				String mailText = "Hello " + username + "\n\nYou just succsesfully deleted a appointment.\n" +
-						"Here is the data of the deleted appointment:\n\n" +
-						"Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName +
-						"\nAddress:\t" + appointmentDocAddress +
-						"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
-						"\n\nYou can create a new appointment anytime using the eHealth Application." +
-						"\n\nBest regards,\nYour eHealth Team";
-				String subject ="[eHealth] Appointment deleted";
-				
-				
-				if(appDB.deleteAppointmentFromDB(appId)) {
-					showMessageDialog(null, "Appointment succesfully deleted");
-					appointmentIdField.setText("");
-					Mail.sendtext(userUsed.getEmail(), subject, mailText);
-				}else {
-					showMessageDialog(null, "Appointment could not be deleted");
+					if(appDB.deleteAppointmentFromDB(appId)) {
+						showMessageDialog(null, "Appointment succesfully deleted");
+						appointmentIdField.setText("");
+						Mail.sendtext(userUsed.getEmail(), subject, mailText);
+					}else {
+						showMessageDialog(null, "Appointment could not be deleted");
+					}
 				}
+				else return;
 			}
 		});
 		deleteAppointmentBtn.setBounds(680, 602, 162, 25);
