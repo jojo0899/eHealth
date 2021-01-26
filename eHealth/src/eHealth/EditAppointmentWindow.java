@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
+import java.awt.Font;
 
 public class EditAppointmentWindow extends JFrame {
 
@@ -34,7 +35,7 @@ public class EditAppointmentWindow extends JFrame {
 		
 		userUsed = new User(user);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 408, 380);
+		setBounds(100, 100, 335, 290);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -42,39 +43,43 @@ public class EditAppointmentWindow extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Edit Appointment");
-		lblNewLabel.setBounds(26, 12, 163, 15);
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNewLabel.setBounds(6, 6, 203, 27);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblId = new JLabel("Id:");
-		lblId.setBounds(36, 39, 70, 15);
+		JLabel lblId = new JLabel("ID:");
+		lblId.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblId.setBounds(6, 45, 70, 15);
 		contentPane.add(lblId);
 		
 		idField = new JTextField();
-		idField.setBounds(162, 37, 114, 19);
+		idField.setBounds(97, 45, 141, 19);
 		contentPane.add(idField);
 		idField.setColumns(10);
 		
 		JLabel lblDate = new JLabel("Date:");
-		lblDate.setBounds(36, 139, 70, 15);
+		lblDate.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblDate.setBounds(6, 139, 70, 15);
 		contentPane.add(lblDate);
 		
 		JLabel lblTime = new JLabel("Time:");
-		lblTime.setBounds(36, 166, 70, 15);
+		lblTime.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblTime.setBounds(6, 173, 70, 15);
 		contentPane.add(lblTime);
 		
 		dateField = new JTextField();
-		dateField.setBounds(162, 137, 114, 19);
+		dateField.setBounds(97, 136, 141, 19);
 		contentPane.add(dateField);
 		dateField.setColumns(10);
 		
 		JComboBox comboBoxHour = new JComboBox();
 		comboBoxHour.setModel(new DefaultComboBoxModel(new String[] {"7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}));
-		comboBoxHour.setBounds(162, 160, 70, 27);
+		comboBoxHour.setBounds(97, 169, 70, 27);
 		contentPane.add(comboBoxHour);
 		
 		JComboBox comboBoxMin = new JComboBox();
 		comboBoxMin.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
-		comboBoxMin.setBounds(247, 160, 70, 27);
+		comboBoxMin.setBounds(168, 169, 70, 27);
 		contentPane.add(comboBoxMin);
 		
 		JButton btnEditThisAppointment = new JButton("Edit this Appointment");
@@ -86,7 +91,7 @@ public class EditAppointmentWindow extends JFrame {
 				//timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
 			}
 		});
-		btnEditThisAppointment.setBounds(159, 68, 211, 25);
+		btnEditThisAppointment.setBounds(62, 76, 211, 25);
 		contentPane.add(btnEditThisAppointment);
 		
 		JButton btnSaveChanges = new JButton("Save Changes");
@@ -117,12 +122,17 @@ public class EditAppointmentWindow extends JFrame {
 				}
 			}
 		});
-		btnSaveChanges.setBounds(68, 302, 141, 25);
+		btnSaveChanges.setBounds(168, 208, 161, 25);
 		contentPane.add(btnSaveChanges);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(247, 302, 117, 25);
+		btnCancel.setBounds(6, 208, 161, 25);
 		contentPane.add(btnCancel);
+		
+		JLabel lblNewLabel_1 = new JLabel(":");
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(165, 172, 14, 16);
+		contentPane.add(lblNewLabel_1);
 		btnCancel.addActionListener(e -> this.dispose());
 	}
 	
