@@ -30,6 +30,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JSeparator;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
@@ -136,6 +140,12 @@ public class MainWindow extends JFrame {
 		comboBoxMin.setBounds(269, 244, 72, 27);
 		contentPane.add(comboBoxMin);
 		
+		dateField = new JTextField();
+		dateField.setBounds(205, 210, 136, 26);
+		contentPane.add(dateField);
+		dateField.setColumns(10);
+		SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
 		JButton searchButton = new JButton("Search for Doctor");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -203,13 +213,21 @@ public class MainWindow extends JFrame {
 				
 				if (appointmentDate.equals("")) {
                 	dateField.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a valid date!", "Warning", WARNING_MESSAGE);
+                	showMessageDialog(null,"Please enter a date!", "Warning", WARNING_MESSAGE);
 		        	return;
 				}
                 else {
+                	try {
+                		Date checkDate = isoFormat.parse(appointmentDate);
+                	} catch (ParseException e1) {
+                		e1.printStackTrace();
+                		dateField.setBorder(new LineBorder(Color.RED, 1));
+                		showMessageDialog(null,"Please enter a valid date in the given format!", "Warning", WARNING_MESSAGE);
+                		return;
+                	}
                 	dateField.setBorder(new LineBorder(Color.GREEN, 1));
                 }
-				
+				// source: https://sopra.cs.tu-dortmund.de/wiki/infos/tutorials/java/datum
 				
 				// distance calc
 				String queryWhereCondition = "WHERE ";
@@ -237,12 +255,7 @@ public class MainWindow extends JFrame {
 		lblNewLabel_1_1_2_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblNewLabel_1_1_2_1_1.setBounds(6, 244, 187, 22);
 		contentPane.add(lblNewLabel_1_1_2_1_1);
-		
-		dateField = new JTextField();
-		dateField.setBounds(205, 210, 136, 26);
-		contentPane.add(dateField);
-		dateField.setColumns(10);
-		
+				
 		JButton logoutBtn = new JButton("Logout");
 		logoutBtn.setForeground(Color.RED);
 		logoutBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
