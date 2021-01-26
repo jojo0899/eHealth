@@ -38,7 +38,7 @@ public class LoginDialog extends JFrame {
 	
 	public LoginDialog() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 521, 300);
+		setBounds(100, 100, 546, 284);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,7 +47,7 @@ public class LoginDialog extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("eHealth Login");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.BOLD, 35));
-		lblNewLabel_1.setBounds(113, 36, 256, 52);
+		lblNewLabel_1.setBounds(113, 36, 311, 52);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel usernamelbl = new JLabel("username:");
@@ -62,7 +62,7 @@ public class LoginDialog extends JFrame {
 		
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		usernameField.setBounds(194, 115, 175, 26);
+		usernameField.setBounds(194, 115, 193, 26);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
@@ -73,7 +73,7 @@ public class LoginDialog extends JFrame {
 			}
 		});
 		passwordField.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		passwordField.setBounds(194, 148, 175, 26);
+		passwordField.setBounds(194, 148, 193, 26);
 		contentPane.add(passwordField);
 		
 		JButton loginButton = new JButton("login");
@@ -85,7 +85,7 @@ public class LoginDialog extends JFrame {
 				//Mail.sendtext("@gmail.com", "ehealth project test", "test1");
 			}
 		});
-		loginButton.setBounds(377, 149, 117, 29);
+		loginButton.setBounds(406, 148, 117, 29);
 		contentPane.add(loginButton);
 		
 		JButton CreateAccButton = new JButton("Create new Account");
@@ -100,7 +100,7 @@ public class LoginDialog extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		CreateAccButton.setBounds(194, 186, 175, 29);
+		CreateAccButton.setBounds(194, 186, 193, 29);
 		contentPane.add(CreateAccButton);
 		
 		JButton btnNewButton = new JButton("@");

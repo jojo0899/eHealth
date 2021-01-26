@@ -111,14 +111,14 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblWelcome = new JLabel("Welcome, ");
 		lblWelcome.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblWelcome.setBounds(6, 34, 123, 34);
+		lblWelcome.setBounds(6, 34, 169, 34);
 		contentPane.add(lblWelcome);
 		
 		JLabel loggedInUser = new JLabel();
 		loggedInUser.setText(userUsed.getUsername());
 		loggedInUser.setForeground(new Color(0, 0, 0));
 		loggedInUser.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		loggedInUser.setBounds(128, 34, 183, 34);
+		loggedInUser.setBounds(140, 34, 183, 34);
 		contentPane.add(loggedInUser);
 		
 		JComboBox<String> comboBoxProblem = new JComboBox<String>();

@@ -34,7 +34,7 @@ public class EditAppointmentWindow extends JFrame {
 	public EditAppointmentWindow(String user) {
 		
 		userUsed = new User(user);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 335, 290);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
@@ -115,10 +115,10 @@ public class EditAppointmentWindow extends JFrame {
 							"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
 							"\n\nBest regards,\nYour eHealth Team";
 					String subject ="[eHealth] Appointment modified";
-					
+					dispose();
 					Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				}else{
-					showMessageDialog(null, "Something went wrong", "Warning", WARNING_MESSAGE);
+					showMessageDialog(null, "Something went wrong\nPlease select a valid Id", "Warning", WARNING_MESSAGE);
 				}
 			}
 		});
