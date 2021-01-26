@@ -1,6 +1,13 @@
 package eHealth;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.logging.log4j.core.util.FileUtils;
 
 public class User {
 
@@ -10,7 +17,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String date_of_birth; 
-	private String healthInfo;
+	private String healthInfo = "";
 	private String insuranceName;
 	private String insuranceType;
 	private String street;
@@ -62,6 +69,32 @@ public class User {
 		this.longitude = user.longitude;
 	}
 
+	public Boolean writeUserIntoTxt() {
+		try {
+			File outputFile = new File(System.getProperty("user.home") + "/Desktop/HealthInformation");
+			//Files.setPosixFilePermisions(outputFile.toPath(), EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE));
+			if (!outputFile.exists()) {
+				outputFile.createNewFile();
+			}
+			FileWriter myWriter = new FileWriter(outputFile);
+
+			String healthInfo = "This document contains all the information eHealth stores about you." +
+								"\n\n\nPersonal information\n\nUsername: " + this.username + "\nName: " + this.firstName + " " + this.lastName + 
+								"\nDate of birth: " + this.date_of_birth + "\nEmail: " + this.email + 
+								"\nAddress: " + this.zipCode + " " + this.city + " , " + this.street + " " + this.streetNo + 
+								"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo + "\n\n\nInsurance" + 
+								"\n\nInsurance type: " + this.insuranceType + "\nInsurance name: " + this.insuranceName;
+			
+			myWriter.write(healthInfo);
+			myWriter.close();
+			myWriter.close();
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	// Getters & Setters
 	public String getUsername() {
 		return username;
@@ -120,6 +153,13 @@ public class User {
 
 	public void setHealthInfo(String healthInfo) {
 		this.healthInfo = healthInfo;
+	}
+	
+	public void addHealthInfo(String healthInfo) {
+		if(this.healthInfo == null) {
+			this.healthInfo = " ";
+		}
+		this.healthInfo = this.healthInfo + " ," + healthInfo;
 	}
 
 

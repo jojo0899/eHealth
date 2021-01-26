@@ -63,7 +63,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1284, 904);
+		setBounds(100, 100, 1083, 856);
 		setBounds(100, 100, 1083, 670);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
@@ -78,7 +78,7 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Please select your health problem:");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(6, 92, 299, 22);
+		lblNewLabel_1.setBounds(6, 92, 335, 22);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Search radius:");
@@ -192,7 +192,54 @@ public class MainWindow extends JFrame {
 					showMessageDialog(null,"Please select a Health Problem!", "Warning", WARNING_MESSAGE);
 					return;
 				}
-
+				String healthProblemInput = "";
+				switch(comboBoxProblem.getSelectedIndex()) {
+				case 0:
+					break;
+				case 1:
+					healthProblemInput = "Eye pain";
+					break;
+				case 2:
+					healthProblemInput = "Weak vision";
+					break;
+				case 3:
+					healthProblemInput = "Watery eyes";
+					break;
+				case 4:
+					healthProblemInput = "Cough";
+					break;
+				case 5:
+					healthProblemInput = "Sniff";
+					break;
+				case 6: 
+					healthProblemInput = "Fever";
+					break;
+				case 7:
+					healthProblemInput = "Headache";
+					break;
+				case 8:
+					healthProblemInput = "Itchy skin";
+					break;
+				case 9:
+					healthProblemInput = "Acne";
+					break;
+				case 10:
+					healthProblemInput = "Toothache";
+					break;
+				case 11:
+					healthProblemInput = "gingivitis";
+					break;
+				case 12:
+					healthProblemInput = "Jaw pain";
+					break;	
+				default:
+					break;
+				}
+				
+				if(healthProblemInput != "") {
+					userUsed.addHealthInfo(healthProblemInput);
+				}
+				
 				if (radiusString.equals("") | isInteger(radiusString) == false) {
 					radius.setBorder(new LineBorder(Color.RED, 1));
                 	radius.setBorder(new LineBorder(Color.RED, 1));
@@ -455,6 +502,20 @@ public class MainWindow extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 383, 1083, 15);
 		contentPane.add(separator);
+		
+		JButton btnExportHealthInfo = new JButton("Export health info");
+		btnExportHealthInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(userUsed.writeUserIntoTxt()) {
+					showMessageDialog(null, "Your health information file has succesfully been exportet to Your Desktop");
+				}else {
+					showMessageDialog(null, "Something went wrong.");
+				}
+				
+			}
+		});
+		btnExportHealthInfo.setBounds(853, 602, 204, 25);
+		contentPane.add(btnExportHealthInfo);
 		
 		
 	}
