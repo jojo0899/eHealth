@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
@@ -29,6 +30,11 @@ import java.awt.event.ActionEvent;
 
 import java.awt.color.*;
 import javax.swing.border.LineBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JSeparator;
 
 public class RegisterWindow extends JFrame {
@@ -94,9 +100,9 @@ public class RegisterWindow extends JFrame {
 		lblCity.setBounds(27, 248, 95, 16);
 		contentPane.add(lblCity);
 		
-		JLabel lblDateOfBirth = new JLabel("Date of Birth(YYYY-MM-DD):");
+		JLabel lblDateOfBirth = new JLabel("Date of Birth:");
 		lblDateOfBirth.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblDateOfBirth.setBounds(27, 276, 219, 16);
+		lblDateOfBirth.setBounds(27, 276, 107, 16);
 		contentPane.add(lblDateOfBirth);
 		
 		JLabel lblInsurenceType = new JLabel("Insurence type:");
@@ -139,10 +145,15 @@ public class RegisterWindow extends JFrame {
 		city.setBounds(244, 245, 300, 26);
 		contentPane.add(city);
 		
-		dateofbirth = new JTextField();
-		dateofbirth.setColumns(10);
-		dateofbirth.setBounds(244, 273, 300, 26);
-		contentPane.add(dateofbirth);
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setBounds(244, 273, 300, 29);
+		contentPane.add(datePicker);
 		
 		insurancename = new JTextField();
 		insurancename.setColumns(10);
@@ -175,7 +186,7 @@ public class RegisterWindow extends JFrame {
                 String addressStreetNo = number.getText();
                 String adressZipCode = zipcode.getText();
                 String addressCity = city.getText();
-                String dateOfBirth = dateofbirth.getText();
+                String dateOfBirth = datePicker.getJFormattedTextField().getText();
                 String healthInformation = null;
                 String insuranceType;
                 String insuranceName = insurancename.getText();
@@ -256,14 +267,10 @@ public class RegisterWindow extends JFrame {
                 } 
    
                                            
-                if (dateOfBirth.equals("")) {
-                	dateofbirth.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a valid date of birth!", "Warning", WARNING_MESSAGE);
+                if (dateOfBirth.equals("")) {           
+                	showMessageDialog(null,"Please enter your date of birth!", "Warning", WARNING_MESSAGE);
 		        	return;
-				}
-                else {
-                	dateofbirth.setBorder(new LineBorder(Color.GREEN, 1));
-                }
+				}              
             
                 if(publicButton.isSelected()) {
                 	insuranceType = "public";

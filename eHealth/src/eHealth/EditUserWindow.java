@@ -11,6 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -21,6 +26,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
@@ -136,11 +142,21 @@ public class EditUserWindow extends JFrame {
 		cityField.setColumns(10);
 		cityField.setBounds(244, 340, 300, 26);
 		contentPane.add(cityField);
-		
+		/*
 		dateOfBirthField = new JTextField();
 		dateOfBirthField.setColumns(10);
 		dateOfBirthField.setBounds(244, 368, 300, 26);
 		contentPane.add(dateOfBirthField);
+		*/
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setBounds(244, 368, 300, 26);
+		contentPane.add(datePicker);
 		
 		JRadioButton publicButton = new JRadioButton("public");
 		publicButton.setBounds(244, 393, 95, 23);
@@ -230,23 +246,13 @@ public class EditUserWindow extends JFrame {
             	
           
                               
-                if (dateOfBirthField.getText().equals("")) {
-                	dateOfBirthField.setBorder(new LineBorder(Color.RED, 1));
+                if (datePicker.getJFormattedTextField().getText().equals("")) {
                 	showMessageDialog(null,"Please enter a valid date of birth!", "Warning", WARNING_MESSAGE);
 		        	return;
 				}
-                else {
-                	dateOfBirthField.setBorder(new LineBorder(Color.GREEN, 1));
-                }
-          /*      if (healthInformation.equals("") | healthInformation.length() > 30) {
-                	healthinfo.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter your health information!", "Warning", WARNING_MESSAGE);
-		        	return;
-				}
-                else {
-                	healthinfo.setBorder(new LineBorder(Color.GREEN, 1));
-                }
-          */    if(publicButton.isSelected()) {
+                
+                
+                if(publicButton.isSelected()) {
                 	insuranceType = "public";
                 }else if(privateButton.isSelected()){
                 	insuranceType = "private";
@@ -265,7 +271,7 @@ public class EditUserWindow extends JFrame {
                 }
                 
                 if(userTable.updateUserInDB(userNameField.getText(), emailField.getText() , firstNameField.getText(), LastNameField.getText(), 
-						dateOfBirthField.getText(), null, insuranceNameField.getText(), 
+                		datePicker.getJFormattedTextField().getText(), null, insuranceNameField.getText(), 
 						insuranceType,streetField.getText(),  streetNo,zipCodeField.getText(), cityField.getText())) 
 				{
 					showMessageDialog(null, "User succsessfully updated", "Info", WARNING_MESSAGE);
@@ -307,8 +313,7 @@ public class EditUserWindow extends JFrame {
 					streetNumberField.setText(userTable.getStringColomnFromDB("STREETNO", "USER",queryWhere));
 					zipCodeField.setText(userTable.getStringColomnFromDB("ZIPCODE", "USER",queryWhere));
 					cityField.setText(userTable.getStringColomnFromDB("CITY", "USER",queryWhere));
-					dateOfBirthField.setText(userTable.getStringColomnFromDB("DATEOFBIRTH", "USER",queryWhere));
-					//healthInfoField.setText(userTable.getStringColomnFromDB("HEALTHINFO", usernameInput, "USER"));
+					datePicker.getJFormattedTextField().setText(userTable.getStringColomnFromDB("DATEOFBIRTH", "USER",queryWhere));
 					insuranceNameField.setText(userTable.getStringColomnFromDB("INSURANCENAME", "USER",queryWhere));
 					
 					if(userTable.getStringColomnFromDB("INSURANCETYPE", "USER",queryWhere).equals("public")) {

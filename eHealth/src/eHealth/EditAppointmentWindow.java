@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class EditAppointmentWindow extends JFrame {
 
@@ -62,6 +63,8 @@ public class EditAppointmentWindow extends JFrame {
 		contentPane.add(lblId);
 		
 		idField = new JTextField();
+		idField.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		idField.setHorizontalAlignment(SwingConstants.CENTER);
 		idField.setBounds(97, 45, 141, 19);
 		contentPane.add(idField);
 		idField.setColumns(10);
@@ -75,12 +78,7 @@ public class EditAppointmentWindow extends JFrame {
 		lblTime.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblTime.setBounds(6, 181, 70, 15);
 		contentPane.add(lblTime);
-		/*
-		dateField = new JTextField();
-		dateField.setBounds(97, 136, 141, 19);
-		contentPane.add(dateField);
-		dateField.setColumns(10);
-		*/
+		
 		Calendar now = Calendar.getInstance();
 		now.set(Calendar.HOUR_OF_DAY, 24);
 		
@@ -110,7 +108,7 @@ public class EditAppointmentWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String idInput = idField.getText();
-				//dateField.setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
+				datePicker.getJFormattedTextField().setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
 				//timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
 			}
 		});

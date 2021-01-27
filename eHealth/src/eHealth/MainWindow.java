@@ -164,7 +164,7 @@ public class MainWindow extends JFrame {
 		p.put("text.year", "Year");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(186, 206, 155, 26);
+		datePicker.setBounds(186, 206, 155, 29);
 		contentPane.add(datePicker);
 		// source: https://www.javaer101.com/de/article/1525991.html
 
