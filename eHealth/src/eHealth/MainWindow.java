@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -30,9 +35,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JSeparator;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 
 public class MainWindow extends JFrame {
 
@@ -56,6 +64,7 @@ public class MainWindow extends JFrame {
 	private String appointmentDocFirstName; 
 	private String appointmentDocLastName;
 	private String appointmentDocAddress;
+	
 	
 	
 	public MainWindow(String username) {
@@ -89,7 +98,7 @@ public class MainWindow extends JFrame {
 		radius = new JTextField();
 		radius.setHorizontalAlignment(SwingConstants.RIGHT);
 		radius.setColumns(10);
-		radius.setBounds(205, 178, 88, 22);
+		radius.setBounds(186, 178, 107, 22);
 		contentPane.add(radius);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("km");
@@ -140,18 +149,27 @@ public class MainWindow extends JFrame {
 		comboBoxMin.setBounds(269, 244, 72, 27);
 		contentPane.add(comboBoxMin);
 		
-		dateField = new JTextField();
-		dateField.setBounds(205, 210, 136, 26);
-		contentPane.add(dateField);
-		dateField.setColumns(10);
-		SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+		UtilDateModel model = new UtilDateModel();
+		model.setDate(2021,01,27);
+		// Need this...
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		// Don't know about the formatter, but there it is...
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        datePicker.setBounds(186,206,155,26);
+        contentPane.add(datePicker);
+		//source: https://www.javaer101.com/de/article/1525991.html
+        
 		JButton searchButton = new JButton("Search for Doctor");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String radiusString = radius.getText();
 				int radiusInt = 0;
-				appointmentDate = dateField.getText();
+				//appointmentDate = dateField.getText();
+				appointmentDate = datePicker.getJFormattedTextField().getText();
 				appointmentTime = (comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem());
 				
 				switch(comboBoxProblem.getSelectedIndex()) {
@@ -257,24 +275,10 @@ public class MainWindow extends JFrame {
                     	return;
                     } 
 				}
-				
-				if (appointmentDate.equals("")) {
-                	dateField.setBorder(new LineBorder(Color.RED, 1));
-                	showMessageDialog(null,"Please enter a date!", "Warning", WARNING_MESSAGE);
-		        	return;
+				if ((datePicker.getJFormattedTextField().getText().equals(""))) {
+					showMessageDialog(null, "Please enter a valid date!", "Warning", WARNING_MESSAGE);
+					return;
 				}
-                else {
-                	try {
-                		Date checkDate = isoFormat.parse(appointmentDate);
-                	} catch (ParseException e1) {
-                		e1.printStackTrace();
-                		dateField.setBorder(new LineBorder(Color.RED, 1));
-                		showMessageDialog(null,"Please enter a valid date in the given format!", "Warning", WARNING_MESSAGE);
-                		return;
-                	}
-                	dateField.setBorder(new LineBorder(Color.GREEN, 1));
-                }
-				// source: https://sopra.cs.tu-dortmund.de/wiki/infos/tutorials/java/datum
 				
 				// distance calc
 				String queryWhereCondition = "WHERE ";
@@ -293,9 +297,9 @@ public class MainWindow extends JFrame {
 		searchButton.setBounds(6, 330, 335, 29);
 		contentPane.add(searchButton);
 		
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date (YYYY-MM-DD):");
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date:");
 		lblNewLabel_1_1_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2_1.setBounds(6, 210, 193, 22);
+		lblNewLabel_1_1_2_1.setBounds(6, 210, 88, 22);
 		contentPane.add(lblNewLabel_1_1_2_1);
 		
 		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Time:");
