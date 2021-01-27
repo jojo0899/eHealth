@@ -45,7 +45,7 @@ public class AuthenticationWindow extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblNewLabel = new JLabel("Enter 6-digit number:");
-		lblNewLabel.setBounds(156, 168, 138, 14);
+		lblNewLabel.setBounds(156, 168, 162, 14);
 
 		authenticationNumberInputField = new JTextField();
 		authenticationNumberInputField.addActionListener(new ActionListener() {
@@ -105,7 +105,7 @@ public class AuthenticationWindow extends JFrame {
 		});
 		
 		JLabel lblNewLabel_1 = new JLabel("You are using 2-Factor-Authentication.");
-		lblNewLabel_1.setBounds(47, 16, 356, 31);
+		lblNewLabel_1.setBounds(47, 12, 391, 31);
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		
 		JLabel lblNewLabel_2 = new JLabel("Click the button below to receive an email");

@@ -70,14 +70,13 @@ abstract class DBController {
     }
     
     
-    protected void resultSetToTableModel(JTable table, String tableName, String whereCondition) throws SQLException{
+    protected void resultSetToTableModel(JTable table, String tableName, String whereCondition, int columnCount) throws SQLException{
     	Connection conn = connectToDB();
     	Statement st = conn.createStatement();
     	ResultSet rs =  st.executeQuery("SELECT * FROM " + tableName + " " + whereCondition);
         DefaultTableModel tableModel = new DefaultTableModel();
         ResultSetMetaData metaData = rs.getMetaData();
-        int columnCount = metaData.getColumnCount();
-
+        
         for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
             tableModel.addColumn(metaData.getColumnLabel(columnIndex));
         }

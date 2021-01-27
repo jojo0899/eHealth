@@ -54,7 +54,7 @@ public class AdminWindow extends JFrame {
 		viewUsersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					userTable.resultSetToTableModel(table, "user", "");
+					userTable.resultSetToTableModel(table, "user", "", 13);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -117,7 +117,7 @@ public class AdminWindow extends JFrame {
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					userTable.resultSetToTableModel(table, "user", "");
+					userTable.resultSetToTableModel(table, "user", "", 13);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -129,7 +129,7 @@ public class AdminWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Please enter the username of the user you like to edit or delete:");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblNewLabel.setBounds(262, 488, 451, 42);
+		lblNewLabel.setBounds(149, 488, 564, 42);
 		contentPane.add(lblNewLabel);
 		
 		userSelectionTextField = new JTextField();
@@ -156,7 +156,7 @@ public class AdminWindow extends JFrame {
 		});
 		btnNewButton.setForeground(new Color(255, 0, 0));
 		btnNewButton.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		btnNewButton.setBounds(1155, 6, 152, 29);
+		btnNewButton.setBounds(1109, 6, 198, 29);
 		contentPane.add(btnNewButton);
 	}
 

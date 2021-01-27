@@ -19,6 +19,7 @@ public class AppointmentsDB extends DBController{
             			    "docaddress   	 varchar(200)," +
             			    "AppointmentDate DATE," +
             			    "AppointmentTime TIME," + 
+            			    "Reminder		 int," +
             			    "PRIMARY KEY(username, docfirstname, doclastname, docaddress, AppointmentDate, AppointmentTime));"
             		);
         } catch (SQLException e) {
@@ -26,17 +27,18 @@ public class AppointmentsDB extends DBController{
         }
     }
 	
-    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime) throws SQLException {
+    public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime, int reminder) throws SQLException {
     	Connection conn =  connectToDB();
 		Statement st = conn.createStatement();
 		
-		st.execute("INSERT INTO Appointments(USERNAME,DOCFIRSTNAME, DOCLASTNAME, DOCADDRESS, AppointmentDate, AppointmentTime) VALUES('" 
+		st.execute("INSERT INTO Appointments(USERNAME,DOCFIRSTNAME, DOCLASTNAME, DOCADDRESS, AppointmentDate, AppointmentTime, Reminder) VALUES('" 
 													+ username + "','"
 													+ docfirstname + "','"
 													+ doclastname + "','"
 													+ docaddress + "','"
 													+ AppointmentDate + "','"
-													+ AppointmentTime + "');");
+													+ AppointmentTime + "','"
+													+ reminder + "');");
     }
     
     public Boolean updateAppointmentInDB(String id, String date, String time) {

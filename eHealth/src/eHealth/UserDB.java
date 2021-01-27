@@ -168,6 +168,18 @@ public class UserDB extends DBController {
 		}
 	}
     
+    public void updateHealthInfoInDB(String healthInfo, String username) {
+    	Connection conn = connectToDB();
+    	Statement st;
+		try {
+			st = conn.createStatement();
+	    	st.execute("UPDATE USER SET healthinfo = '"+ healthInfo + "' WHERE username = '" + username + "';" );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public Boolean checkIfUsernameExistsInDB(String username) {
         Connection conn = connectToDB();
         try{
