@@ -46,7 +46,6 @@ public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField radius;
-	private JTextField dateField;
 	private JTextField docIdField;
 	private JTable appointmentsTable;
 	private JTable searchResultTable;
@@ -71,7 +70,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(String username) {
 
 		userUsed = new User(username);
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1083, 856);
 		setBounds(100, 100, 1083, 670);
@@ -156,16 +155,14 @@ public class MainWindow extends JFrame {
 		contentPane.add(comboBoxMin);
 
 		Calendar now = Calendar.getInstance();
+		now.set(Calendar.HOUR_OF_DAY, 24);
 
 		UtilDateModel model = new UtilDateModel();
-		// model.setDate((now.get(Calendar.YEAR)),(now.get(Calendar.MONTH)+1),(now.get(Calendar.DAY_OF_MONTH)));
-		// Need this...
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		// Don't know about the formatter, but there it is...
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		datePicker.setBounds(186, 206, 155, 26);
 		contentPane.add(datePicker);
@@ -176,7 +173,6 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String radiusString = radius.getText();
 				int radiusInt = 0;
-				// appointmentDate = dateField.getText();
 				appointmentDate = datePicker.getJFormattedTextField().getText();
 				appointmentTime = (comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem());
 
@@ -302,28 +298,35 @@ public class MainWindow extends JFrame {
 						return;
 					}
 				}
-				if ((datePicker.getJFormattedTextField().getText().equals(""))) {
+				if ((appointmentDate.equals(""))) {
 					showMessageDialog(null, "Please enter a valid date!", "Warning", WARNING_MESSAGE);
 					return;
 				}
 
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				try {
-					Date date1 = sdf.parse(datePicker.getJFormattedTextField().getText());
+					Date date1 = sdf.parse(appointmentDate);
 					Date date2 = sdf.parse(((now.get(Calendar.YEAR)) + "-" + now.get(Calendar.MONTH) + 1) + "-"
 							+ now.get(Calendar.DAY_OF_MONTH));
 					if (date1.compareTo(date2) < 0) {
-						showMessageDialog(null, "You can't make an appointment in the past!", "Warning",
-								WARNING_MESSAGE);
+						showMessageDialog(null, "You can't make an appointment in the past!", "Warning", WARNING_MESSAGE);
 						return;
 					}
 				} catch (ParseException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				// source:
 				// https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java
 
+				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR)) {					
+					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+					return;
+				}
+				else if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your!", "Warning", WARNING_MESSAGE);
+					return;
+				}
+				
 				try {
 					docDB.resultSetToTableModel(searchResultTable, doctorType, " ", userUsed, radiusInt);
 					searchResultTable.getColumnModel().getColumn(3).setPreferredWidth(300);

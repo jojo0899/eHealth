@@ -10,10 +10,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -64,22 +73,36 @@ public class EditAppointmentWindow extends JFrame {
 		
 		JLabel lblTime = new JLabel("Time:");
 		lblTime.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblTime.setBounds(6, 173, 70, 15);
+		lblTime.setBounds(6, 181, 70, 15);
 		contentPane.add(lblTime);
-		
+		/*
 		dateField = new JTextField();
 		dateField.setBounds(97, 136, 141, 19);
 		contentPane.add(dateField);
 		dateField.setColumns(10);
+		*/
+		Calendar now = Calendar.getInstance();
+		now.set(Calendar.HOUR_OF_DAY, 24);
+		
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.getJFormattedTextField().setBounds(0, 0, 273, 173);
+		datePicker.setBounds(88, 139, 176, 29);
+		contentPane.add(datePicker);
 		
 		JComboBox comboBoxHour = new JComboBox();
 		comboBoxHour.setModel(new DefaultComboBoxModel(new String[] {"7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}));
-		comboBoxHour.setBounds(97, 169, 70, 27);
+		comboBoxHour.setBounds(98, 177, 70, 27);
 		contentPane.add(comboBoxHour);
 		
 		JComboBox comboBoxMin = new JComboBox();
 		comboBoxMin.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
-		comboBoxMin.setBounds(168, 169, 70, 27);
+		comboBoxMin.setBounds(168, 177, 70, 27);
 		contentPane.add(comboBoxMin);
 		
 		JButton btnEditThisAppointment = new JButton("Edit this Appointment");
@@ -87,7 +110,7 @@ public class EditAppointmentWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String idInput = idField.getText();
-				dateField.setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
+				//dateField.setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
 				//timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
 			}
 		});
@@ -98,14 +121,38 @@ public class EditAppointmentWindow extends JFrame {
 		btnSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String timeInput = comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem();
-				if(appDB.updateAppointmentInDB(idField.getText(), dateField.getText(), timeInput)) 
+				String appointmentDate = datePicker.getJFormattedTextField().getText();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					Date date1 = sdf.parse(appointmentDate);
+					Date date2 = sdf.parse(((now.get(Calendar.YEAR)) + "-" + now.get(Calendar.MONTH) + 1) + "-"
+							+ now.get(Calendar.DAY_OF_MONTH));
+					if (date1.compareTo(date2) < 0) {
+						showMessageDialog(null, "You can't make an appointment in the past!", "Warning",
+								WARNING_MESSAGE);
+						return;
+					}
+				} catch (ParseException e2) {
+					e2.printStackTrace();
+				}
+				if ((comboBoxHour.getSelectedIndex() + 7) < now.get(Calendar.HOUR)) {					
+					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+					return;
+				}
+				else if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+					return;
+				}
+				
+				if(appDB.updateAppointmentInDB(idField.getText(), appointmentDate, timeInput)) 
 				{
+					dispose();
 					showMessageDialog(null, "Appointment succsessfully updated", "Info", WARNING_MESSAGE);
 					String queryWhere = " id = " + idField.getText(); 
 					String appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
 					String appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
 					String appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
-					String appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
+					String appointmentDateInput = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
 					String appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
 					
 					String mailText = "Hello " + user + "\n\nYou just succsesfully modified a appointment.\n" +
@@ -115,18 +162,17 @@ public class EditAppointmentWindow extends JFrame {
 							"\nDate & Time:\t" + appointmentDate + " " + appointmentTime +
 							"\n\nBest regards,\nYour eHealth Team";
 					String subject ="[eHealth] Appointment modified";
-					dispose();
 					Mail.sendtext(userUsed.getEmail(), subject, mailText);
 				}else{
 					showMessageDialog(null, "Something went wrong\nPlease select a valid Id", "Warning", WARNING_MESSAGE);
 				}
 			}
 		});
-		btnSaveChanges.setBounds(168, 208, 161, 25);
+		btnSaveChanges.setBounds(168, 216, 161, 25);
 		contentPane.add(btnSaveChanges);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(6, 208, 161, 25);
+		btnCancel.setBounds(6, 216, 161, 25);
 		contentPane.add(btnCancel);
 		
 		JLabel lblNewLabel_1 = new JLabel(":");
