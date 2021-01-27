@@ -148,9 +148,11 @@ public class MainWindow extends JFrame {
 		comboBoxMin.setModel(new DefaultComboBoxModel<String>(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
 		comboBoxMin.setBounds(269, 244, 72, 27);
 		contentPane.add(comboBoxMin);
+	
+		Calendar now = Calendar.getInstance();
 		
 		UtilDateModel model = new UtilDateModel();
-		model.setDate(2021,01,27);
+		//model.setDate((now.get(Calendar.YEAR)),(now.get(Calendar.MONTH)+1),(now.get(Calendar.DAY_OF_MONTH)));
 		// Need this...
 		Properties p = new Properties();
 		p.put("text.today", "Today");
@@ -280,6 +282,20 @@ public class MainWindow extends JFrame {
 					return;
 				}
 				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		        try {
+					Date date1 = sdf.parse(datePicker.getJFormattedTextField().getText());
+					Date date2 = sdf.parse(((now.get(Calendar.YEAR))+"-"+now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH));
+			        if (date1.compareTo(date2) < 0) {
+			        	showMessageDialog(null, "You can't make an appointment in the past!", "Warning", WARNING_MESSAGE);
+			            return;
+			        }
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}	        
+		        //source: https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java
+		        	        			
 				// distance calc
 				String queryWhereCondition = "WHERE ";
 				try {
