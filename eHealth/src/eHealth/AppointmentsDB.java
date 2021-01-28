@@ -1,6 +1,7 @@
 package eHealth;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -74,5 +75,34 @@ public class AppointmentsDB extends DBController{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public ResultSet reminderlist() {
+		ResultSet results = null;
+		Connection conn =  connectToDB();
+        try {
+            Statement st = conn.createStatement();
+            results = st.executeQuery("SELECT AppointmentDate, AppointmentTime, reminder, username, id FROM Appointments Where Reminder > 0;");
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		return results;		
+	}
+	
+	public Boolean updateReminder(String id, String reminder) {
+    	Connection conn =  connectToDB();
+		try {
+			Statement st = conn.createStatement();
+			String query = "UPDATE Appointments SET reminder = '" + reminder + "' WHERE id = " + id;
+			st.execute(query);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+    }
+	
 
 }
