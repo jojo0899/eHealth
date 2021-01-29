@@ -314,23 +314,26 @@ public class MainWindow extends JFrame {
 							+ now.get(Calendar.DAY_OF_MONTH));
 					if (date1.compareTo(date2) < 0) {
 						showMessageDialog(null, "You can't make an appointment in the past!", "Warning", WARNING_MESSAGE);
-						//makeAppointmentBtn
 						return;
 					}
+					else if (date1.compareTo(date2) == 0) {
+						if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
+							showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+							return;
+						}
+						else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+							showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+							return;
+						}
+					}
+					else { }
 				} catch (ParseException e2) {
 					e2.printStackTrace();
 				}
 				// source:
 				// https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java
 
-				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
-					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
-					return;
-				}
-				else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
-					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
-					return;
-				}
+				
 				
 				makeAppointmentBtn.setEnabled(true);
 				

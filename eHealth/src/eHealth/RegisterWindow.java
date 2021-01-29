@@ -22,26 +22,26 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import java.awt.color.*;
 import javax.swing.border.LineBorder;
-
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
 import javax.swing.JSeparator;
 
+/**
+ * This class is used to generate the register window if you want to create a new account. 
+ */
 public class RegisterWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField firstname;
 	private JTextField lastname;
+	private JTextField email;
 	private JTextField street;
 	private JTextField number;
 	private JTextField zipcode;
@@ -53,9 +53,10 @@ public class RegisterWindow extends JFrame {
 	private JPasswordField repeatPasswordField;
 	
 	private UserDB userTable = new UserDB();
-	private JTextField email;
 
-	
+	/**
+	 * Method to set properties and actions for the register window.
+	 */
 	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 575, 610);
@@ -174,7 +175,6 @@ public class RegisterWindow extends JFrame {
 		group.add(privateButton);
 		group.add(publicButton);
 		
-		// Add exception Handling for falsely formatted inputs
 		JButton ConfirmBtn = new JButton("Confirm and Register");
 		ConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -220,7 +220,6 @@ public class RegisterWindow extends JFrame {
                 	email.setBorder(new LineBorder(Color.GREEN, 1));
                 }
                 
-                // address validation not completely working yet
             	if(addressStreet.equals("") | addressStreetNo.equals("") | addressCity.equals("") | adressZipCode.equals("") | 
             			addressStreet.length() > 60 | addressCity.length() > 40 |  adressZipCode.length() > 5 | 
             			isInteger(adressZipCode) == false | isInteger(addressStreetNo) == false) {
@@ -398,7 +397,11 @@ public class RegisterWindow extends JFrame {
 		separator.setBounds(27, 387, 517, 2);
 		contentPane.add(separator);
 	}
-	
+	/**
+	 * Method to check if an email pattern is valid.
+	 * @param email
+	 * @return true/false
+	 */
 	public static boolean isValidEmailAddress(String email) {
 		boolean result = true;
    	   	try {
@@ -411,7 +414,11 @@ public class RegisterWindow extends JFrame {
 	}
 	// https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
 	
-	
+	/**
+	 * Method to check whether a number is an integer or not.
+	 * @param input
+	 * @return true/false
+	 */
 	public boolean isInteger(String input) {
 	    try {
 	        Integer.parseInt(input);
@@ -422,7 +429,9 @@ public class RegisterWindow extends JFrame {
 	    }
 	}
 	
-	
+	/**
+	* This is the method used to create the register window.
+	*/	
 	public void createRegisterWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

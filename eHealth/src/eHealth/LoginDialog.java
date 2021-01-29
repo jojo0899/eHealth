@@ -2,13 +2,11 @@ package eHealth;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -19,11 +17,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
-
 import static javax.swing.JOptionPane.*;
 import java.awt.Color;
 import java.awt.SystemColor;
 
+/**
+ * This class is used to generate the login window, so it provides the basic functions to login or for creating a new account.
+ */
 public class LoginDialog extends JFrame {
 
 	private JPanel contentPane;
@@ -35,7 +35,9 @@ public class LoginDialog extends JFrame {
 	private DoctorDB docTables = new DoctorDB();
 	private AppointmentsDB appTable = new AppointmentsDB();
 
-	
+	/**
+	 * Method to set properties and actions for the Login Dialog.
+	 */
 	public LoginDialog() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 546, 284);
@@ -121,7 +123,9 @@ public class LoginDialog extends JFrame {
 		btnNewButton.setBounds(10, 11, 43, 23);
 		contentPane.add(btnNewButton);
 	}
-	
+	/**
+	 * This method is used to check if the login is valid.
+	 */
 	private void login() {
 		String user;
 		user = usernameField.getText();
@@ -146,10 +150,9 @@ public class LoginDialog extends JFrame {
 		}
 	}
 	
-	
-
-
-	
+	/**
+	* This is the method used to create this window.
+	*/
 	public void createLoginDialog() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

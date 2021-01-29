@@ -129,16 +129,19 @@ public class EditAppointmentWindow extends JFrame {
 								WARNING_MESSAGE);
 						return;
 					}
+					else if (date1.compareTo(date2) == 0) {
+						if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
+							showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+							return;
+						}
+						else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+							showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
+							return;
+						}
+					}
+					else { }
 				} catch (ParseException e2) {
 					e2.printStackTrace();
-				}
-				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
-					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
-					return;
-				}
-				else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
-					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
-					return;
 				}
 				
 				if(appDB.updateAppointmentInDB(idField.getText(), appointmentDate, timeInput)) 
