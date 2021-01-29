@@ -80,7 +80,6 @@ public class EditAppointmentWindow extends JFrame {
 		contentPane.add(lblTime);
 		
 		Calendar now = Calendar.getInstance();
-		now.set(Calendar.HOUR_OF_DAY, 24);
 		
 		UtilDateModel model = new UtilDateModel();
 		Properties p = new Properties();
