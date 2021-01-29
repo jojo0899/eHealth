@@ -155,7 +155,6 @@ public class MainWindow extends JFrame {
 		contentPane.add(comboBoxMin);
 
 		Calendar now = Calendar.getInstance();
-		now.set(Calendar.HOUR_OF_DAY, 24);
 
 		UtilDateModel model = new UtilDateModel();
 		Properties p = new Properties();
@@ -318,12 +317,12 @@ public class MainWindow extends JFrame {
 				// source:
 				// https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java
 
-				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR)) {					
+				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
 					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 					return;
 				}
-				else if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
-					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your!", "Warning", WARNING_MESSAGE);
+				else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 					return;
 				}
 				

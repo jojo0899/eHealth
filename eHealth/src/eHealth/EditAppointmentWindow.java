@@ -133,11 +133,11 @@ public class EditAppointmentWindow extends JFrame {
 				} catch (ParseException e2) {
 					e2.printStackTrace();
 				}
-				if ((comboBoxHour.getSelectedIndex() + 7) < now.get(Calendar.HOUR)) {					
+				if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
 					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 					return;
 				}
-				else if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
+				else if ((comboBoxHour.getSelectedIndex() + 7)<= now.get(Calendar.HOUR_OF_DAY) & (comboBoxMin.getSelectedIndex() * 5) < now.get(Calendar.MINUTE)) {
 					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 					return;
 				}
