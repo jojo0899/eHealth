@@ -153,6 +153,9 @@ public class MainWindow extends JFrame {
 				new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
 		comboBoxMin.setBounds(269, 244, 72, 27);
 		contentPane.add(comboBoxMin);
+		
+		JButton makeAppointmentBtn = new JButton("Make appointment");
+		makeAppointmentBtn.setEnabled(false);
 
 		Calendar now = Calendar.getInstance();
 
@@ -175,6 +178,8 @@ public class MainWindow extends JFrame {
 				appointmentDate = datePicker.getJFormattedTextField().getText();
 				appointmentTime = (comboBoxHour.getSelectedItem() + ":" + comboBoxMin.getSelectedItem());
 
+				makeAppointmentBtn.setEnabled(false);
+				
 				switch (comboBoxProblem.getSelectedIndex()) {
 				case 0:
 					// Warning
@@ -309,6 +314,7 @@ public class MainWindow extends JFrame {
 							+ now.get(Calendar.DAY_OF_MONTH));
 					if (date1.compareTo(date2) < 0) {
 						showMessageDialog(null, "You can't make an appointment in the past!", "Warning", WARNING_MESSAGE);
+						//makeAppointmentBtn
 						return;
 					}
 				} catch (ParseException e2) {
@@ -325,6 +331,8 @@ public class MainWindow extends JFrame {
 					showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 					return;
 				}
+				
+				makeAppointmentBtn.setEnabled(true);
 				
 				try {
 					docDB.resultSetToTableModel(searchResultTable, doctorType, " ", userUsed, radiusInt);
@@ -403,7 +411,6 @@ public class MainWindow extends JFrame {
 		lblSearchResults.setBounds(405, 36, 263, 30);
 		contentPane.add(lblSearchResults);
 
-		JButton makeAppointmentBtn = new JButton("Make appointment");
 		makeAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String docIdString = docIdField.getText();
