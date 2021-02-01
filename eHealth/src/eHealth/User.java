@@ -1,6 +1,8 @@
 package eHealth;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -8,6 +10,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.logging.log4j.core.util.FileUtils;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class User {
 
@@ -33,19 +44,19 @@ public class User {
 	
 	public User(String usernameInput) {
 		String queryWhere = "username = '" +usernameInput+"' ";
-		username = userFromDB.getStringColomnFromDB("username", dbTableName,queryWhere);
-		password = userFromDB.getStringColomnFromDB("password", dbTableName,queryWhere);
-		email = userFromDB.getStringColomnFromDB("email", dbTableName,queryWhere);
-		firstName = userFromDB.getStringColomnFromDB("firstName", dbTableName,queryWhere);
-		lastName = userFromDB.getStringColomnFromDB("lastName", dbTableName,queryWhere);
-		date_of_birth = userFromDB.getStringColomnFromDB("dateOfBirth", dbTableName,queryWhere);
-		healthInfo = userFromDB.getStringColomnFromDB("healthInfo", dbTableName,queryWhere);
-		insuranceName = userFromDB.getStringColomnFromDB("insuranceName", dbTableName,queryWhere);
-		insuranceType = userFromDB.getStringColomnFromDB("insuranceType", dbTableName,queryWhere);
-		street = userFromDB.getStringColomnFromDB("street", dbTableName,queryWhere);
+		username = userFromDB.getStringColumnFromDB("username", dbTableName,queryWhere);
+		password = userFromDB.getStringColumnFromDB("password", dbTableName,queryWhere);
+		email = userFromDB.getStringColumnFromDB("email", dbTableName,queryWhere);
+		firstName = userFromDB.getStringColumnFromDB("firstName", dbTableName,queryWhere);
+		lastName = userFromDB.getStringColumnFromDB("lastName", dbTableName,queryWhere);
+		date_of_birth = userFromDB.getStringColumnFromDB("dateOfBirth", dbTableName,queryWhere);
+		healthInfo = userFromDB.getStringColumnFromDB("healthInfo", dbTableName,queryWhere);
+		insuranceName = userFromDB.getStringColumnFromDB("insuranceName", dbTableName,queryWhere);
+		insuranceType = userFromDB.getStringColumnFromDB("insuranceType", dbTableName,queryWhere);
+		street = userFromDB.getStringColumnFromDB("street", dbTableName,queryWhere);
 		streetNo = userFromDB.getIntColomnFromDB("streetNo", usernameInput, dbTableName);
-		zipCode = userFromDB.getStringColomnFromDB("zipCode", dbTableName,queryWhere);
-		city = userFromDB.getStringColomnFromDB("city", dbTableName,queryWhere);
+		zipCode = userFromDB.getStringColumnFromDB("zipCode", dbTableName,queryWhere);
+		city = userFromDB.getStringColumnFromDB("city", dbTableName,queryWhere);
 		latitude = userFromDB.getBigDecimalColomnFromDB("latitude", dbTableName, queryWhere);
 		longitude = userFromDB.getBigDecimalColomnFromDB("longitude", dbTableName, queryWhere);
 		System.out.println(latitude+" "+longitude);
@@ -95,6 +106,31 @@ public class User {
 		}
 	}
 	
+	public Boolean writeUserIntoPdf() {
+		Document document = new Document();
+		String healthInfo = "This document contains all the information eHealth stores about you." +
+				"\n\n\nPersonal information\n\nUsername: " + this.username + "\nName: " + this.firstName + " " + this.lastName + 
+				"\nDate of birth: " + this.date_of_birth + "\nEmail: " + this.email + 
+				"\nAddress: " + this.zipCode + " " + this.city + " , " + this.street + " " + this.streetNo + 
+				"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo + "\n\n\nInsurance" + 
+				"\n\nInsurance type: " + this.insuranceType + "\nInsurance name: " + this.insuranceName;
+		try {
+			PdfWriter.getInstance(document, new FileOutputStream(System.getProperty("user.home") + "/Desktop/HealthInformation.pdf"));
+
+			document.open();
+			Paragraph para = new Paragraph (healthInfo); 
+			document.add(para);
+			document.close();
+			return true;
+		} catch (FileNotFoundException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	//https://www.baeldung.com/java-pdf-creation
+
 	// Getters & Setters
 	public String getUsername() {
 		return username;

@@ -107,7 +107,7 @@ public class EditAppointmentWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String idInput = idField.getText();
-				datePicker.getJFormattedTextField().setText(appDB.getStringColomnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
+				datePicker.getJFormattedTextField().setText(appDB.getStringColumnFromDB("AppointmentDate", "Appointments", "id = " + idInput));
 				//timeField.setText(appDB.getStringColomnFromDB("AppointmentTime", "Appointments", "id = " + idInput));
 			}
 		});
@@ -149,11 +149,11 @@ public class EditAppointmentWindow extends JFrame {
 					dispose();
 					showMessageDialog(null, "Appointment succsessfully updated", "Info", WARNING_MESSAGE);
 					String queryWhere = " id = " + idField.getText(); 
-					String appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
-					String appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
-					String appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
-					String appointmentDateInput = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
-					String appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+					String appointmentDocFirstName = appDB.getStringColumnFromDB("docfirstname", "Appointments", queryWhere);
+					String appointmentDocLastName = appDB.getStringColumnFromDB("doclastname", "Appointments", queryWhere);
+					String appointmentDocAddress = appDB.getStringColumnFromDB("docaddress", "Appointments", queryWhere);
+					String appointmentDateInput = appDB.getStringColumnFromDB("AppointmentDate", "Appointments", queryWhere);
+					String appointmentTime = appDB.getStringColumnFromDB("AppointmentTime", "Appointments", queryWhere);
 					
 					String mailText = "Hello " + user + "\n\nYou just succsesfully modified a appointment.\n" +
 							"Here is the modified data of the appointment:\n\n" +

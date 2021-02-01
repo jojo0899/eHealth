@@ -47,13 +47,13 @@ public class reminder extends Thread {
 					if(timediff< n) {
 						
 						String queryWhere = " id = " + reminderList.getString(5);
-						String appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
-						String appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
-						String appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
-						String appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
-						String appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+						String appointmentDocFirstName = appDB.getStringColumnFromDB("docfirstname", "Appointments", queryWhere);
+						String appointmentDocLastName = appDB.getStringColumnFromDB("doclastname", "Appointments", queryWhere);
+						String appointmentDocAddress = appDB.getStringColumnFromDB("docaddress", "Appointments", queryWhere);
+						String appointmentDate = appDB.getStringColumnFromDB("AppointmentDate", "Appointments", queryWhere);
+						String appointmentTime = appDB.getStringColumnFromDB("AppointmentTime", "Appointments", queryWhere);
 												
-						String mailText = "Hello " + reminderList.getString(4) + "\n\nThis is areminder for your next appointment.\n"
+						String mailText = "Hello " + reminderList.getString(4) + "\n\nThis is a reminder for your next appointment.\n"
 								+ "In the following You can find the most important information regarding your appointment:\n\n"
 								+ "Name of the Doctor:\t" + appointmentDocFirstName + " " + appointmentDocLastName
 								+ "\nAddress:\t" + appointmentDocAddress + "\nDate & Time:\t" + appointmentDate + " "
@@ -63,12 +63,12 @@ public class reminder extends Thread {
 						String subject = "[eHealth] Appointment reminder";
 						String usernameString = "username = '" + reminderList.getString(4) +"'";
 						
-						String mailString = userTable.getStringColomnFromDB("email", "user", usernameString );	
+						String mailString = userTable.getStringColumnFromDB("email", "user", usernameString );	
 						
 						System.out.println(mailString + subject + mailText);
 						
-						//Mail.sendtext(mailString, subject, mailText);
-						//appDB.updateReminder(reminderList.getString(5), "0");
+						Mail.sendtext(mailString, subject, mailText);
+						appDB.updateReminder(reminderList.getString(5), "0");
 					}
 				}
 			} catch (SQLException e) {

@@ -305,18 +305,18 @@ public class EditUserWindow extends JFrame {
 				String usernameInput = userNameField.getText();
 				if(userTable.checkIfUsernameExistsInDB(usernameInput)) {
 					String queryWhere = "username = '" +usernameInput+"' ";
-					userNameField.setText(userTable.getStringColomnFromDB("USERNAME", "USER", queryWhere));
-					emailField.setText(userTable.getStringColomnFromDB("EMAIL", "USER",queryWhere));
-					firstNameField.setText(userTable.getStringColomnFromDB("FIRSTNAME", "USER",queryWhere));
-					LastNameField.setText(userTable.getStringColomnFromDB("LASTNAME", "USER",queryWhere));
-					streetField.setText(userTable.getStringColomnFromDB("STREET", "USER",queryWhere));
-					streetNumberField.setText(userTable.getStringColomnFromDB("STREETNO", "USER",queryWhere));
-					zipCodeField.setText(userTable.getStringColomnFromDB("ZIPCODE", "USER",queryWhere));
-					cityField.setText(userTable.getStringColomnFromDB("CITY", "USER",queryWhere));
-					datePicker.getJFormattedTextField().setText(userTable.getStringColomnFromDB("DATEOFBIRTH", "USER",queryWhere));
-					insuranceNameField.setText(userTable.getStringColomnFromDB("INSURANCENAME", "USER",queryWhere));
+					userNameField.setText(userTable.getStringColumnFromDB("USERNAME", "USER", queryWhere));
+					emailField.setText(userTable.getStringColumnFromDB("EMAIL", "USER",queryWhere));
+					firstNameField.setText(userTable.getStringColumnFromDB("FIRSTNAME", "USER",queryWhere));
+					LastNameField.setText(userTable.getStringColumnFromDB("LASTNAME", "USER",queryWhere));
+					streetField.setText(userTable.getStringColumnFromDB("STREET", "USER",queryWhere));
+					streetNumberField.setText(userTable.getStringColumnFromDB("STREETNO", "USER",queryWhere));
+					zipCodeField.setText(userTable.getStringColumnFromDB("ZIPCODE", "USER",queryWhere));
+					cityField.setText(userTable.getStringColumnFromDB("CITY", "USER",queryWhere));
+					datePicker.getJFormattedTextField().setText(userTable.getStringColumnFromDB("DATEOFBIRTH", "USER",queryWhere));
+					insuranceNameField.setText(userTable.getStringColumnFromDB("INSURANCENAME", "USER",queryWhere));
 					
-					if(userTable.getStringColomnFromDB("INSURANCETYPE", "USER",queryWhere).equals("public")) {
+					if(userTable.getStringColumnFromDB("INSURANCETYPE", "USER",queryWhere).equals("public")) {
 						publicButton.setSelected(true);
 					}else {
 						privateButton.setSelected(true);

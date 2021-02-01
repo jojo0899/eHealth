@@ -426,9 +426,9 @@ public class MainWindow extends JFrame {
 					return;
 				}
 				String queryWhere = " id = " + docId;
-				appointmentDocFirstName = docDB.getStringColomnFromDB("firstname", doctorType, queryWhere);
-				appointmentDocLastName = docDB.getStringColomnFromDB("lastname", doctorType, queryWhere);
-				appointmentDocAddress = docDB.getStringColomnFromDB("address", doctorType, queryWhere);
+				appointmentDocFirstName = docDB.getStringColumnFromDB("firstname", doctorType, queryWhere);
+				appointmentDocLastName = docDB.getStringColumnFromDB("lastname", doctorType, queryWhere);
+				appointmentDocAddress = docDB.getStringColumnFromDB("address", doctorType, queryWhere);
 				
 				
 
@@ -530,11 +530,11 @@ public class MainWindow extends JFrame {
 						"Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 				if (confirm == 0) {
 					String queryWhere = " id = " + appId;
-					appointmentDocFirstName = appDB.getStringColomnFromDB("docfirstname", "Appointments", queryWhere);
-					appointmentDocLastName = appDB.getStringColomnFromDB("doclastname", "Appointments", queryWhere);
-					appointmentDocAddress = appDB.getStringColomnFromDB("docaddress", "Appointments", queryWhere);
-					appointmentDate = appDB.getStringColomnFromDB("AppointmentDate", "Appointments", queryWhere);
-					appointmentTime = appDB.getStringColomnFromDB("AppointmentTime", "Appointments", queryWhere);
+					appointmentDocFirstName = appDB.getStringColumnFromDB("docfirstname", "Appointments", queryWhere);
+					appointmentDocLastName = appDB.getStringColumnFromDB("doclastname", "Appointments", queryWhere);
+					appointmentDocAddress = appDB.getStringColumnFromDB("docaddress", "Appointments", queryWhere);
+					appointmentDate = appDB.getStringColumnFromDB("AppointmentDate", "Appointments", queryWhere);
+					appointmentTime = appDB.getStringColumnFromDB("AppointmentTime", "Appointments", queryWhere);
 
 					String mailText = "Hello " + username + "\n\nYou just succsesfully deleted a appointment.\n"
 							+ "Here is the data of the deleted appointment:\n\n" + "Name of the Doctor:\t"
@@ -570,7 +570,7 @@ public class MainWindow extends JFrame {
 		JButton btnExportHealthInfo = new JButton("Export health info");
 		btnExportHealthInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (userUsed.writeUserIntoTxt()) {
+				if (userUsed.writeUserIntoTxt() && userUsed.writeUserIntoPdf()) {
 					showMessageDialog(null,
 							"Your health information file has succesfully been exportet to Your Desktop");
 				} else {
