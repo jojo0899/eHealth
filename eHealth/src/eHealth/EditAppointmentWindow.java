@@ -121,15 +121,16 @@ public class EditAppointmentWindow extends JFrame {
 				String appointmentDate = datePicker.getJFormattedTextField().getText();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				try {
-					Date date1 = sdf.parse(appointmentDate);
-					Date date2 = sdf.parse(((now.get(Calendar.YEAR)) + "-" + now.get(Calendar.MONTH) + 1) + "-"
-							+ now.get(Calendar.DAY_OF_MONTH));
-					if (date1.compareTo(date2) < 0) {
-						showMessageDialog(null, "You can't make an appointment in the past!", "Warning",
-								WARNING_MESSAGE);
+					Date inputdate = sdf.parse(appointmentDate);
+					Date actualdate = sdf.parse(((now.get(Calendar.YEAR)) + "-" + (now.get(Calendar.MONTH) + 1) + "-"
+							+ (now.get(Calendar.DAY_OF_MONTH))));
+					//System.out.println("Input: " + inputdate);
+					//System.out.println("Date today: " + actualdate);
+					if (inputdate.compareTo(actualdate) < 0) {
+						showMessageDialog(null, "You can't make an appointment in the past!", "Warning", WARNING_MESSAGE);
 						return;
 					}
-					else if (date1.compareTo(date2) == 0) {
+					else if (inputdate.compareTo(actualdate) == 0) {
 						if ((comboBoxHour.getSelectedIndex() + 7)< now.get(Calendar.HOUR_OF_DAY)) {					
 							showMessageDialog(null, "You can't make an appointment in the past!\nPlease check your time!", "Warning", WARNING_MESSAGE);
 							return;
