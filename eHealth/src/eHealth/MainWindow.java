@@ -41,6 +41,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.MatteBorder;
 
 public class MainWindow extends JFrame {
 
@@ -72,8 +76,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1083, 856);
-		setBounds(100, 100, 1083, 670);
+		setBounds(100, 100, 1083, 770);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,35 +95,35 @@ public class MainWindow extends JFrame {
 
 		JLabel lblNewLabel_1_1 = new JLabel("Search radius:");
 		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1.setBounds(6, 176, 136, 22);
+		lblNewLabel_1_1.setBounds(6, 297, 136, 22);
 		contentPane.add(lblNewLabel_1_1);
 
 		radius = new JTextField();
 		radius.setHorizontalAlignment(SwingConstants.RIGHT);
 		radius.setColumns(10);
-		radius.setBounds(186, 178, 107, 22);
+		radius.setBounds(205, 299, 107, 22);
 		contentPane.add(radius);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("km");
 		lblNewLabel_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_1.setBounds(305, 176, 36, 22);
+		lblNewLabel_1_1_1.setBounds(324, 297, 36, 22);
 		contentPane.add(lblNewLabel_1_1_1);
 
 		JLabel lblNewLabel_1_1_2 = new JLabel("Reminder:");
 		lblNewLabel_1_1_2.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2.setBounds(6, 278, 136, 22);
+		lblNewLabel_1_1_2.setBounds(6, 399, 136, 22);
 		contentPane.add(lblNewLabel_1_1_2);
 
 		JComboBox<String> comboBoxReminder = new JComboBox<String>();
 
 		comboBoxReminder.setModel(new DefaultComboBoxModel<String>(new String[] { "no reminder", "1 week before",
 				"3 days before", "1 hour before", "10 minutes before" }));
-		comboBoxReminder.setBounds(105, 275, 236, 34);
+		comboBoxReminder.setBounds(124, 396, 236, 34);
 		contentPane.add(comboBoxReminder);
 
 		JLabel lblUpcoming = new JLabel("Upcoming appointments:");
 		lblUpcoming.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		lblUpcoming.setBounds(6, 410, 354, 34);
+		lblUpcoming.setBounds(6, 519, 354, 34);
 		contentPane.add(lblUpcoming);
 
 		JLabel lblWelcome = new JLabel("Welcome, ");
@@ -139,19 +142,19 @@ public class MainWindow extends JFrame {
 		comboBoxProblem.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "---", "Eye pain", "Weak vision", "Watery eyes", "Cough", "Sniff", "Fever", "Headache",
 						"Itchy skin", "Acne", "Toothache", "Gingivitis", "Jaw pain" }));
-		comboBoxProblem.setBounds(6, 126, 335, 38);
+		comboBoxProblem.setBounds(6, 116, 354, 38);
 		contentPane.add(comboBoxProblem);
 
 		JComboBox<String> comboBoxHour = new JComboBox<String>();
 		comboBoxHour.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
-		comboBoxHour.setBounds(195, 244, 72, 27);
+		comboBoxHour.setBounds(214, 368, 72, 27);
 		contentPane.add(comboBoxHour);
 
 		JComboBox<String> comboBoxMin = new JComboBox<String>();
 		comboBoxMin.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
-		comboBoxMin.setBounds(269, 244, 72, 27);
+		comboBoxMin.setBounds(288, 368, 72, 27);
 		contentPane.add(comboBoxMin);
 		
 		JButton makeAppointmentBtn = new JButton("Make appointment");
@@ -166,7 +169,7 @@ public class MainWindow extends JFrame {
 		p.put("text.year", "Year");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(186, 206, 155, 29);
+		datePicker.setBounds(205, 327, 155, 29);
 		contentPane.add(datePicker);
 		// source: https://www.javaer101.com/de/article/1525991.html
 
@@ -348,17 +351,17 @@ public class MainWindow extends JFrame {
 			}
 
 		});
-		searchButton.setBounds(6, 330, 335, 29);
+		searchButton.setBounds(6, 451, 354, 29);
 		contentPane.add(searchButton);
 
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("Date:");
 		lblNewLabel_1_1_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2_1.setBounds(6, 210, 88, 22);
+		lblNewLabel_1_1_2_1.setBounds(6, 331, 88, 22);
 		contentPane.add(lblNewLabel_1_1_2_1);
 
 		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Time:");
 		lblNewLabel_1_1_2_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1_1_2_1_1.setBounds(6, 244, 187, 22);
+		lblNewLabel_1_1_2_1_1.setBounds(6, 365, 187, 22);
 		contentPane.add(lblNewLabel_1_1_2_1_1);
 
 		JButton logoutBtn = new JButton("Logout");
@@ -402,8 +405,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(quitBtn);
 
 		JScrollPane scrollPaneSearchResult = new JScrollPane();
-		scrollPaneSearchResult.setBounds(431, 65, 624, 207);
-		scrollPaneSearchResult.setBounds(405, 92, 663, 211);
+		scrollPaneSearchResult.setBounds(405, 92, 663, 329);
 		contentPane.add(scrollPaneSearchResult);
 
 		searchResultTable = new JTable();
@@ -456,23 +458,22 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		makeAppointmentBtn.setBounds(819, 332, 258, 25);
+		makeAppointmentBtn.setBounds(819, 452, 258, 25);
 		contentPane.add(makeAppointmentBtn);
 
 		docIdField = new JTextField();
 		docIdField.setHorizontalAlignment(SwingConstants.CENTER);
-		docIdField.setBounds(729, 333, 78, 19);
+		docIdField.setBounds(729, 454, 78, 19);
 		contentPane.add(docIdField);
 		docIdField.setColumns(10);
 
 		JLabel lblEnterTheId = new JLabel("Enter the ID of the wanted Doctor:");
 		lblEnterTheId.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblEnterTheId.setBounds(405, 336, 337, 15);
+		lblEnterTheId.setBounds(405, 455, 337, 15);
 		contentPane.add(lblEnterTheId);
 
 		JScrollPane scrollPanAppointments = new JScrollPane();
-		scrollPanAppointments.setBounds(52, 576, 1003, 164);
-		scrollPanAppointments.setBounds(6, 456, 1065, 137);
+		scrollPanAppointments.setBounds(6, 557, 1065, 137);
 		contentPane.add(scrollPanAppointments);
 
 		appointmentsTable = new JTable();
@@ -492,22 +493,21 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		refreshAppointmentTableBtn.setBounds(938, 534, 117, 25);
-		refreshAppointmentTableBtn.setBounds(819, 421, 258, 25);
+		refreshAppointmentTableBtn.setBounds(819, 520, 258, 25);
 		contentPane.add(refreshAppointmentTableBtn);
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(12, 448, 1043, 2);
+		separator_1.setBounds(12, 557, 1043, 2);
 		contentPane.add(separator_1);
 
 		JLabel lblSelectTheAppointment = new JLabel("Enter the Id of the Apointment you wish to edit or delete:");
 		lblSelectTheAppointment.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblSelectTheAppointment.setBounds(6, 605, 440, 15);
+		lblSelectTheAppointment.setBounds(6, 714, 440, 15);
 		contentPane.add(lblSelectTheAppointment);
 
 		appointmentIdField = new JTextField();
 		appointmentIdField.setHorizontalAlignment(SwingConstants.CENTER);
-		appointmentIdField.setBounds(429, 603, 72, 19);
+		appointmentIdField.setBounds(429, 712, 72, 19);
 		contentPane.add(appointmentIdField);
 		appointmentIdField.setColumns(10);
 
@@ -518,7 +518,7 @@ public class MainWindow extends JFrame {
 				eaw.createEditAppointmentWindow(appointmentIdField.getText(), username);
 			}
 		});
-		editAppointmentBtn.setBounds(513, 602, 155, 25);
+		editAppointmentBtn.setBounds(513, 711, 155, 25);
 		contentPane.add(editAppointmentBtn);
 
 		JButton deleteAppointmentBtn = new JButton("Delete");
@@ -555,16 +555,16 @@ public class MainWindow extends JFrame {
 					return;
 			}
 		});
-		deleteAppointmentBtn.setBounds(680, 602, 162, 25);
+		deleteAppointmentBtn.setBounds(680, 711, 162, 25);
 		contentPane.add(deleteAppointmentBtn);
 
 		JLabel lblNewLabel_2 = new JLabel(":");
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(264, 247, 18, 16);
+		lblNewLabel_2.setBounds(283, 371, 18, 16);
 		contentPane.add(lblNewLabel_2);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 383, 1083, 15);
+		separator.setBounds(0, 492, 1083, 15);
 		contentPane.add(separator);
 
 		JButton btnExportHealthInfo = new JButton("Export health info");
@@ -579,8 +579,23 @@ public class MainWindow extends JFrame {
 
 			}
 		});
-		btnExportHealthInfo.setBounds(853, 602, 204, 25);
+		btnExportHealthInfo.setBounds(853, 711, 204, 25);
 		contentPane.add(btnExportHealthInfo);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Describe your health problem:");
+		lblNewLabel_1_2.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblNewLabel_1_2.setBounds(6, 157, 335, 22);
+		contentPane.add(lblNewLabel_1_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(null);
+		scrollPane.setBounds(6, 193, 354, 92);
+		contentPane.add(scrollPane);
+		
+		JTextArea problemDescription = new JTextArea();
+		scrollPane.setViewportView(problemDescription);
+		problemDescription.setLineWrap(true);
+		problemDescription.setWrapStyleWord(true);
 
 	}
 
