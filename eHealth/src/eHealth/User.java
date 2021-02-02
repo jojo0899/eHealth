@@ -37,6 +37,7 @@ public class User {
 	private String city;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
+	private String healthProblemDescription;
 
 	private String dbTableName = "USER";
 	
@@ -93,7 +94,8 @@ public class User {
 								"\n\n\nPersonal information\n\nUsername: " + this.username + "\nName: " + this.firstName + " " + this.lastName + 
 								"\nDate of birth: " + this.date_of_birth + "\nEmail: " + this.email + 
 								"\nAddress: " + this.zipCode + " " + this.city + " , " + this.street + " " + this.streetNo + 
-								"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo + "\n\n\nInsurance" + 
+								"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo +
+								"\n\nHealth problem description:\n" + healthProblemDescription +"\n\n\nInsurance" + 
 								"\n\nInsurance type: " + this.insuranceType + "\nInsurance name: " + this.insuranceName;
 			
 			myWriter.write(healthInfo);
@@ -112,7 +114,8 @@ public class User {
 				"\n\n\nPersonal information\n\nUsername: " + this.username + "\nName: " + this.firstName + " " + this.lastName + 
 				"\nDate of birth: " + this.date_of_birth + "\nEmail: " + this.email + 
 				"\nAddress: " + this.zipCode + " " + this.city + " , " + this.street + " " + this.streetNo + 
-				"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo + "\n\n\nInsurance" + 
+				"\n\n\nHealth information\n\nHealth problem:  " + this.healthInfo + 
+				"\n\nHealth problem description:\n" + healthProblemDescription + "\n\n\nInsurance" + 
 				"\n\nInsurance type: " + this.insuranceType + "\nInsurance name: " + this.insuranceName;
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(System.getProperty("user.home") + "/Desktop/HealthInformation.pdf"));
