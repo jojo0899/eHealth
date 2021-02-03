@@ -77,7 +77,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1090, 903);
+		setBounds(100, 100, 1090, 775);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -414,7 +414,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(quitBtn);
 
 		JScrollPane scrollPaneSearchResult = new JScrollPane();
-		scrollPaneSearchResult.setBounds(405, 92, 663, 329);
+		scrollPaneSearchResult.setBounds(405, 92, 663, 280);
 		contentPane.add(scrollPaneSearchResult);
 
 		searchResultTable = new JTable();
@@ -467,18 +467,18 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		makeAppointmentBtn.setBounds(819, 452, 258, 25);
+		makeAppointmentBtn.setBounds(819, 396, 258, 25);
 		contentPane.add(makeAppointmentBtn);
 
 		docIdField = new JTextField();
 		docIdField.setHorizontalAlignment(SwingConstants.CENTER);
-		docIdField.setBounds(729, 454, 78, 19);
+		docIdField.setBounds(729, 396, 78, 19);
 		contentPane.add(docIdField);
 		docIdField.setColumns(10);
 
 		JLabel lblEnterTheId = new JLabel("Enter the ID of the wanted Doctor:");
 		lblEnterTheId.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblEnterTheId.setBounds(405, 455, 337, 15);
+		lblEnterTheId.setBounds(405, 397, 337, 15);
 		contentPane.add(lblEnterTheId);
 
 		JScrollPane scrollPanAppointments = new JScrollPane();
@@ -588,7 +588,7 @@ public class MainWindow extends JFrame {
 
 			}
 		});
-		btnExportHealthInfo.setBounds(65, 797, 204, 25);
+		btnExportHealthInfo.setBounds(698, 453, 183, 25);
 		contentPane.add(btnExportHealthInfo);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Describe your health problem:");
@@ -606,8 +606,9 @@ public class MainWindow extends JFrame {
 		problemDescription.setLineWrap(true);
 		problemDescription.setWrapStyleWord(true);
 		
-		JLabel lblYouCanExport = new JLabel("You can export your health information ");
-		lblYouCanExport.setBounds(24, 770, 583, 15);
+		JLabel lblYouCanExport = new JLabel("Export your health information: ");
+		lblYouCanExport.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblYouCanExport.setBounds(405, 450, 281, 25);
 		contentPane.add(lblYouCanExport);
 		
 		JButton btnExportToPdf = new JButton("Export to PDF");
@@ -623,12 +624,8 @@ public class MainWindow extends JFrame {
 			}
 			
 		});
-		btnExportToPdf.setBounds(324, 797, 204, 25);
+		btnExportToPdf.setBounds(894, 453, 183, 25);
 		contentPane.add(btnExportToPdf);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(6, 743, 1083, 15);
-		contentPane.add(separator_2);
 
 	}
 
