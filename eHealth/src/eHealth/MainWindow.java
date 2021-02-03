@@ -510,13 +510,13 @@ public class MainWindow extends JFrame {
 		contentPane.add(separator_1);
 
 		JLabel lblSelectTheAppointment = new JLabel("Enter the Id of the Apointment you wish to edit or delete:");
-		lblSelectTheAppointment.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblSelectTheAppointment.setBounds(6, 714, 440, 15);
+		lblSelectTheAppointment.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblSelectTheAppointment.setBounds(6, 710, 516, 23);
 		contentPane.add(lblSelectTheAppointment);
 
 		appointmentIdField = new JTextField();
 		appointmentIdField.setHorizontalAlignment(SwingConstants.CENTER);
-		appointmentIdField.setBounds(429, 712, 72, 19);
+		appointmentIdField.setBounds(534, 713, 72, 19);
 		contentPane.add(appointmentIdField);
 		appointmentIdField.setColumns(10);
 
@@ -527,7 +527,7 @@ public class MainWindow extends JFrame {
 				eaw.createEditAppointmentWindow(appointmentIdField.getText(), username);
 			}
 		});
-		editAppointmentBtn.setBounds(513, 711, 155, 25);
+		editAppointmentBtn.setBounds(618, 712, 232, 25);
 		contentPane.add(editAppointmentBtn);
 
 		JButton deleteAppointmentBtn = new JButton("Delete");
@@ -564,7 +564,7 @@ public class MainWindow extends JFrame {
 					return;
 			}
 		});
-		deleteAppointmentBtn.setBounds(680, 711, 162, 25);
+		deleteAppointmentBtn.setBounds(845, 712, 232, 25);
 		contentPane.add(deleteAppointmentBtn);
 
 		JLabel lblNewLabel_2 = new JLabel(":");
