@@ -37,7 +37,7 @@ public class User {
 	private String city;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
-	private String healthProblemDescription;
+	private String healthProblemDescription = "";
 
 	private String dbTableName = "USER";
 	
@@ -133,6 +133,14 @@ public class User {
 
 	}
 	//https://www.baeldung.com/java-pdf-creation
+
+	public String getHealthProblemDescription() {
+		return healthProblemDescription;
+	}
+
+	public void setHealthProblemDescription(String healthProblemDescription) {
+		this.healthProblemDescription = healthProblemDescription;
+	}
 
 	// Getters & Setters
 	public String getUsername() {

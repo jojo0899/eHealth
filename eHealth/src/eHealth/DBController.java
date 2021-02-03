@@ -28,12 +28,13 @@ abstract class DBController {
         Connection conn = null;
         try {
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:~/eda;create=true","test", "test");
+            conn = DriverManager.getConnection("jdbc:h2:~/eda;create=true;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO","test", "test");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return conn;
     }
+    
 	/**
 	 * <h4>Retrieving a String column from the database</h4>
 	 * The caller of this method must provide the name of the table, the name of the column in that table and a where condition in order to retrieve the desired information.

@@ -53,7 +53,8 @@ public class MainWindow extends JFrame {
 	private JTextField docIdField;
 	private JTable appointmentsTable;
 	private JTable searchResultTable;
-
+	private JTextArea problemDescription;
+	
 	private String doctorType;
 	private String appointmentTime;
 	private String appointmentDate;
@@ -76,7 +77,7 @@ public class MainWindow extends JFrame {
 		userUsed = new User(username);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1083, 770);
+		setBounds(100, 100, 1090, 903);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -349,6 +350,12 @@ public class MainWindow extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				if(problemDescription.getText().equals(null)) {
+					userUsed.setHealthProblemDescription("-");
+				}else {
+					userUsed.setHealthProblemDescription(problemDescription.getText());	
+				}
 
 			}
 
@@ -569,10 +576,10 @@ public class MainWindow extends JFrame {
 		separator.setBounds(0, 492, 1083, 15);
 		contentPane.add(separator);
 
-		JButton btnExportHealthInfo = new JButton("Export health info");
+		JButton btnExportHealthInfo = new JButton("Export to TXT");
 		btnExportHealthInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (userUsed.writeUserIntoTxt() && userUsed.writeUserIntoPdf()) {
+				if (userUsed.writeUserIntoTxt()) {
 					showMessageDialog(null,
 							"Your health information file has succesfully been exportet to Your Desktop");
 				} else {
@@ -581,7 +588,7 @@ public class MainWindow extends JFrame {
 
 			}
 		});
-		btnExportHealthInfo.setBounds(853, 711, 204, 25);
+		btnExportHealthInfo.setBounds(65, 797, 204, 25);
 		contentPane.add(btnExportHealthInfo);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Describe your health problem:");
@@ -594,10 +601,34 @@ public class MainWindow extends JFrame {
 		scrollPane.setBounds(6, 193, 354, 92);
 		contentPane.add(scrollPane);
 		
-		JTextArea problemDescription = new JTextArea();
+		problemDescription = new JTextArea();
 		scrollPane.setViewportView(problemDescription);
 		problemDescription.setLineWrap(true);
 		problemDescription.setWrapStyleWord(true);
+		
+		JLabel lblYouCanExport = new JLabel("You can export your health information ");
+		lblYouCanExport.setBounds(24, 770, 583, 15);
+		contentPane.add(lblYouCanExport);
+		
+		JButton btnExportToPdf = new JButton("Export to PDF");
+		btnExportToPdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (userUsed.writeUserIntoPdf()) {
+					showMessageDialog(null,
+							"Your health information file has succesfully been exportet to Your Desktop");
+				} else {
+					showMessageDialog(null, "Something went wrong.");
+				}
+
+			}
+			
+		});
+		btnExportToPdf.setBounds(324, 797, 204, 25);
+		contentPane.add(btnExportToPdf);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setBounds(6, 743, 1083, 15);
+		contentPane.add(separator_2);
 
 	}
 
