@@ -14,9 +14,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-
+/**
+ * This class is used to create the user table, and provide operations for querying the user table. 
+ * @author marin
+ *
+ */
 public class UserDB extends DBController {
 	
+	/**
+	 * <h4>Creating the user table</h4>
+	 * Creates the user table in the database if it does not exist already.
+	 */
     public void createUserDBTable(){
         Connection conn =  connectToDB();
         try {
@@ -45,6 +53,27 @@ public class UserDB extends DBController {
         }
     }
     
+    /**
+     * <h4>Inserting a user into the user table</h4>
+     * A user is inserted into the user table, using the attributes specified by the caller of the method.
+     * <p>
+     * The latitude and longitude is calculated within this method, using OpenStreetMapUtils.
+     * 
+     * @param username
+     * @param password
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param date_of_birth
+     * @param healthInfo
+     * @param insuranceName
+     * @param insuranceType
+     * @param street
+     * @param streetNo
+     * @param zipCode
+     * @param city
+     * @return true if user was successfully inserted into the database, else false
+     */
     public Boolean insertUserIntoDB(
     		String username,
             String password,
@@ -101,7 +130,14 @@ public class UserDB extends DBController {
 	}
     
     
-    
+    /**
+     * <h4>Validating login data</h4>
+     * Checks if the username and the encrypted password match in the database.
+     * 
+     * @param username
+     * @param password
+     * @return true if matched, else false
+     */
     public Boolean validLoginData(String username, String password){
         Connection conn = connectToDB();
         try{
@@ -114,6 +150,11 @@ public class UserDB extends DBController {
         }
     }
     
+    /**
+     * <h4>Deleting a user from the user table</h4>
+     * Deletes the user with the given username from the user table.
+     * @param username
+     */
     public void deleteUserFromDB(String username){
         Connection conn = connectToDB();
         Statement st;
@@ -127,6 +168,24 @@ public class UserDB extends DBController {
         
     }
     
+    /**
+     * <h4>Updating a row in the user table</h4>
+     * Updates a row in the user table with the given parameters.
+     * 
+     * @param username
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param date_of_birth
+     * @param healthInfo
+     * @param insuranceName
+     * @param insuranceType
+     * @param street
+     * @param streetNo
+     * @param zipCode
+     * @param city
+     * @return true if updated successfully, else false
+     */
     public Boolean updateUserInDB(
     		String username,
             /*String password,*/
@@ -168,6 +227,13 @@ public class UserDB extends DBController {
 		}
 	}
     
+    /**
+     * <h4>Updating the health information of a user in the database</h4>
+     * Changes the health information of the given user to the given String.
+     * 
+     * @param healthInfo New health info to be inserted
+     * @param username User which should have its health information changed 
+     */
     public void updateHealthInfoInDB(String healthInfo, String username) {
     	Connection conn = connectToDB();
     	Statement st;
@@ -180,6 +246,13 @@ public class UserDB extends DBController {
 		}
     }
     
+    /**
+     * <h4>Checking if a user exists in the user table</h4>
+     * Checks if the user with the given username exists in the user table.
+     * 
+     * @param username The user to be checked
+     * @return true if user exists in db, else false
+     */
     public Boolean checkIfUsernameExistsInDB(String username) {
         Connection conn = connectToDB();
         try{

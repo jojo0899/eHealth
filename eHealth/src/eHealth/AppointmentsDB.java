@@ -4,9 +4,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * This class is used to create the appointments table, and provide operations for querying the appointments table. 
+ * @author marin
+ *
+ */
 public class AppointmentsDB extends DBController{
 
+	/**
+	 * <h4>Creating the appointments table</h4>
+	 * A query is executed, which creates the appointment table with all its attributes in the database.
+	 */
     public void createAppointmentsDBTable(){
         Connection conn =  connectToDB();
         try {
@@ -28,6 +36,19 @@ public class AppointmentsDB extends DBController{
         }
     }
 	
+    /**
+     * <h4>Inserting a row into the appointments table</h4>
+     * A row is inserted into the appointments table, with the attributes specified by the caller of this method.
+     * 
+     * @param username The username of the referenced user
+     * @param docfirstname The first name of the referenced doctor
+     * @param doclastname The last name of the referenced doctor
+     * @param docaddress The address of the referenced doctor
+     * @param AppointmentDate The specified date for the appointment
+     * @param AppointmentTime The specified time for the appointment
+     * @param reminder The reminder for the appointment (in min)
+     * @throws SQLException If row can not be inserted
+     */
     public void insertIntoAppointmentsDBTable(String username, String docfirstname, String doclastname, String docaddress, String AppointmentDate, String AppointmentTime, int reminder) throws SQLException {
     	Connection conn =  connectToDB();
 		Statement st = conn.createStatement();
@@ -55,6 +76,12 @@ public class AppointmentsDB extends DBController{
 		}
     }
     
+    /**
+     * <h4>Deleting an appointment from the appointment table</h4>
+     * The appointment with the id specified by the caller of the method is deleted from the appointment table.
+     * @param id The Id which should be deleted
+     * @return true if deleted successfully, false if deletion failed
+     */
     public Boolean deleteAppointmentFromDB(int id) {
     	Connection conn = connectToDB();
         Statement st;

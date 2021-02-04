@@ -11,9 +11,18 @@ import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * This class is used to create the doctor table, and provide operations for querying the doctor table. 
+ * @author marin
+ *
+ */
 public class DoctorDB extends DBController{
 
-	
+	/**
+	 * <h4>Creating the doctor table</h4>
+	 * The doctor table for the specified docType is created in the database if it does not exist already
+	 * @param docType The sort of doctor
+	 */
     public void createDoctorDBTable(String docType){
         Connection conn =  connectToDB();
         try {
@@ -34,6 +43,15 @@ public class DoctorDB extends DBController{
         }
     }
     
+    /**
+     * <h4>Getting the latitude of a doctor</h4>
+     * This method queries the doctor table, specified by the caller of the method, for the latitude of a specific doctor.
+     * 
+     * @param doctype The sort of doctor
+     * @param whereCondition The where condition for the query
+     * @return The latitude of the desired doctor
+     * @throws SQLException If desired doctor was not found in the given table
+     */
     public BigDecimal getDocLat(String doctype, String whereCondition) throws SQLException {
     	String query = "SELECT latitude FROM " + doctype + "  " + whereCondition;
     	Connection conn = connectToDB();
@@ -43,6 +61,15 @@ public class DoctorDB extends DBController{
     	return result.getBigDecimal("latitude");
     }
     
+    /**
+	 * <h4>Getting the longitude of a doctor</h4>
+     * This method queries the doctor table, specified by the caller of the method, for the longitude of a specific doctor.
+     * 
+     * @param doctype The sort of doctor
+     * @param whereCondition The where condition for the query
+     * @return The longitude of the desired doctor
+     * @throws SQLException If desired doctor was not found in the given table
+     */
     public BigDecimal getDocLon(String doctype, String whereCondition) throws SQLException {
     	String query = "SELECT longitude FROM " + doctype + "  " + whereCondition;
     	Connection conn = connectToDB();
@@ -52,6 +79,17 @@ public class DoctorDB extends DBController{
     	return result.getBigDecimal("longitude");
     }
     
+    /**
+     * <h4>Inserting a doctor into a doctor table</h4>
+     * A doctor is inserted into a doctor table, using the attributes specified by the caller of the method.
+     * <p>
+     * The latitude and longitude is calculated within this method, using OpenStreetMapUtils
+     * 
+     * @param tableName The name of the table to insert into
+     * @param firstname The first name of the doctor
+     * @param lastname The last name of the doctor
+     * @param address The address of the doctor 
+     */
     public void insertIntoDoctorDBTable(String tableName, String firstname, String lastname, String address) {
     	Connection conn =  connectToDB();
     	
@@ -74,6 +112,12 @@ public class DoctorDB extends DBController{
 		}
     }
     
+    /**
+     * <h4>Populating the doctor tables with data</h4>
+     * The doctors available in eHealth are hard coded into the database using this method.
+     * <p>
+     * The methods "createDoctorDBTable" and "insertIntoDoctorDBTable", also part of this class, are used to populate the tables.
+     */
     public void createPopulatedDoctorDB(){
     	createDoctorDBTable("Dentist");
     	createDoctorDBTable("Oculist");
@@ -101,7 +145,20 @@ public class DoctorDB extends DBController{
     	insertIntoDoctorDBTable("Dermatologist", "Kerstin", "Dr. Friedrich", "Zentturmstraße 6, 64807 Dieburg");
     }
 
-    
+    /**
+     * <h4>Populating a table(UI) with data retrieved from the doctor table</h4>
+     * A table from the UI is populated with the data of a doctor table from the database.
+     * <p>
+     * Not all rows from the doctor table are also represented in the UI, only the rows which match the where condition and the max distance condition specified by the caller of this method.
+     * <p>
+     * The distance between doctor and user is calculated within the method, using OpenStreetMapUtils.
+     * @param table The table to be populated
+     * @param tableName The name of the table to extract data from
+     * @param whereCondition The where condition for the query
+     * @param user The user used, for determining the distance
+     * @param maxDistance The maximum distance between doctor and user
+     * @throws SQLException If no data was found
+     */
     public void resultSetToTableModel(JTable table, String tableName, String whereCondition, User user, double maxDistance) throws SQLException{
     	Connection conn = connectToDB();
     	Statement st = conn.createStatement();
@@ -144,7 +201,7 @@ public class DoctorDB extends DBController{
 
         table.setModel(tableModel);
     }
-    
+
 	@Override
 	protected void displayListOfAllDBEntries(String tableName) {
         Connection conn =  connectToDB();
