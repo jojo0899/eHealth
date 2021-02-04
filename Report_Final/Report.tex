@@ -4,6 +4,9 @@
 \usepackage{graphicx} 
 \usepackage{makecell}
 \usepackage{float}
+\usepackage[nottoc]{tocbibind}
+
+\graphicspath{{figures/}}
 % Title Page
 \title{\textbf{eHealth Documentation}\\Java - Objected Oriented Programming}
 \author{Johannes Jobst\\Marin-Petru Hincu\\Pascal Kautzmann\\Hania Anjum Chatha}
@@ -17,6 +20,7 @@
 %\end{abstract}
 
 \tableofcontents
+\listoffigures
 
 \chapter{Introduction}
 
@@ -32,14 +36,32 @@ In our weekly meetings we discussed how to do and implement certain tasks in the
 So always at the end of our meetings we came to a task distrubiution and defined who is
 responsible for which task. 
 \section{Task distribution}
-
 Johannes Jobst was responsible for everything concerning the Graphical User Interface.
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
-...
+Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
+
+%All contributors to the project linked their functionality to the respective part of the UI%
+
 
 \chapter{Technical description}
 \section{Requirements}
+\subsection{Overview}
+The following figure represents all components needed for the project and their correlation.
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{clImg.png} 
+\caption{Class diagram for the eHealth project}
+\end{figure}
+\\The user class represents the user of the eHealth application. Every piece of data needed for the user is stored as an attribute. Some methods allow for modifications and obtaining information about the user. Methods for writing user information into a txt or pdf are also available. \\
+DBController contains important methods for connecting to the database modifying its contents and retrieving data. The classes AppointmentsDB, UserDB and DoctorDB are derived from the DBController and are used for creating and querying the respective database tables. The AppintmentsDB also uses the class reminder which allows threading the appointments table.\\The class named UI represents all User Interfaces used in the project. Some graphical user interfaces make use of the class OpenStreetMapUtils, which provides useful functionality for determining the location of a user or a doctor and calculating the distance between both. The class Mail is also used for sending out E-mails whenever this is necessary in the project. Finally, the class DateLabelFormatter is used by the UI to ensure correctly formatted dates for the appointments. \\
+As illustrated in Figure 5.1, each user contains one DBController and the UI contains one User and multiple instances of the DBController. The reason being that in some cases the UI needs to have access to all three database tables.\\ The following pages will go in more detail about the components of the UI and their interactions.
+\subsection{Editing an Appointment}
+In the main window the user has the possibility to view the appointments he made. He can also edit or delete these appointments.
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{acImg.png} 
+\caption{Activity diagram for deleting and editing an appointment}
+\end{figure}
+\\In the appointments table displayed in the main window, the user has to select the id of the appointment he wishes to edit or delete. After the user introduced the id into the respective text field, he can either press the button "delete" or "edit". If the user presses "delete", he must first confirm the action and then the selected appointment is deleted from the table. If the user presses "edit", he gets redirected to a new window, where he can then change the date and time of the appointment. The user must then press "save" for the changes to be saved in the appointments table, and he returns to the main window. However, if the user presses "cancel", he returns to the main window without modifying anything.
 
 \section{Problem facing}
 
