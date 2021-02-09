@@ -22,21 +22,43 @@ import java.awt.Color;
 import java.awt.SystemColor;
 
 /**
- * This class is used to generate the login window, so it provides the basic functions to login or for creating a new account.
+ * This class is used to generate the login window, so it provides the basic functions to login or for creating a new account. 
+ * @author johannes
+ *
  */
+
 public class LoginDialog extends JFrame {
 
+	/**
+	 * creating the JPanel where every GUI element is placed on
+	 */
 	private JPanel contentPane;
+	/**
+	 * creating new JTextfield for entering the username
+	 */
 	private JTextField usernameField;
+	/**
+	 * creating new JPasswordField for entering the password
+	 */
 	private JPasswordField passwordField;
 	
-	
+	/**
+	 * A instance of the user database allowing the system to access the user table from the database
+	 */
 	private UserDB userTable = new UserDB();
+	/**
+	 * A instance of the user database allowing the system to access the doctor table from the database
+	 */
 	private DoctorDB docTables = new DoctorDB();
+	/**
+	 * A instance of the user database allowing the system to access the appointments table from the database
+	 */
 	private AppointmentsDB appTable = new AppointmentsDB();
 
 	/**
-	 * Method to set properties and actions for the Login Dialog.
+	 * <h4>Defining properties for the login dialog GUI</h4>
+	 * <p>
+	 * This method is used set up the properties and actions for the login dialog.
 	 */
 	public LoginDialog() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +100,11 @@ public class LoginDialog extends JFrame {
 		passwordField.setBounds(194, 148, 193, 26);
 		contentPane.add(passwordField);
 		
+		
 		JButton loginButton = new JButton("login");
+		/**
+		 * action to confirm the entered data, check whether they are valid and login to the eHealth system
+		 */
 		loginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -91,6 +117,9 @@ public class LoginDialog extends JFrame {
 		contentPane.add(loginButton);
 		
 		JButton CreateAccButton = new JButton("Create new Account");
+		/**
+		 * action to display the register window and create a new account
+		 */
 		CreateAccButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -98,14 +127,17 @@ public class LoginDialog extends JFrame {
                 rw.createRegisterWindow();
 			}
 		});
-		CreateAccButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		//CreateAccButton.addActionListener(new ActionListener() {
+		//	public void actionPerformed(ActionEvent e) {
+		//	}
+		//});
 		CreateAccButton.setBounds(194, 186, 193, 29);
 		contentPane.add(CreateAccButton);
 		
 		JButton btnNewButton = new JButton("@");
+		/**
+		 * action to create database files when you using the application for the first time
+		 */
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String createDBInfoText = "If you are using the Application for the first time click YES (the Database will then be created).\nAs a next step you have to create a admin account.";
@@ -123,8 +155,10 @@ public class LoginDialog extends JFrame {
 		btnNewButton.setBounds(10, 11, 43, 23);
 		contentPane.add(btnNewButton);
 	}
+
 	/**
-	 * This method is used to check if the login is valid.
+	 * <h4>login check</h4>
+	 * Method to check if the login data is valid.
 	 */
 	private void login() {
 		String user;
@@ -151,8 +185,9 @@ public class LoginDialog extends JFrame {
 	}
 	
 	/**
-	* This is the method used to create this window.
-	*/
+	 * <h4>Create register window</h4>
+	 * Method to create the login window
+	 */
 	public void createLoginDialog() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

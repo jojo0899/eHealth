@@ -27,15 +27,35 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 
+/**
+ * This class is used to generate the admin window, so it provides the basic functions to view, edit and delete users. 
+ * @author johannes
+ *
+ */
 public class AdminWindow extends JFrame {
 
+	/**
+	 * creating the JPanel where every GUI element is placed on
+	 */
 	private JPanel contentPane;
+	/**
+	 * creating new JTable to display all users with their personal information
+	 */
 	private JTable table;
+	/**
+	 * creating new JTextfield for entering the user id which is wanted to edit or delete
+	 */
 	private JTextField userSelectionTextField;
-	
+	/**
+	 * A instance of the user database allowing the system to access the user table from the database
+	 */
 	private UserDB userTable = new UserDB();
 
-	
+	/**
+	 * <h4>Defining properties for the admin window GUI</h4>
+	 * <p>
+	 * This method is used set up the properties and actions for the admin window.
+	 */
 	public AdminWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1333, 570);
@@ -51,6 +71,9 @@ public class AdminWindow extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton viewUsersButton = new JButton("View Users");
+		/**
+		 * action to view all users out of the user database
+		 */
 		viewUsersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -72,6 +95,9 @@ public class AdminWindow extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton editUserButton = new JButton("Edit this User\r\n");
+		/**
+		 * action to edit selected user
+		 */
 		editUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(userTable.checkIfUsernameExistsInDB(userSelectionTextField.getText())) {
@@ -90,6 +116,9 @@ public class AdminWindow extends JFrame {
 		
 		JButton deleteButton = new JButton("Delete this User");
 		deleteButton.setForeground(Color.RED);
+		/**
+		 * action to delete selected user
+		 */
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String userToDelete = userSelectionTextField.getText();
@@ -114,6 +143,9 @@ public class AdminWindow extends JFrame {
 		contentPane.add(deleteButton);
 		
 		JButton refreshButton = new JButton("Refresh\r\n");
+		/**
+		 * action to refresh the displayed table of the user database
+		 */
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -143,6 +175,9 @@ public class AdminWindow extends JFrame {
 		contentPane.add(separator);
 		
 		JButton btnNewButton = new JButton("Leave Admin View");
+		/**
+		 * action to leave admin view and go back to the login dialog
+		 */
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave Admin view?\nAny unsaved Changes won't be saved!", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -160,6 +195,10 @@ public class AdminWindow extends JFrame {
 		contentPane.add(btnNewButton);
 	}
 
+	/**
+	 * <h4>Create admin window</h4>
+	 * Method to create the admin window
+	 */
 	public void createAdminWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

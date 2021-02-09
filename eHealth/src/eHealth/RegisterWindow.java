@@ -35,27 +35,68 @@ import javax.swing.JSeparator;
 
 /**
  * This class is used to generate the register window if you want to create a new account. 
+ * @author johannes
+ * 
  */
 public class RegisterWindow extends JFrame {
 
+	/**
+	 * creating the JPanel where every GUI element is placed on
+	 */
 	private JPanel contentPane;
+	/**
+	 * creating new JTextfield for entering the firstname
+	 */
 	private JTextField firstname;
+	/**
+	 * creating new JTextfield for entering the lastname
+	 */
 	private JTextField lastname;
+	/**
+	 * creating new JTextfield for entering the email address
+	 */
 	private JTextField email;
+	/**
+	 * creating new JTextfield for entering the street
+	 */
 	private JTextField street;
+	/**
+	 * creating new JTextfield for entering the street number
+	 */
 	private JTextField number;
+	/**
+	 * creating new JTextfield for entering the zipcode
+	 */
 	private JTextField zipcode;
+	/**
+	 * creating new JTextfield for entering the city
+	 */
 	private JTextField city;
-	private JTextField dateofbirth;
+	/**
+	 * creating new JTextfield for entering the ensurance name
+	 */
 	private JTextField insurancename;
+	/**
+	 * creating new JTextfield for entering the username
+	 */
 	private JTextField usernameField;
+	/**
+	 * creating new JPasswordField for entering the password
+	 */
 	private JPasswordField passwordField;
+	/**
+	 * creating new JPasswordField for reentering the password
+	 */
 	private JPasswordField repeatPasswordField;
-	
+	/**
+	 * A instance of the user database allowing the system to access the user table from the database
+	 */
 	private UserDB userTable = new UserDB();
 
 	/**
-	 * Method to set properties and actions for the register window.
+	 * <h4>Defining properties for the register window GUI</h4>
+	 * <p>
+	 * This method is used set up the properties and actions for the register window.
 	 */
 	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -176,6 +217,9 @@ public class RegisterWindow extends JFrame {
 		group.add(publicButton);
 		
 		JButton ConfirmBtn = new JButton("Confirm and Register");
+		/**
+		 * action to confirm the entered data, check whether they are valid and create a new database entry
+		 */
 		ConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Read in text fields
@@ -350,6 +394,9 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(ConfirmBtn);
 		
 		JButton cancelButton = new JButton("Cancel");
+		/**
+		 * action to cancel the current process of creating a new account and return to login dialog
+		 */
 		cancelButton.addActionListener(e -> this.dispose());
 		
 		cancelButton.setBounds(125, 531, 117, 29);
@@ -397,10 +444,13 @@ public class RegisterWindow extends JFrame {
 		separator.setBounds(27, 387, 517, 2);
 		contentPane.add(separator);
 	}
+
 	/**
+	 * <h4>Email Validation</h4>
 	 * Method to check if an email pattern is valid.
+	 * <p>
 	 * @param email
-	 * @return true/false
+	 * @return true, if email is valid, else false
 	 */
 	public static boolean isValidEmailAddress(String email) {
 		boolean result = true;
@@ -415,9 +465,11 @@ public class RegisterWindow extends JFrame {
 	// https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
 	
 	/**
-	 * Method to check whether a number is an integer or not.
+	 * <h4>Integer check</h4>
+	 * Method to check if a number is an integer value.
+	 * <p>
 	 * @param input
-	 * @return true/false
+	 * @return true, if input is integer, else false
 	 */
 	public boolean isInteger(String input) {
 	    try {
@@ -430,8 +482,9 @@ public class RegisterWindow extends JFrame {
 	}
 	
 	/**
-	* This is the method used to create the register window.
-	*/	
+	 * <h4>Create register window</h4>
+	 * Method to create the register window
+	 */
 	public void createRegisterWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

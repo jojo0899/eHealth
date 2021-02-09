@@ -46,14 +46,41 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.MatteBorder;
 
+/**
+ * This class is used to generate the main window where you have options 
+ * @author johannes
+ * 
+ */
 public class MainWindow extends JFrame {
 
+	/**
+	 * creating the JPanel where every GUI element is placed on
+	 */
 	private JPanel contentPane;
+	/**
+	 * creating new JTextfield for entering the search radius
+	 */
 	private JTextField radius;
+	/**
+	 * creating new JTextfield for entering the wanted doctor ID
+	 */
 	private JTextField docIdField;
+	/**
+	 * creating new JTable to display all upcoming appointments of the logged in user
+	 */
 	private JTable appointmentsTable;
+	/**
+	 * creating new JTable to display the result of the doctor search
+	 */
 	private JTable searchResultTable;
+	/**
+	 * creating new JTextArea to enter a description of the health problem
+	 */
 	private JTextArea problemDescription;
+	/**
+	 * creating new JTextfield for entering the appointment ID
+	 */
+	private JTextField appointmentIdField;
 	
 	private String doctorType;
 	private String appointmentTime;
@@ -61,10 +88,19 @@ public class MainWindow extends JFrame {
 
 	private User userUsed;
 	
+	/**
+	 * A instance of the user database allowing the system to access the user table from the database
+	 */
 	private UserDB userDB = new UserDB();
+	/**
+	 * A instance of the user database allowing the system to access the doctor table from the database
+	 */
 	private DoctorDB docDB = new DoctorDB();
+	/**
+	 * A instance of the user database allowing the system to access the appointment table from the database
+	 */
 	private AppointmentsDB appDB = new AppointmentsDB();
-	private JTextField appointmentIdField;
+
 
 	private String appointmentDocFirstName;
 	private String appointmentDocLastName;
@@ -72,6 +108,13 @@ public class MainWindow extends JFrame {
 
 	private int reminderInMin = -1;
 
+	/**
+	 * <h4>Defining properties for the main window GUI</h4>
+	 * <p>
+	 * This method is used set up the properties and actions for the main window.
+	 * 
+	 * @param username
+	 */
 	public MainWindow(String username) {
 
 		userUsed = new User(username);
@@ -175,6 +218,9 @@ public class MainWindow extends JFrame {
 		// source: https://www.javaer101.com/de/article/1525991.html
 
 		JButton searchButton = new JButton("Search for Doctor");
+		/**
+		 * action to search with the given data for a doctor
+		 */
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String radiusString = radius.getText();
@@ -337,9 +383,7 @@ public class MainWindow extends JFrame {
 					e2.printStackTrace();
 				}
 				// source:
-				// https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java
-
-				
+				// https://www.codeflow.site/de/article/java__how-to-compare-dates-in-java				
 				
 				makeAppointmentBtn.setEnabled(true);
 				
@@ -376,6 +420,9 @@ public class MainWindow extends JFrame {
 		JButton logoutBtn = new JButton("Logout");
 		logoutBtn.setForeground(Color.RED);
 		logoutBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		/**
+		 * action to log out from eHealth and go back to the login dialog
+		 */
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirm = JOptionPane.showConfirmDialog(null,
@@ -397,6 +444,9 @@ public class MainWindow extends JFrame {
 		JButton quitBtn = new JButton("Quit");
 		quitBtn.setForeground(Color.RED);
 		quitBtn.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		/**
+		 * action to quit the application
+		 */
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirm = JOptionPane.showConfirmDialog(null,
@@ -425,6 +475,9 @@ public class MainWindow extends JFrame {
 		lblSearchResults.setBounds(405, 36, 263, 30);
 		contentPane.add(lblSearchResults);
 
+		/**
+		 * action to make an appointment at the selected doctor
+		 */
 		makeAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String docIdString = docIdField.getText();
@@ -489,6 +542,9 @@ public class MainWindow extends JFrame {
 		scrollPanAppointments.setViewportView(appointmentsTable);
 
 		JButton refreshAppointmentTableBtn = new JButton("Refresh appointments");
+		/**
+		 * action to refresh the displayed table of the appointment database
+		 */
 		refreshAppointmentTableBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String queryWhere = "WHERE username = '" + username + "'";
@@ -530,6 +586,9 @@ public class MainWindow extends JFrame {
 		editAppointmentBtn.setBounds(618, 712, 232, 25);
 		contentPane.add(editAppointmentBtn);
 
+		/**
+		 * action to delete a selected appointment
+		 */
 		JButton deleteAppointmentBtn = new JButton("Delete");
 		deleteAppointmentBtn.setForeground(Color.RED);
 		deleteAppointmentBtn.addActionListener(new ActionListener() {
@@ -577,6 +636,9 @@ public class MainWindow extends JFrame {
 		contentPane.add(separator);
 
 		JButton btnExportHealthInfo = new JButton("Export to TXT");
+		/**
+		 * action to export your health information as a txt file
+		 */
 		btnExportHealthInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (userUsed.writeUserIntoTxt()) {
@@ -612,6 +674,9 @@ public class MainWindow extends JFrame {
 		contentPane.add(lblYouCanExport);
 		
 		JButton btnExportToPdf = new JButton("Export to PDF");
+		/**
+		 * action to export your health information as a pdf file
+		 */
 		btnExportToPdf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (userUsed.writeUserIntoPdf()) {
@@ -629,6 +694,13 @@ public class MainWindow extends JFrame {
 
 	}
 
+	/**
+	 * <h4>Integer check</h4>
+	 * Method to check if a number is an integer value.
+	 * <p>
+	 * @param input
+	 * @return true, if input is integer, else false
+	 */
 	public boolean isInteger(String input) {
 		try {
 			Integer.parseInt(input);
@@ -638,6 +710,12 @@ public class MainWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * <h4>Create main window</h4>
+	 * Method to create the main window with the logged in user
+	 * <p>
+	 * @param usernameInput
+	 */
 	public static void createMainWindow(String usernameInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

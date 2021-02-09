@@ -113,7 +113,7 @@ public class User {
 	private String dbTableName = "USER";
 	
 	/**
-	 * A instance of the user database allowing the user to acces the user table from the database
+	 * A instance of the user database allowing the user to access the user table from the database
 	 */
 	private UserDB userFromDB = new UserDB();
 	
