@@ -23,16 +23,18 @@
 \listoffigures
 
 \chapter{Introduction}
+{\tiny (Johannes Jobst)\\}
 This documentation is about our results of creating a smart eHealth consulting system. We give an overview how our application is structured, how we proceeded the project, how the task were be distributed in the team and much more.
 
 \chapter{Project motivation}
 
 \chapter{Project description}
+{\tiny (Johannes Jobst)\\}
 Our eHealth application is designed that a user doesn't anymore need to call a doctor via the telephone if he or she has a  health problem. \\
 Instead it provides a whole new experience for people to creating an appointment. They now are able to create an account in our eHealth application. With this account they can login into the system and specify their health problem. The smart application then displays based on the symptoms you have and  the distance a doctor should be, all suggested doctors for you. In the next step the user is able to make an appointment at one of these doctors. \\
 Furthermore our eHealth application displays for logged in users all upcoming appointments they have. Adding to that the user has the ability to edit or delete a certain appointment.
 \\
-Because our user storing is implemented in a database our eHealth application has an admin account which is available with special login data. In this admin view the admin is able to magnage the users like edit personal information of them but also deleting them.
+Because our user storing is implemented in a database our eHealth application has an admin account which is available with special login data. In this admin view the admin is able to manage the users like edit personal information of them but also deleting them.
 \\
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{main.png} 
@@ -41,6 +43,7 @@ Because our user storing is implemented in a database our eHealth application ha
 
 \chapter{Team organization}
 \section{Meetings}
+{\tiny (Johannes Jobst)\\}
 At the beginning of the project we first of all thought it would be very useful 
 to have a fixed day in the week to have a meeting about our project. \\
 In our weekly meetings we discussed how to do and implement certain tasks in the project.
@@ -53,13 +56,23 @@ input by the user was correct. But also checks that appointments could not be ma
 Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
 
 \section{Development timeline}
+{\tiny (Johannes Jobst)\\}
 At the beginning we started to create a GitHub repository for our project. We then constructed a basic GUI construct for the login window. With his basic construct we already were able to implement our database in the project. \\
 After this we were already basically been able to create new accounts and add them to the database and login with them or with already existing accounts to our system. \\
 In the next step we added password encryption to the login data. \\
 We then thought that a convert of our project to a Maven project would be very handy, because of ... %add text
 \\
+After that we build the admin window and add step by step the full functionality to the GUI of the admin. We created a table to display all users in the database. Made buttons to edit a user via the "editUserWindow" or delete a user.
+\\
+After finishing with the admin window we focused more on the main part of the application. Therefore it was required to implement a 2 factor authentication. We implemented that with a new window.
+\\
+As a next step we started to develop all functionalities for the main window. We added all necessary GUI elements and connected them to the database. We implemented a "editAppointment" window to shift upcoming appointments. Concomitant with that we finally implemented the reminder functionality and also the health information export function.
+\\
+So finally our program is finished. At the end we had only to fix some bugs where something was not probably working. 
+
 % Johannes adds text here
 \section{Tools}
+{\tiny (Johannes Jobst)\\}
 For our project the whole team used the Eclipse IDE, because of some small differences in other IDEs. In Eclipse itself we used the WindowBuilder to design our GUI.\\
 Our main tool for working on the project as a team was GitHub. There we have a central repository for storing all project data like the complete source code but also the project documentation. It makes the working on the project very comfortable and easy because of the ability to work simultaneously on the code.
 
@@ -78,7 +91,8 @@ The following figure represents all components needed for the project and their 
 DBController contains important methods for connecting to the database modifying its contents and retrieving data. The classes AppointmentsDB, UserDB and DoctorDB are derived from the DBController and are used for creating and querying the respective database tables. The AppointmentsDB also uses the class reminder which allows threading the appointments table.\\The class named UI represents all User Interfaces used in the project. Some graphical user interfaces make use of the class OpenStreetMapUtils, which provides useful functionality for determining the location of a user or a doctor and calculating the distance between both. The class Mail is also used for sending out E-mails whenever this is necessary in the project. Finally, the class DateLabelFormatter is used by the UI to ensure correctly formatted dates for the appointments. \\
 As illustrated in Figure 5.1, each user contains one DBController and the UI contains one User and multiple instances of the DBController. The reason being that in some cases the UI needs to have access to all three database tables.\\ The following pages will go in more detail about the components of the UI and their interactions.
 
-\subsection{Activity overview} 
+\subsection{Activity overview}
+{\tiny (Johannes Jobst)\\}
 In Figure 5.2 you can see how the activity flow of our program works.\\
 First of all our program displays an login window where you have the choice to create a new account or to login with your account into our eHealth system. If you type in your username and your password correctly the system will check the authentication via 2 factor authentication, so it sends you a mail with a random code which you must type in the dialog. After validation the system checks whether you are an admin or a user.\\
 In the admin view the admin has the ability to show up all registered users and can edit their personal data or delete them.
@@ -93,6 +107,7 @@ The last main functionality he has is that he can export his health information 
 \end{figure}
 
 \subsection{Account creation}
+{\tiny (Johannes Jobst)\\}
 The first main requirement of our program is the account creation.\\
 If the User uses the application for the first time he has the ability to create a new eHealth account. Therefore he has to enter his firstname, lastname, email address, address information, date of birth, insurance type and his insurance name.
 If the user confirms, the entered data is checked for correctness.
@@ -106,10 +121,12 @@ If every information is typed in correctly the account is now created.
 %\caption{Class diagram for the eHealth project}
 %\end{figure}
 \subsection{Login}
+{\tiny (Johannes Jobst)\\}
 If the user already has an account he is able to login with his username and password. The password is encrypted with ...
 % adding text here
 
 \subsection{Admin view}
+{\tiny (Johannes Jobst)\\}
 If the user enters admin login data into login dialog the system will open an admin view. The admin there has the ability to view all users. This is implemented via an SQL query out of the user table in the database. The admin has also the option to edit the personal informations of users. Therefore a looking almost like the register window pops up, where he is able to make changes.
 With the same error handling like in the account creation the system is prevented from any errors.
 
