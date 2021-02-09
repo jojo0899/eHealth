@@ -25,14 +25,19 @@
 \chapter{Introduction}
 This documentation is about our results of creating a smart eHealth consulting system. We give an overview how our application is structured, how we proceeded the project, how the task were be distributed in the team and much more.
 
+\chapter{Project motivation}
+
 \chapter{Project description}
 Our eHealth application is designed that a user doesn't anymore need to call a doctor via the telephone if he or she has a  health problem. \\
 Instead it provides a whole new experience for people to creating an appointment. They now are able to create an account in our eHealth application. With this account they can login into the system and specify their health problem. The smart application then displays based on the symptoms you have and  the distance a doctor should be, all suggested doctors for you. In the next step the user is able to make an appointment at one of these doctors. \\
 Furthermore our eHealth application displays for logged in users all upcoming appointments they have. Adding to that the user has the ability to edit or delete a certain appointment.
 \\
 Because our user storing is implemented in a database our eHealth application has an admin account which is available with special login data. In this admin view the admin is able to magnage the users like edit personal information of them but also deleting them.
-
-\chapter{Project motivation}
+\\
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{main.png} 
+\caption{eHealth main window under MacOS}
+\end{figure}
 
 \chapter{Team organization}
 \section{Meetings}
@@ -86,6 +91,28 @@ The last main functionality he has is that he can export his health information 
 	\includegraphics[width=\linewidth]{eHealth_Activity.png}
 	\caption{Activity diagram for the eHealth project}
 \end{figure}
+
+\subsection{Account creation}
+The first main requirement of our program is the account creation.\\
+If the User uses the application for the first time he has the ability to create a new eHealth account. Therefore he has to enter his firstname, lastname, email address, address information, date of birth, insurance type and his insurance name.
+If the user confirms, the entered data is checked for correctness.
+The Validation of the email address happens by checking if the email has the right format (eg. max@mustermann.de). For validating the address we use the API of OpenStreetMaps and check if the given address exists.
+The username must be unique in our database, so the system checks whether its already existing. For the insurance type one of the given types must be selected.
+For the rest of the Fields the system checks that they aren't empty and not longer than the capacity of the corresponding field in the database.
+With this error handling we ensure that ours system doesn't run into database errors.\\
+If every information is typed in correctly the account is now created.
+%\begin{figure}[!h]
+%\includegraphics[width=\linewidth]{login_Activity.png} 
+%\caption{Class diagram for the eHealth project}
+%\end{figure}
+\subsection{Login}
+If the user already has an account he is able to login with his username and password. The password is encrypted with ...
+% adding text here
+
+\subsection{Admin view}
+If the user enters admin login data into login dialog the system will open an admin view. The admin there has the ability to view all users. This is implemented via an SQL query out of the user table in the database. The admin has also the option to edit the personal informations of users. Therefore a looking almost like the register window pops up, where he is able to make changes.
+With the same error handling like in the account creation the system is prevented from any errors.
+
 
 \subsection{Editing an Appointment}
 In the main window the user has the possibility to view the appointments he made. He can also edit or delete these appointments.
