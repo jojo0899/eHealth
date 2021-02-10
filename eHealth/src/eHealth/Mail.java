@@ -11,9 +11,22 @@ import javax.mail.internet.MimeMultipart;
 
 import java.util.Properties;
 
+/**
+ * This class is used to send e-mails. 
+ * @author Pascal
+ *
+ */
 
 public class Mail {
 
+	
+	 /**
+     * <h4>Sending an  e-mail</h4>
+     * An email is send send to a receiver with a the given message.
+     * @param mailreciever The receiver e-mail address
+     * @param mailsubject The subject of the e-mail
+     * @param mailmessage The message of the e-mail
+     */
 		public static void sendtext(String mailreceiver, String mailsubject, String mailmessage) {
 			final String username = "healthtesting01@gmail.com";
 	        final String password = "3He4lth!";
@@ -47,8 +60,7 @@ public class Mail {
 	            Multipart multipart = new MimeMultipart();
 	            multipart.addBodyPart(messageBodyPart);
 	            
-	            messageBodyPart.setText("This is message body");
-	           // message.setDataHandler(new DataHandler("C:\\Users\\Antil\\OneDrive\\Dokumente\\java\\test", password));
+	            messageBodyPart.setText("This is message body");	          
 
 	            Transport.send(message);
 
@@ -59,7 +71,14 @@ public class Mail {
 	        }
 		}
 		
-		
+		/**
+	     * <h4>Sending an  e-mail</h4>
+	     * An email is send with an attached file to a receiver with a the given message.
+	     * @param mailreciever The receiver e-mail address
+	     * @param mailsubject The subject of the e-mail
+	     * @param mailmessage The message of the e-mail
+	     * @param filename the directory of the file to be send
+	     */
 		
 		public static void sendattchement(String mailreceiver, String mailsubject, String mailmessage, String filename) {
 			final String username = "healthtesting01@gmail.com";

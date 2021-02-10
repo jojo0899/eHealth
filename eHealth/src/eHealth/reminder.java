@@ -1,20 +1,28 @@
 package eHealth;
 
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
+
+/**
+ * This class is used to send reminder e-mails. 
+ * @author Pascal
+ *
+ */
 
 public class reminder extends Thread {
 
 	
 	
-	
+	/**
+     * <h4>Send reminder mails</h4>
+     * this class is used to check every minute if a user need a reminder, and then send the user an e-mail,
+     * with the appointment information stored in the database.     
+     */
 	
 	public void run() {
 		UserDB userTable = new UserDB();
@@ -26,7 +34,7 @@ public class reminder extends Thread {
 		ResultSet reminderList = null;
 		
 		while (true) {
-			reminderList =appDB.reminderlist();
+			reminderList = appDB.reminderlist();
 			datenow = new Date(System.currentTimeMillis());
 			
 			try {
@@ -41,7 +49,7 @@ public class reminder extends Thread {
 						timediff = Math.abs(dateapp.getTime()-datenow.getTime());
 						timediff = TimeUnit.MINUTES.convert(timediff, TimeUnit.MILLISECONDS);
 					}
-					System.out.println(timediff);
+					
 					int n = reminderList.getInt(3);
 					
 					if(timediff< n) {
@@ -64,8 +72,6 @@ public class reminder extends Thread {
 						String usernameString = "username = '" + reminderList.getString(4) +"'";
 						
 						String mailString = userTable.getStringColumnFromDB("email", "user", usernameString );	
-						
-						System.out.println(mailString + subject + mailText);
 						
 						Mail.sendtext(mailString, subject, mailText);
 						appDB.updateReminder(reminderList.getString(5), "0");

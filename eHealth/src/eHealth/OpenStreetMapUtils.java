@@ -20,6 +20,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * This class is used to get the coordinates from an address and to calculate the distance between to points.
+ * @author Pascal
+ *
+ */
+
 public class OpenStreetMapUtils {
 	
 	
@@ -30,11 +36,21 @@ public class OpenStreetMapUtils {
   private JSONParser jsonParser;
 
   private static OkHttpClient client = getUnsafeOkHttpClient();
+  
+  /**
+   * <h4>create jsonParser</h4>
+   * Creating a new jsonParser
+   *   
+   */
 
   public OpenStreetMapUtils() {
     jsonParser = new JSONParser();
   }
-
+  /**
+   * <h4>OpenStreetMap instance</h4>
+   * Creating a new OpenStreetMapUtils instance
+   *   
+   */
   public static OpenStreetMapUtils getInstance() {
     if (instance == null) {
       instance = new OpenStreetMapUtils();
@@ -42,6 +58,14 @@ public class OpenStreetMapUtils {
     return instance;
   }
 
+  
+  /**
+   * <h4>Sending an URL</h4>
+   * Build the complete URL request then sends it. the received data is transformed to jsonData and the returned
+   *  
+   *   @param completeURL The URL 
+   *   @return the jsonData with the response
+   */
   protected String getRequest(String completeUrl)
       throws IOException {
     Response response = null;
@@ -63,10 +87,25 @@ public class OpenStreetMapUtils {
     }
   }
 
+  /**
+   * <h4>Returns the OkHttpClient</h4>
+   * Returns the OkHttpClient
+   *   
+   *   @return the OkHttpClient
+   */
   protected OkHttpClient getClient() {
     return client;
   }
 
+  /**
+   * <h4>Get coordinates</h4>
+   * builds a OpenStreetMap URL for the specified address, then sends this URL with the OkHttpClient 
+   * to receive the coordinates from OpenStreetMap and return them. 
+   * 
+   * @param address the address
+   * @param return returns the coordinates
+   *   
+   */
   public Map<String, Double> getCoordinates(String address) {
 	  
   	org.apache.log4j.BasicConfigurator.configure();
@@ -125,6 +164,14 @@ public class OpenStreetMapUtils {
     return res;
   }
 
+  /**
+   * <h4>Builds the OkHttpClient</h4>
+   * building the OkHttpClient
+   * 
+   * 
+   * @return the new OkHttpClient
+   */
+  
   private static OkHttpClient getUnsafeOkHttpClient() {
     try {
       final TrustManager[] trustAllCerts = new TrustManager[]{
@@ -160,7 +207,16 @@ public class OpenStreetMapUtils {
     }
   }
   
- 
+  /**
+   * <h4>Calculate the distance between coordinates</h4>
+   * The distance between with the input defined points is calculate and returned
+   * 
+   * @param lat1 the latitude of the fist point
+   * @param long1 the longitude of the first point
+   * @param lat2 the latitude of the second point
+   * @param long2 the longitude of the second point
+   * @return returns the distance
+   */
   public static double distance(BigDecimal lat1, BigDecimal long1, BigDecimal lat2, BigDecimal long2) {
 	  	double lat1AsDouble = lat1.doubleValue();
 	  	double lon1AsDouble = long1.doubleValue();

@@ -10,16 +10,27 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-
+/**
+ * This class is used to generate a hashed password. 
+ * @author Pascal
+ *
+ */
 
 public class Password {
 	
-	//method to create a hashed password
+	 /**
+     * <h4>Generates a hashed password</h4>
+     * A hashed password is generated for the given password and salt
+     * @param password The password to be hashed be hashed
+     * @param salt The Salt added to the password
+     * @return returns the hashed password
+     
+     */
 	public static String createhash(char[] password, String salt)throws UnsupportedEncodingException {
 		
 	    int iterations = 10000;
 	    
-	    //l�nge
+	   
 	    int keyLength = 512;
 	    char[] passwordChars = password;
 	    byte[] saltBytes = salt.getBytes();
@@ -27,11 +38,20 @@ public class Password {
 	    byte[] hashedBytes = hashPassword(passwordChars, saltBytes, iterations, keyLength);
 	    String hashedString = Hex.encodeHexString(hashedBytes);
 	    
-	    // return hashed password
+	    
     	return hashedString;
 	}
 	
-	//method to check if password is correct
+	/**
+     * <h4>checks if the password is correct</h4>
+     * check if the given password is the same with the hashed password.
+     * @param password The password to be hashed be hashed
+     * @param hashedpassword
+     * @param salt The Salt added to the password
+     * @return returns true if the password is cooreect, returns falls if the password is false.
+     
+     */
+	
 	public static String testpassword(String password, String hashedpassword,String salt) {
 		
 		
