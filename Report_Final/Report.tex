@@ -5,6 +5,12 @@
 \usepackage{makecell}
 \usepackage{float}
 \usepackage[nottoc]{tocbibind}
+\usepackage{titlesec}
+
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{35pt}
 
 \graphicspath{{figures/}}
 % Title Page
@@ -27,6 +33,15 @@
 This documentation is about our results of creating a smart eHealth consulting system. We give an overview how our application is structured, how we proceeded the project, how the task were be distributed in the team and much more.
 
 \chapter{Project motivation}
+{\tiny (Marin-Petru Hincu)\\}
+This chapter will present some aspects that motivated us as a team, but also individually, to work on the eHealth project.
+One important aspect was exploring the possibilities we had to work on the same project simultaneously. It was going to be our first experience working on a project with specific requirements as a small group, so we were very excited. \\
+The other important aspect was learning more about the topics we needed to study in order to successfully finish the project. Some topics we were most interested in will be discussed in the following.\\
+Creating an Application which uses a database to store most of its user information was one interesting topic. We knew that most applications nowadays heavily use databases, but we did not know how it is implemented. Learning more about how the application can be connected to the database and successfully implementing some of the relations between the application and the database was a very rewarding experience. \\
+Knowing we would learn more about the practical implementation of distance calculations between addresses was also a motivation. Most of us use these tools on a daily basis, either by looking up an address on Google Maps or by searching for a restaurant on your favorite delivery app. However, most of us do not know how those features are implemented into our applications, so we were very excited about implementing those features ourselves.
+A final topic which we were motivated to learn more about was encryption. The basics of encryption were common knowledge for all group members. Nevertheless, none of us had experience in implementing encryption algorithms for storing encrypted passwords in a database. Security is a very important aspect in the world of software, so we were eager to learn more about the practical implementation methods. \\
+These were some aspects which gave us a great amount of motivation at the beginning and during the project. In general, we were motivated to learn more about the above mentioned topics, because we knew that the accumulated experiences during the project would make us better software developers.
+
 
 \chapter{Project description}
 {\tiny (Johannes Jobst)\\}
@@ -83,6 +98,7 @@ Our main tool for working on the project as a team was GitHub. There we have a c
 \chapter{Technical description}
 \section{Requirements}
 \subsection{Overview}
+{\tiny (Marin-Petru Hincu)\\}
 The following figure represents all components needed for the project and their correlation.
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{clImg.png} 
@@ -102,7 +118,7 @@ Additionally the user can display the upcoming appointments and make changes of 
 The last main functionality he has is that he can export his health information either in pdf or txt format.
 
 
-\begin{figure}
+\begin{figure}[!h]
 	\includegraphics[width=\linewidth]{eHealth_Activity.png}
 	\caption{Activity diagram for the eHealth project}
 \end{figure}
@@ -156,9 +172,17 @@ Now the user can select the date and time when they want to have an appointment.
 The last information needed is whether they want to receive a reminder and how long before the appointment.
 If the user presses the button "Search for Doctor" the programm first checks if all necessary data is given and in a correct format. Then it gest the list of possible doctors from the Doctor-Database and and displays them so the user can select one.
 
+\subsection{Creating an Appointment}
+{\tiny (Hania Anjum Chatha )\\}
+In this figure, we add multiple features to make the appointment easily for patients. After logging into the system, they can make and cancel their appointment. For making appointment, patient can select the department, and according to that department they can select a doctor and their preferred time. For canceling the appointment, patient is required to select the registered appointment and click on the cancel button.
 
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{sequence_appointments.png}
+\caption{Sequence diagram for creating an appointment}
+\end{figure}
 
 \subsection{Editing an Appointment}
+{\tiny (Marin-Petru Hincu)\\}
 In the main window the user has the possibility to view the appointments he made. He can also edit or delete these appointments.
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{acImg.png} 
@@ -174,9 +198,12 @@ The reminder will check every minute whether there is an entry in the Appointmen
 Then it sends to the user who wants the reminder an e-mail with the appointment details.
 
 
-\section{Problem facing}
+\chapter{Challenges}
 
 \chapter{Conclusion}
+{\tiny (Hania Anjum Chatha )\\}
+In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimizing human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
+In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.
 
 \chapter{Sources}
 
