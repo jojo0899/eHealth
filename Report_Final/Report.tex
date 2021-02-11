@@ -54,6 +54,7 @@ Johannes Jobst was responsible for everything concerning the Graphical User Inte
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
 Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
+Pascal Kautzmann was responsible for the e-mail, the password hashing, the reminder function and the usability of the OpensStreetMaps-API
 
 \section{Development timeline}
 {\tiny (Johannes Jobst)\\}
@@ -122,13 +123,39 @@ If every information is typed in correctly the account is now created.
 %\end{figure}
 \subsection{Login}
 {\tiny (Johannes Jobst)\\}
-If the user already has an account he is able to login with his username and password. The password is encrypted with ...
-% adding text here
+If the user already has an account he is able to login with his username and password.
+
+\subsection{Password}
+{\tiny ( Pascal Kautzmann)\\}
+The password is saved as a hash, because it is really difficult and time consuming to recreate a hashed string.
+The password is hashed with the from javax.crypto provided functions. It uses a SHA512 algorithm  to hash, the password is also is"Salted", so that if two useres have the same password, the hashed password is still different.
+
+\subsection{E-Mail}
+{\tiny (Pascal Kautzmann)\\}
+To send e-mails the javax.mail classes are used. An e-mail adress to send e-mail is predefined %?
+because mail services, like g-mail, don't allow unverified apps as long as  less secure app access is deactivated. 
+
 
 \subsection{Admin view}
 {\tiny (Johannes Jobst)\\}
 If the user enters admin login data into login dialog the system will open an admin view. The admin there has the ability to view all users. This is implemented via an SQL query out of the user table in the database. The admin has also the option to edit the personal informations of users. Therefore a looking almost like the register window pops up, where he is able to make changes.
 With the same error handling like in the account creation the system is prevented from any errors.
+
+
+\subsection{Searching for a doctor}
+{\tiny (Pascal Kautzmann)\\}
+In the main window the user has the possibility to search for a doctor, for that the user has to provide some data.
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{doctorsearch.jpg} 
+\caption{Activity diagram for searching a doctor}
+\end{figure}
+\\First the user needs to select their health problem with the help of a drop-down list, where we predefined some health problems .
+Then the user has the possibility to better describe their problem nad give some more information.
+Next they have to select the search radius, so it is possible only search for a doctor in the given radius around thier address.
+Now the user can select the date and time when they want to have an appointment.
+The last information needed is whether they want to receive a reminder and how long before the appointment.
+If the user presses the button "Search for Doctor" the programm first checks if all necessary data is given and in a correct format. Then it gest the list of possible doctors from the Doctor-Database and and displays them so the user can select one.
+
 
 
 \subsection{Editing an Appointment}
@@ -138,6 +165,14 @@ In the main window the user has the possibility to view the appointments he made
 \caption{Activity diagram for deleting and editing an appointment}
 \end{figure}
 \\In the appointments table displayed in the main window, the user has to select the id of the appointment he wishes to edit or delete. After the user introduced the id into the respective text field, he can either press the button "delete" or "edit". If the user presses "delete", he must first confirm the action and then the selected appointment is deleted from the table. If the user presses "edit", he gets redirected to a new window, where he can then change the date and time of the appointment. The user must then press "save" for the changes to be saved in the appointments table, and he returns to the main window. However, if the user presses "cancel", he returns to the main window without modifying anything.
+
+
+\subsection{Reminder}
+{\tiny (Pascal Kautzmann)\\}
+The reminder runs in a separate thread, so it dosn't interfere with the rest of the program.
+The reminder will check every minute whether there is an entry in the Appointment-database that requires a reminder. 
+Then it sends to the user who wants the reminder an e-mail with the appointment details.
+
 
 \section{Problem facing}
 

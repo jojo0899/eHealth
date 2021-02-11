@@ -48,7 +48,7 @@ public class Password {
      * @param password The password to be hashed be hashed
      * @param hashedpassword
      * @param salt The Salt added to the password
-     * @return returns true if the password is cooreect, returns falls if the password is false.
+     * @return returns true if the password is correct, returns falls if the password is false.
      
      */
 	
