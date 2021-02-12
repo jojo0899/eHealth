@@ -31,8 +31,11 @@
 \chapter{Introduction}
 {\tiny (Johannes Jobst)\\}
 This documentation is about our results of creating a smart eHealth consulting system. We give an overview how our application is structured, how we proceeded the project, how the task were be distributed in the team and much more.
+\\
+\\
+\\
 
-\chapter{Project motivation}
+{\let\clearpage\relax \chapter{Project motivation}}
 {\tiny (Marin-Petru Hincu)\\}
 This chapter will present some aspects that motivated us as a team, but also individually, to work on the eHealth project.
 One important aspect was exploring the possibilities we had to work on the same project simultaneously. It was going to be our first experience working on a project with specific requirements as a small group, so we were very excited. \\
@@ -41,9 +44,11 @@ Creating an Application which uses a database to store most of its user informat
 Knowing we would learn more about the practical implementation of distance calculations between addresses was also a motivation. Most of us use these tools on a daily basis, either by looking up an address on Google Maps or by searching for a restaurant on your favorite delivery app. However, most of us do not know how those features are implemented into our applications, so we were very excited about implementing those features ourselves.
 A final topic which we were motivated to learn more about was encryption. The basics of encryption were common knowledge for all group members. Nevertheless, none of us had experience in implementing encryption algorithms for storing encrypted passwords in a database. Security is a very important aspect in the world of software, so we were eager to learn more about the practical implementation methods. \\
 These were some aspects which gave us a great amount of motivation at the beginning and during the project. In general, we were motivated to learn more about the above mentioned topics, because we knew that the accumulated experiences during the project would make us better software developers.
+\\
+\\
+\\
 
-
-\chapter{Project description}
+{\let\clearpage\relax \chapter{Project description}}
 {\tiny (Johannes Jobst)\\}
 Our eHealth application is designed that a user doesn't anymore need to call a doctor via the telephone if he or she has a  health problem. \\
 Instead it provides a whole new experience for people to creating an appointment. They now are able to create an account in our eHealth application. With this account they can login into the system and specify their health problem. The smart application then displays based on the symptoms you have and  the distance a doctor should be, all suggested doctors for you. In the next step the user is able to make an appointment at one of these doctors. \\
@@ -69,7 +74,9 @@ Johannes Jobst was responsible for everything concerning the Graphical User Inte
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
 Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
-Pascal Kautzmann was responsible for the e-mail, the password hashing, the reminder function and the usability of the OpensStreetMaps-API
+Pascal Kautzmann was responsible for the e-mail, the password hashing, the reminder function and the usability of the OpensStreetMaps-API \\ 
+	\\
+% Hania nedds to add text here:
 
 \section{Development timeline}
 {\tiny (Johannes Jobst)\\}
@@ -139,7 +146,7 @@ If every information is typed in correctly the account is now created.
 %\end{figure}
 \subsection{Login}
 {\tiny (Johannes Jobst)\\}
-If the user already has an account he is able to login with his username and password.
+If the user already has an account he is able to login with his username and password. In the next step there is a database comparison and when the data is valid there appears a 2 factor authentication window. In this window the user is asked to enter the code which is send to him via email. This ensures that no unauthorised person can log in even with knowing the login data. All in all this ensures that the very sensitive health and user information is kept secure.
 
 \subsection{Password}
 {\tiny ( Pascal Kautzmann)\\}
@@ -148,7 +155,7 @@ The password is hashed with the from javax.crypto provided functions. It uses a 
 
 \subsection{E-Mail}
 {\tiny (Pascal Kautzmann)\\}
-To send e-mails the javax.mail classes are used. An e-mail adress to send e-mail is predefined %?
+To send e-mails the javax.mail classes are used. An e-mail address to send e-mail is predefined %?
 because mail services, like g-mail, don't allow unverified apps as long as  less secure app access is deactivated. 
 
 
@@ -166,11 +173,11 @@ In the main window the user has the possibility to search for a doctor, for that
 \caption{Activity diagram for searching a doctor}
 \end{figure}
 \\First the user needs to select their health problem with the help of a drop-down list, where we predefined some health problems .
-Then the user has the possibility to better describe their problem nad give some more information.
-Next they have to select the search radius, so it is possible only search for a doctor in the given radius around thier address.
+Then the user has the possibility to better describe their problem and give some more information.
+Next they have to select the search radius, so it is possible only search for a doctor in the given radius around their address.
 Now the user can select the date and time when they want to have an appointment.
 The last information needed is whether they want to receive a reminder and how long before the appointment.
-If the user presses the button "Search for Doctor" the programm first checks if all necessary data is given and in a correct format. Then it gest the list of possible doctors from the Doctor-Database and and displays them so the user can select one.
+If the user presses the button "Search for Doctor" the program first checks if all necessary data is given and in a correct format. Then it gest the list of possible doctors from the Doctor-Database and and displays them so the user can select one.
 
 \subsection{Creating an Appointment}
 {\tiny (Hania Anjum Chatha )\\}
@@ -193,7 +200,7 @@ In the main window the user has the possibility to view the appointments he made
 
 \subsection{Reminder}
 {\tiny (Pascal Kautzmann)\\}
-The reminder runs in a separate thread, so it dosn't interfere with the rest of the program.
+The reminder runs in a separate thread, so it doesn't interfere with the rest of the program.
 The reminder will check every minute whether there is an entry in the Appointment-database that requires a reminder. 
 Then it sends to the user who wants the reminder an e-mail with the appointment details.
 
@@ -207,8 +214,8 @@ Now having the database all set up, it was important to create the corresponding
 
 \chapter{Conclusion}
 {\tiny (Hania Anjum Chatha )\\}
-In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimizing human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
-In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.
+In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimising human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
+In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.\cite{hi}
 
 \chapter{Sources}
 [1] https://www.h2database.com/html/features.html
