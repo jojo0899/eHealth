@@ -6,7 +6,7 @@
 \usepackage{float}
 \usepackage[nottoc]{tocbibind}
 \usepackage{titlesec}
-
+\usepackage[strings]{underscore}
 
 \titleformat{\chapter}[display]
     {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
@@ -73,7 +73,7 @@ responsible for which task.
 Johannes Jobst was responsible for everything concerning the Graphical User Interface.
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
-Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
+Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project [1]. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
 Pascal Kautzmann was responsible for the e-mail, the password hashing, the reminder function and the usability of the OpensStreetMaps-API \\ 
 	\\
 % Hania nedds to add text here:
@@ -204,21 +204,29 @@ The reminder runs in a separate thread, so it doesn't interfere with the rest of
 The reminder will check every minute whether there is an entry in the Appointment-database that requires a reminder. 
 Then it sends to the user who wants the reminder an e-mail with the appointment details.
 
+\subsection{Exporting health information}
+{\tiny (Marin-Petru Hincu)\\}
+By pressing the button "Export health info to TXT/PDF", located in the main window, the health information stored about the user can be exported as a text file or as a pdf [3].\\ The file is by default exported to the desktop of the user.
 
 \chapter{Challenges}
 \subsection{Implementing the database}
 {\tiny (Marin-Petru Hincu)\\}
-The first and very challenging step in the project was implementing the database. It was difficult at first, because we were completely new to that subject and had to do a lot of research before even beginning with the implementation. We then decided to use an embedded version of the H2 database[1].\\
+The first and very challenging step in the project was implementing the database. It was difficult at first, because we were completely new to that subject and had to do a lot of research before even beginning with the implementation [4]. We then decided to use an embedded version of the H2 database [2].
 Using an embedded database, it wasn't necessary for each of us to have a local database running. Another advantage is the high portability and increased performance this concept provides.\\
 Now having the database all set up, it was important to create the corresponding database tables as precise as possible, knowing that those tables are the basis for the whole application. \\
 
 \chapter{Conclusion}
 {\tiny (Hania Anjum Chatha )\\}
 In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimising human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
-In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.\cite{hi}
+In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.
 
 \chapter{Sources}
-[1] https://www.h2database.com/html/features.html
 
+[1] Oracle, The Java™ Tutorials, Using JDBC with GUI API,\\
+https://docs.oracle.com/javase/tutorial/jdbc/basics/		jdbcswing.html, \\22.01.2021 17:10 \\\relax
+[2] Thomas Mueller, H2 Features, https://www.h2database.com/html/features.html,\\ 11.02.2021 13:35 \\\relax
+[3] Baeldung, Creating PDF Files in Java, \\https://www.baeldung.com/java-pdf-creation, 06.02.2021 19:15 \\\relax
+[4] Tutorialspoint, H2 Database - JDBC Connection, \\https://www.tutorialspoint.com/h2_database/index.htm, 16.12.2020 21:55
+%author, publication date, page title, site title, URL, date accessed
 
 \end{document}
