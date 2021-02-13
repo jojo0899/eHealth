@@ -33,6 +33,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+/**
+ * This class we are checking if user is exists or not.
+ * @author hania
+ *
+ */
+
 public class EditUserWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField userNameField;
@@ -48,7 +54,10 @@ public class EditUserWindow extends JFrame {
 	private UserDB userTable = new UserDB();
 	private JTextField emailField;
 
-
+	/**
+	 * <h4>Edit User Window</h4>
+	 * The Edit User Window is for creating of the Window design, the written output and the texts are processed here
+	 */
 	public EditUserWindow() {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

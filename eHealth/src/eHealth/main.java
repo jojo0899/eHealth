@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 
 import javax.mail.search.AddressStringTerm;
 
-
+/**
+ * This class is our main class, here we can start with the log in.
+ * @author hania
+ *
+ */
 
 
 

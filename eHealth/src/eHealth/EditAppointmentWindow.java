@@ -30,6 +30,11 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+/**
+ * This class is for creating Edit Appointment Window design.
+ * @author hania
+ *
+ */
 public class EditAppointmentWindow extends JFrame {
 
 	private JPanel contentPane;

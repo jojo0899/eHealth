@@ -24,6 +24,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import java.awt.Color;
 
+/**
+ * In This class user will be able to login after adding valid username and authentication number.
+ * @author hania
+ *
+ */
+
 public class AuthenticationWindow extends JFrame {
 
 	private JPanel contentPane;
@@ -33,6 +39,10 @@ public class AuthenticationWindow extends JFrame {
 
 	private String authenticationNumber;
 
+	/**
+	 * <h4>Authentication Window</h4>
+	 * The Authentication Window class is for creating of the Authentication Window design
+	 */
 	public AuthenticationWindow(String username) {
 
 		userUsed = new User(username);
