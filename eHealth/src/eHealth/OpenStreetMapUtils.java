@@ -63,7 +63,7 @@ public class OpenStreetMapUtils {
    * <h4>Sending an URL</h4>
    * Build the complete URL request then sends it. the received data is transformed to jsonData and the returned
    *  
-   *   @param completeURL The URL 
+   *   @param completeUrl The URL 
    *   @return the jsonData with the response
    */
   protected String getRequest(String completeUrl)
@@ -103,7 +103,7 @@ public class OpenStreetMapUtils {
    * to receive the coordinates from OpenStreetMap and return them. 
    * 
    * @param address the address
-   * @param return returns the coordinates
+   * @return returns the coordinates
    *   
    */
   public Map<String, Double> getCoordinates(String address) {

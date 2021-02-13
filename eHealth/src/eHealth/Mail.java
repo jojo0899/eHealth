@@ -23,7 +23,7 @@ public class Mail {
 	 /**
      * <h4>Sending an  e-mail</h4>
      * An email is send send to a receiver with a the given message.
-     * @param mailreciever The receiver e-mail address
+     * @param mailreceiver The receiver e-mail address
      * @param mailsubject The subject of the e-mail
      * @param mailmessage The message of the e-mail
      */
@@ -74,7 +74,7 @@ public class Mail {
 		/**
 	     * <h4>Sending an  e-mail</h4>
 	     * An email is send with an attached file to a receiver with a the given message.
-	     * @param mailreciever The receiver e-mail address
+	     * @param mailreceiver The receiver e-mail address
 	     * @param mailsubject The subject of the e-mail
 	     * @param mailmessage The message of the e-mail
 	     * @param filename the directory of the file to be send
