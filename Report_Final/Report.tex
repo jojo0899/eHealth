@@ -135,7 +135,7 @@ The last main functionality he has is that he can export his health information 
 The first main requirement of our program is the account creation.\\
 If the User uses the application for the first time he has the ability to create a new eHealth account. Therefore he has to enter his firstname, lastname, email address, address information, date of birth, insurance type and his insurance name.
 If the user confirms, the entered data is checked for correctness.
-The Validation of the email address happens by checking if the email has the right format (eg. max@mustermann.de). For validating the address we use the API of OpenStreetMaps and check if the given address exists.
+The Validation of the email address happens by checking if the email has the right format (eg. max@mustermann.de) [6]. For validating the address we use the API of OpenStreetMaps and check if the given address exists.
 The username must be unique in our database, so the system checks whether its already existing. For the insurance type one of the given types must be selected.
 For the rest of the Fields the system checks that they aren't empty and not longer than the capacity of the corresponding field in the database.
 With this error handling we ensure that ours system doesn't run into database errors.\\
@@ -215,6 +215,10 @@ The first and very challenging step in the project was implementing the database
 Using an embedded database, it wasn't necessary for each of us to have a local database running. Another advantage is the high portability and increased performance this concept provides.\\
 Now having the database all set up, it was important to create the corresponding database tables as precise as possible, knowing that those tables are the basis for the whole application. \\
 
+\subsection{JDatePicker}
+{\tiny (Johannes Jobst)\\}
+When we first started our project we implemented every date user input using a normal JTextfield. But after a while we run into problems with error handing with wrong dates. We then though of the implementation via a JDatePicker [5]. This made the error handling easy because you can no more enter a wrong date format. You only can choose a date out of the calendar. 
+
 \chapter{Conclusion}
 {\tiny (Hania Anjum Chatha )\\}
 In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimising human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
@@ -226,7 +230,9 @@ In this Project we maintain the patient and doctor data, and patient can registe
 https://docs.oracle.com/javase/tutorial/jdbc/basics/		jdbcswing.html, \\22.01.2021 17:10 \\\relax
 [2] Thomas Mueller, H2 Features, https://www.h2database.com/html/features.html,\\ 11.02.2021 13:35 \\\relax
 [3] Baeldung, Creating PDF Files in Java, \\https://www.baeldung.com/java-pdf-creation, 06.02.2021 19:15 \\\relax
-[4] Tutorialspoint, H2 Database - JDBC Connection, \\https://www.tutorialspoint.com/h2_database/index.htm, 16.12.2020 21:55
+[4] Tutorialspoint, H2 Database - JDBC Connection, \\https://www.tutorialspoint.com/h2_database/index.htm, 16.12.2020 21:55 \\\relax
 %author, publication date, page title, site title, URL, date accessed
+[5] Ashane Alvis, Wie implementiere ich JDatePicker?, \\https://www.javaer101.com/de/article/1525991.html, 24.01.2021 17:30 \\\relax
+[6] Aaron Davidson, What is the best Java email address validation method?, \\https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method, \\10.01.2021 20:45
 
 \end{document}
