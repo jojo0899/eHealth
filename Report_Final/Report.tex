@@ -74,7 +74,7 @@ Johannes Jobst was responsible for everything concerning the Graphical User Inte
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
 Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project [1]. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
-Pascal Kautzmann was responsible for the e-mail, the password hashing, the reminder function and the usability of the OpensStreetMaps-API \\ 
+Pascal Kautzmann was responsible for implementing the e-mail function, the password hashing, the reminder function and the usability of the OpensStreetMaps-API \\ 
 	\\
 Hania Anjum Chatha was responsible for deciding the health problems of patients and names, addresses of the doctor. She also tried to make database tables for appointment and doctor.
 
@@ -149,14 +149,14 @@ If every information is typed in correctly the account is now created.
 If the user already has an account he is able to login with his username and password. In the next step there is a database comparison and when the data is valid there appears a 2 factor authentication window. In this window the user is asked to enter the code which is send to him via email. This ensures that no unauthorised person can log in even with knowing the login data. All in all this ensures that the very sensitive health and user information is kept secure.
 
 \subsection{Password}
-{\tiny ( Pascal Kautzmann)\\}
-The password is saved as a hash, because it is really difficult and time consuming to recreate a hashed string.
-The password is hashed with the from javax.crypto provided functions. It uses a SHA512 algorithm  to hash, the password is also is"Salted", so that if two useres have the same password, the hashed password is still different.
+{\tiny ( Pascal Kautzmann, 1320404)\\}
+The password is saved as a hash, because it is really difficult and time-consuming to recreate a hashed string.
+The password is hashed with the from javax.crypto provided functions. It uses a SHA512 algorithm to hash, the password is also "Salted", so that if two users have the same password, the hashed password is still different.
 
 \subsection{E-Mail}
-{\tiny (Pascal Kautzmann)\\}
-To send e-mails the javax.mail classes are used. An e-mail address to send e-mail is predefined %?
-because mail services, like g-mail, don't allow unverified apps as long as  less secure app access is deactivated. 
+{\tiny (Pascal Kautzmann, 1320404)\\}
+To send e-mails the javax.mail classes are used. An e-mail address to send an e-mail is predefined, and can't be changed by the user,
+because mail services, like g-mail, don't allow unverified apps as long as  less secure app access is deactivated. [7]
 
 
 \subsection{Admin view}
@@ -166,18 +166,19 @@ With the same error handling like in the account creation the system is prevente
 
 
 \subsection{Searching for a doctor}
-{\tiny (Pascal Kautzmann)\\}
+{\tiny (Pascal Kautzmann, 1320404)\\}
 In the main window the user has the possibility to search for a doctor, for that the user has to provide some data.
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{doctorsearch.jpg} 
 \caption{Activity diagram for searching a doctor}
 \end{figure}
-\\First the user needs to select their health problem with the help of a drop-down list, where we predefined some health problems .
+\\First the user needs to select their health problem with the help of a drop-down list, where we predefined some health problems.
 Then the user has the possibility to better describe their problem and give some more information.
 Next they have to select the search radius, so it is possible only search for a doctor in the given radius around their address.
 Now the user can select the date and time when they want to have an appointment.
 The last information needed is whether they want to receive a reminder and how long before the appointment.
-If the user presses the button "Search for Doctor" the program first checks if all necessary data is given and in a correct format. Then it gest the list of possible doctors from the Doctor-Database and and displays them so the user can select one.
+If the user presses the button "Search for Doctor" the program first checks if all necessary data is given and in a correct format. Then it gets the list of possible doctors from the Doctor-Database and displays them, so the user can select one.
+
 
 \subsection{Creating an Appointment}
 {\tiny (Hania Anjum Chatha )\\}
@@ -199,7 +200,7 @@ In the main window the user has the possibility to view the appointments he made
 
 
 \subsection{Reminder}
-{\tiny (Pascal Kautzmann)\\}
+{\tiny (Pascal Kautzmann, 1320404)\\}
 The reminder runs in a separate thread, so it doesn't interfere with the rest of the program.
 The reminder will check every minute whether there is an entry in the Appointment-database that requires a reminder. 
 Then it sends to the user who wants the reminder an e-mail with the appointment details.
@@ -217,7 +218,20 @@ Now having the database all set up, it was important to create the corresponding
 
 \subsection{JDatePicker}
 {\tiny (Johannes Jobst)\\}
-When we first started our project we implemented every date user input using a normal JTextfield. But after a while we run into problems with error handing with wrong dates. We then though of the implementation via a JDatePicker [5]. This made the error handling easy because you can no more enter a wrong date format. You only can choose a date out of the calendar. 
+When we first started our project we implemented every date user input using a normal JTextfield. But after a while we run into problems with error handing with wrong dates. We then though of the implementation via a JDatePicker [5]. This made the error handling easy because you can no more enter a wrong date format. You only can choose a date out of the calendar.
+
+\subsection{Password-Encryption}
+{\tiny (Pascal Kautzmann, 1320404)\\}
+Another challenge was to find out how passwords can be stored securely in a database, so we had to research. We found out passwords are stored in hash, "Hashing is the process of generating a string, or hash, from a given message using a mathematical function known as a cryptographic hash function" [8], so if someone sees the database he can't know the original password. \\
+There are a some implementations in java for hashing, like MD5 and SHA-512, but these are old and weak algorithms, so we decided to use the PBKDF2 function. To ensure that even if two users have the same password we still have different hashes in the database we needed to use a salt for the password.
+
+
+\subsection{Distance of search}
+{\tiny (Pascal Kautzmann, 1320404)\\}
+We now had to find out how to calculate the Distance of search, we found out that it's easy to calculate a distance between the coordinates, but now we didn't know how we could get the coordinate of a given address. After a search we found two options, Google-Maps and OpenStreetMap, booth have an option to use them with java, but OpenStreetMap has the advantage
+that it doesn't need an account, to enable the api, like google. "OpenStreetAPI provides GET request support, with open to get the data in json." [9]\\
+With this implementation we can store the coordinates from the given address, now we only needed a simple distance calculation.[10] 
+ 
 
 \chapter{Conclusion}
 {\tiny (Hania Anjum Chatha )\\}
@@ -233,6 +247,11 @@ https://docs.oracle.com/javase/tutorial/jdbc/basics/		jdbcswing.html, \\22.01.20
 [4] Tutorialspoint, H2 Database - JDBC Connection, \\https://www.tutorialspoint.com/h2_database/index.htm, 16.12.2020 21:55 \\\relax
 %author, publication date, page title, site title, URL, date accessed
 [5] Ashane Alvis, Wie implementiere ich JDatePicker?, \\https://www.javaer101.com/de/article/1525991.html, 24.01.2021 17:30 \\\relax
-[6] Aaron Davidson, What is the best Java email address validation method?, \\https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method, \\10.01.2021 20:45
+[6] Aaron Davidson, What is the best Java email address validation method?, \\https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method , \\10.01.2021 20:45 \\\relax
+[7]Google,Mit der Mail API E-Mails senden, \\https://cloud.google.com/appengine/docs/standard/java/mail/sending-mail-with-mail-api?hl=de , 12.10.2020\\\relax
+[8]Sam Millington,Hashing a Password in Java,\\https://www.baeldung.com/java-password-hashing , 09.01.2021 \\\relax
+[9]Muasir Khalil,Geo data Leveraging OpenStreetMap,\\https://medium.com/@muasir_33255/geo-data-leveraging-openstreetmap-11a5fe2cf9dc , 03.07.2020\\\relax
+[10]Martin Kompf,Distance calculation,\\https://www.mkompf.com/gps/distcalc.html , 2019
+
 
 \end{document}

@@ -73,7 +73,15 @@ public class Password {
 		
 		
 	}
-	
+	/**
+	 * <h4>Generates a hashed password as byte array</h4>
+	 * A byte array is generated for the given password and salt, with the given iterations and keylength
+	 * @param password
+	 * @param salt
+	 * @param iterations
+	 * @param keyLength
+	 * @return the hashed password as byte array
+	 */
 	
 	
 	public static byte[] hashPassword( final char[] password, final byte[] salt, final int iterations, final int keyLength ) {
