@@ -10,7 +10,7 @@
 
 \titleformat{\chapter}[display]
     {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{0pt}{30pt}
+\titlespacing*{\chapter}{0pt}{0pt}{5pt}
 
 \graphicspath{{figures/}}
 % Title Page
@@ -36,7 +36,7 @@ This documentation is about our results of creating a smart eHealth consulting s
 \\
 
 {\let\clearpage\relax \chapter{Project motivation}}
-{\tiny (Marin-Petru Hincu)\\}
+{\tiny (Marin-Petru Hincu, 1268171)\\}
 This chapter will present some aspects that motivated us as a team, but also individually, to work on the eHealth project.
 One important aspect was exploring the possibilities we had to work on the same project simultaneously. It was going to be our first experience working on a project with specific requirements as a small group, so we were very excited. \\
 The other important aspect was learning more about the topics we needed to study in order to successfully finish the project. Some topics we were most interested in will be discussed in the following.\\
@@ -105,7 +105,7 @@ Our main tool for working on the project as a team was GitHub. There we have a c
 \chapter{Technical description}
 \section{Requirements}
 \subsection{Overview}
-{\tiny (Marin-Petru Hincu)\\}
+{\tiny (Marin-Petru Hincu, 1268171)\\}
 The following figure represents all components needed for the project and their correlation.
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{clImg.png} 
@@ -181,7 +181,7 @@ If the user presses the button "Search for Doctor" the program first checks if a
 
 
 \subsection{Creating an Appointment}
-{\tiny (Hania Anjum Chatha )\\}
+{\tiny (Hania Anjum Chatha, 1293609)\\}
 In this figure, we add multiple features to make the appointment easily for patients. After logging into the system, they can make and cancel their appointment. For making appointment, patient can select the department, and according to that department they can select a doctor and their preferred time. For canceling the appointment, patient is required to select the registered appointment and click on the cancel button.
 
 \begin{figure}[!h]
@@ -190,7 +190,7 @@ In this figure, we add multiple features to make the appointment easily for pati
 \end{figure}
 
 \subsection{Editing an Appointment}
-{\tiny (Marin-Petru Hincu)\\}
+{\tiny (Marin-Petru Hincu, 1268171)\\}
 In the main window the user has the possibility to view the appointments he made. He can also edit or delete these appointments.
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{acImg.png} 
@@ -206,12 +206,12 @@ The reminder will check every minute whether there is an entry in the Appointmen
 Then it sends to the user who wants the reminder an e-mail with the appointment details.
 
 \subsection{Exporting health information}
-{\tiny (Marin-Petru Hincu)\\}
+{\tiny (Marin-Petru Hincu, 1268171)\\}
 By pressing the button "Export health info to TXT/PDF", located in the main window, the health information stored about the user can be exported as a text file or as a pdf [3].\\ The file is by default exported to the desktop of the user.
 
 \chapter{Challenges}
 \subsection{Implementing the database}
-{\tiny (Marin-Petru Hincu)\\}
+{\tiny (Marin-Petru Hincu, 1268171)\\}
 The first and very challenging step in the project was implementing the database. It was difficult at first, because we were completely new to that subject and had to do a lot of research before even beginning with the implementation [4]. We then decided to use an embedded version of the H2 database [2].
 Using an embedded database, it wasn't necessary for each of us to have a local database running. Another advantage is the high portability and increased performance this concept provides.\\
 Now having the database all set up, it was important to create the corresponding database tables as precise as possible, knowing that those tables are the basis for the whole application. \\
@@ -228,15 +228,15 @@ There are a some implementations in java for hashing, like MD5 and SHA-512, but 
 
 \subsection{Distance of search}
 {\tiny (Pascal Kautzmann, 1320404)\\}
-We now had to find out how to calculate the Distance of search, we found out that it's easy to calculate a distance between the coordinates, but now we didn't know how we could get the coordinate of a given address. After a search we found two options, Google-Maps and OpenStreetMap, booth have an option to use them with java, but OpenStreetMap has the advantage
+We now had to find out how to calculate the distance of search, we found out that it's easy to calculate a distance between the coordinates, but now we didn't know how we could get the coordinate of a given address. After a search we found two options, Google-Maps and OpenStreetMap, booth have an option to use them with java, but OpenStreetMap has the advantage
 that it doesn't need an account, to enable the api, like google. "OpenStreetAPI provides GET request support, with open to get the data in json." [9]\\
 With this implementation we can store the coordinates from the given address, now we only needed a simple distance calculation.[10] 
  
 
 \chapter{Conclusion}
-{\tiny (Hania Anjum Chatha )\\}
-In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimising human effort and. makes an efficient and accessible patient record. Using system analysis and design techniques like class diagram, sequence diagram, activity diagram in designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within in the system to edit or delete Patient records and without problems to arrange quick doctor´s appointment. \\
-In this Project we maintain the patient and doctor data, and patient can register their appointment. Overall, this Project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.
+{\tiny (Hania Anjum Chatha, 1293609)\\}
+In Conclusion, our Smart E-health Consulting System simplifies the management process by providing fast services with high accuracy and security. Minimising human effort and is needed and it  makes an efficient and accessible patient record. Using system analysis and design techniques like class diagrams, sequence diagrams, and activity diagrams helped designing an error free system. The Smart E-health Consulting system accommodates scalability allowing flexibility within the system to edit or delete patient records and without problems to arrange quick doctor´s appointment. \\
+In this project we maintain the patient and doctor data, and patients can register their appointment. Overall, this project is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctor´s.
 
 \chapter{Sources}
 
