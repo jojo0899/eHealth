@@ -15,7 +15,7 @@
 \graphicspath{{figures/}}
 % Title Page
 \title{\textbf{eHealth Documentation}\\Java - Objected Oriented Programming}
-\author{Johannes Jobst\\Marin-Petru Hincu\\Pascal Kautzmann\\Hania Anjum Chatha}
+\author{Johannes Jobst (1300563)\\Marin-Petru Hincu (1268171)\\Pascal Kautzmann (1320404)\\Hania Anjum Chatha (1293609)}
 
 
 \begin{document}
@@ -77,7 +77,7 @@ Johannes Jobst was responsible for everything concerning the Graphical User Inte
 He also implemented the most parts of ERROR handling. For example the check whether the given
 input by the user was correct. But also checks that appointments could not be made in the past. \\ \\
 Marin-Petru Hincu designed the database, created the necessary tables and embedded the database into the project [1]. He provided methods for connecting to the database, manipulating, and retrieving data from the database. Marin did also implement the user class and its functionality. \\ \\
-Pascal Kautzmann was responsible for implementing the e-mail function, the password hashing, the reminder function and the usability of the OpensStreetMaps-API \\ 
+Pascal Kautzmann was responsible for implementing the e-mail function, the password hashing, the reminder function and the usability of the OpensStreetMaps-API. \\ 
 	\\
 Hania Anjum Chatha was responsible for deciding the health problems of patients and names, addresses of the doctor. She also tried to make database tables for appointment and doctor.
 
@@ -85,16 +85,16 @@ Hania Anjum Chatha was responsible for deciding the health problems of patients 
 {\tiny (Johannes Jobst, 1300563)\\}
 At the beginning we started to create a GitHub repository for our project. We then constructed a basic GUI construct for the login window. With this basic construct we already were able to implement our database in the project. \\
 After implementing the database we were already able to create new accounts and add them to it. As a result the login with existing accounts to our system already worked. \\
-In the next step we added password encryption to the login data. \\
+In the next step we added password hashing to the login data. \\
 We then thought that a convert of our project to a Maven project would be very handy, because we needed to implement some "Plugins" like the H2 Database [2] or the JDatePicker [5] to our Java project.
 \\
-After that we build the admin window and add step by step the full functionality to the GUI of the admin. We created a table to display all users in the database. Made buttons to edit a user via the "editUserWindow" or delete a user.
+After that we build the admin window and add step by step the full functionality to the GUI of the admin. We created a table to display all users in the database. Then we made buttons to edit a user via the "editUserWindow" or delete a user.
 \\
 After finishing with the admin window we focused more on the main part of the application. Therefore it was required to implement a 2 factor authentication. We implemented that with a new window.
 \\
 As a next step we started to develop all functionalities for the main window. We added all necessary GUI elements and connected them to the database. We implemented a "editAppointment" window to shift upcoming appointments. Concomitant with that we finally implemented the reminder functionality and also the health information export function.
 \\
-So finally our program is finished. At the end we had only to fix some bugs where something was not probably working. 
+So finally our program is finished. At the end we had only to fix some bugs where something was not properly working. 
 
 \section{Tools}
 {\tiny (Johannes Jobst, 1300563)\\}
@@ -163,7 +163,7 @@ because mail services, like g-mail, don't allow unverified apps as long as  less
 
 \subsection{Admin view}
 {\tiny (Johannes Jobst, 1300563)\\}
-If the user enters admin login data into login dialog the system will open an admin view. The admin there has the ability to view all users. This is implemented via an SQL query out of the user table in the database. The admin has also the option to edit the personal informations of users. Therefore a looking almost like the register window pops up, where he is able to make changes.
+If the user enters admin login data into login dialog the system will open an admin view. The admin there has the ability to view all users. This is implemented via an SQL query out of the user table in the database. The admin has also the option to edit the personal informations of users. Therefore a window looking almost like the register window pops up, where he is able to make changes.
 With the same error handling like in the account creation the system is prevented from any errors.
 
 
@@ -209,7 +209,7 @@ Then it sends to the user who wants the reminder an e-mail with the appointment 
 
 \subsection{Exporting health information}
 {\tiny (Marin-Petru Hincu, 1268171)\\}
-By pressing the button "Export health info to TXT/PDF", located in the main window, the health information stored about the user can be exported as a text file or as a pdf [3].\\ The file is by default exported to the desktop of the user.
+By either pressing the button "Export to TXT" or "Export to PDF", located in the main window, the health information stored about the user can be exported as a text file or as a pdf [3].\\ The file is by default exported to the desktop of the user.
 
 \chapter{Challenges}
 \subsection{Implementing the database}
@@ -241,8 +241,8 @@ In Conclusion, our smart E-health Consulting System simplifies the management pr
 In this project we maintain the patient and doctor data, where patients can register their appointment. Overall, this projects' aim is to manage the appointment, patients and doctor details. The Smart E-health Consulting System technology is a future-oriented good alternative for our patients and doctors.\\\\
 {\tiny (Marin-Petru Hincu, 1268171)\\}
 Another important aspect regarding the conclusion is what we have learned during the project.\\
-We already knew the basics of java, however, during the project we had the chance to apply this knowledge in order to create a practical application. By facing the above mentioned challenges we have learned a lot about including an API into our application and also when it is useful to rather implement a feature by ourselves, instead of using an external API. \\
-Finally, this group project was a great step towards becoming better java developers for each one of us. 
+We already knew the basics of Java, however, during the project we had the chance to apply this knowledge in order to create a practical application. By facing the above mentioned challenges we have learned a lot about including an API into our application and also when it is useful to rather implement a feature by ourselves, instead of using an external API. \\
+Finally, this group project was a great step towards becoming better Java developers for each one of us. 
 
 \chapter{Sources}
 
